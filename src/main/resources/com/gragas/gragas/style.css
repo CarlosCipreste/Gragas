@@ -1,0 +1,9 @@
+.botaoEntrar{
+    -fx-background-color:black;
+}
+
+.botaoEntrar:hover{
+
+    -fx-text-fill:black;
+    -fx-background-color:white;
+}
