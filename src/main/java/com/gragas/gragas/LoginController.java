@@ -9,8 +9,10 @@ import javafx.scene.control.TextField;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import static com.gragas.gragas.classes.loginClass.TentarLogin;
 
-public class LoginController extends loginClass {
+
+public class LoginController{
 
     @FXML
     private TextField usuarioTextField;

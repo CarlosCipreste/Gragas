@@ -7,3 +7,25 @@
     -fx-text-fill:black;
     -fx-background-color:white;
 }
+
+.botaomenuleft{
+-fx-background-color:transparent;
+-fx-border-color:white;
+-fx-border-width:3px;
+-fx-border-radius:5px;
+
+
+}
+
+.botaomenuleft:hover{
+    -fx-cursor:hand;
+}
+
+.botaomenuright{
+-fx-background-color: #479F6C;
+-fx-border-color:black;
+-fx-border-width:3px;
+-fx-border-radius:30px;
+-fx-background-radius:30px;
+}
+
