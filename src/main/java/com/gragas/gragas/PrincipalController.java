@@ -1,8 +1,12 @@
 package com.gragas.gragas;
 
+import com.gragas.gragas.classes.loginClass;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class PrincipalController {
 
@@ -29,5 +33,12 @@ public class PrincipalController {
 
     @FXML
     private Button RegistroButton;
+
+
+    @FXML
+    void Logout(ActionEvent event) throws SQLException {
+        HelloApplication.trocaTela("login");
+        loginClass.conexao.close();
+    }
 
 }

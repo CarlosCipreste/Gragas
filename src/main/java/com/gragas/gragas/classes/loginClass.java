@@ -15,7 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class loginClass {
-    static Connection conexao = null;
+    public static Connection conexao = null;
 
 
 
