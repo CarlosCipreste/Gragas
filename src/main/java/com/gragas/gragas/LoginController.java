@@ -1,18 +1,15 @@
 package com.gragas.gragas;
 
-import com.gragas.gragas.classes.loginClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import java.sql.Connection;
-import java.sql.DriverManager;
 
-import static com.gragas.gragas.classes.loginClass.TentarLogin;
+import static com.gragas.gragas.metodos.metodosGerais.TentarLogin;
 
 
-public class LoginController{
+public class LoginController {
 
     @FXML
     private TextField usuarioTextField;
@@ -25,7 +22,7 @@ public class LoginController{
 
     @FXML
     void Login(ActionEvent event) {
-        TentarLogin(usuarioTextField,senhaTextField);
+        TentarLogin(usuarioTextField, senhaTextField);
     }
 
 }
