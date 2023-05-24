@@ -30,4 +30,6 @@ public class PrincipalController {
     @FXML
     private Button RegistroButton;
 
+
+
 }

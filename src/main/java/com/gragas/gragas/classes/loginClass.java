@@ -51,10 +51,10 @@ public class loginClass {
             String username = usuarioTextField.getText().toString();
             String password = senhaTextField.getText().toString();
 
-            /*
-                Faz uma query de sql fazendo uma comparação de String para fazer o login,
-                Caso o valor seja retornado, ele aceita o login.
-            */
+
+//                Faz uma query de sql fazendo uma comparação de String para fazer o login,
+//                Caso o valor seja retornado, ele aceita o login.
+
             String sql = "SELECT * FROM conexao WHERE binary username = ? and senha = ?";
 
             try {
