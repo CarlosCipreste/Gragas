@@ -35,8 +35,6 @@ public class PrincipalController {
     private Button RegistroButton;
 
 
-
-
     @FXML
     void Logout(ActionEvent event) throws SQLException {
         HelloApplication.trocaTela("login");
