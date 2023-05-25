@@ -11,29 +11,22 @@ import java.sql.SQLException;
 public class PrincipalController {
 
     @FXML
-    public static Label nomeLogon;
-
-    @FXML
-    private Button atualizarEstoqueButton;
-
-    @FXML
-    private Button ConsultarFornecedoresButton;
+    private Label nomeLogon;
 
     @FXML
     private Button sairContaButton;
 
     @FXML
-    private Button cadastrarUsuarioButton;
-
-    @FXML
-    private Button prepararPedidoButton;
-
-    @FXML
-    private Button ConsultaProdutosButton;
+    private Button CadastroButton;
 
     @FXML
     private Button RegistroButton;
 
+    @FXML
+    void EnterCadastrar(ActionEvent event) {
+        HelloApplication.trocaTela("cadastro");
+        System.out.println("Troca de tela");
+    }
 
     @FXML
     void Logout(ActionEvent event) throws SQLException {

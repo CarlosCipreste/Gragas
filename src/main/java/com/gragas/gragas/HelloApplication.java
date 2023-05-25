@@ -9,8 +9,10 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
 
-    private static Scene loginPage;
-    private static Scene principalPage;
+    private static Scene LoginPage;
+    private static Scene PrincipalPage;
+
+    private static Scene CadastroPage;
 
     private static Stage stage;
 
@@ -22,15 +24,18 @@ public class HelloApplication extends Application {
 
         //Cache de paginas FXML
         FXMLLoader loginfxml = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
-        loginPage = new Scene(loginfxml.load());
+        LoginPage = new Scene(loginfxml.load());
 
         FXMLLoader principalfxml = new FXMLLoader(HelloApplication.class.getResource("principal.fxml"));
-        principalPage = new Scene(principalfxml.load());
+        PrincipalPage = new Scene(principalfxml.load());
+
+        FXMLLoader cadastrofxml = new FXMLLoader(HelloApplication.class.getResource("cadastro.fxml"));
+        CadastroPage = new Scene(cadastrofxml.load());
 
         stage.setTitle("Taverna do Gragas");
         stage.setResizable(false);
         stage.centerOnScreen();
-        stage.setScene(loginPage);
+        stage.setScene(LoginPage);
         stage.show();
 
     }
@@ -41,17 +46,21 @@ public class HelloApplication extends Application {
             case "login":
 
                 //Chamando a tela que será exibida caso chame "login"
-                stage.setScene(loginPage);
+                stage.setScene(LoginPage);
                 //Centralizando a tela depois de chama-la
                 stage.centerOnScreen();
                 break;
 
             case "principal":
 
-                stage.setScene(principalPage);
+                stage.setScene(PrincipalPage);
                 stage.centerOnScreen();
                 break;
 
+            case "cadastro":
+                stage.setScene(CadastroPage);
+                stage.centerOnScreen();
+                break;
         }
     }
 
