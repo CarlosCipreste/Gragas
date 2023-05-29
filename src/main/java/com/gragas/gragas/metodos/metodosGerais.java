@@ -68,7 +68,8 @@ public class metodosGerais {
             else {
                 System.out.println("Bem-Vindo!");
                 HelloApplication.trocaTela("principal");
-
+                usuarioTextField.clear();
+                senhaTextField.clear();
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

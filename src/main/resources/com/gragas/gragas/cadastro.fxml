@@ -15,69 +15,9 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gragas.gragas.CadastroController">
    <children>
-      <Pane fx:id="FornecedorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #479F6C;" visible="false" />
-      <Pane fx:id="ProdutoPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #479F6C;" visible="false">
+      <Pane fx:id="FornecedorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #479F6C;">
          <children>
-            <Label layoutX="271.0" layoutY="32.0" text="Cadastro de Produto">
-               <font>
-                  <Font name="Leelawadee UI Bold" size="26.0" />
-               </font>
-            </Label>
-            <Label layoutX="24.0" layoutY="159.0" text="Nome:" textFill="WHITE">
-               <font>
-                  <Font name="Leelawadee UI Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="536.0" layoutY="118.0" text="Preço:" textFill="WHITE">
-               <font>
-                  <Font name="Leelawadee UI Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="56.0" layoutY="249.0" text="Alcoólico:" textFill="WHITE">
-               <font>
-                  <Font name="Leelawadee UI Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="58.0" layoutY="325.0" text="Não-Alcoólico:" textFill="WHITE">
-               <font>
-                  <Font name="Leelawadee UI Bold" size="24.0" />
-               </font>
-            </Label>
-            <CheckBox fx:id="alcoolicoCheckBox" layoutX="266.0" layoutY="252.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="15.0" selected="true" stylesheets="@style.css" />
-            <TextField fx:id="nomeProdutoTextField" layoutX="108.0" layoutY="160.0" prefHeight="34.0" prefWidth="416.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
-               <font>
-                  <Font name="Leelawadee UI Bold" size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="precoTextField" layoutX="610.0" layoutY="160.0" prefHeight="34.0" prefWidth="135.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
-               <font>
-                  <Font name="Leelawadee UI Bold" size="14.0" />
-               </font>
-            </TextField>
-            <ChoiceBox fx:id="nalcoolicoChoiceBox" layoutX="371.0" layoutY="329.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 3px; -fx-border-radius: 30px;" />
-            <ChoiceBox fx:id="alcoolicoChoiceBox" layoutX="366.0" layoutY="249.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 3px; -fx-border-radius: 30px;" />
-            <CheckBox fx:id="NAlcoolicoCkeckBox" layoutX="265.0" layoutY="332.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="15.0" selected="true" stylesheets="@style.css" />
-            <Label layoutX="66.0" layoutY="419.0" text="Validade:" textFill="WHITE">
-               <font>
-                  <Font name="Leelawadee UI Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="66.0" layoutY="492.0" text="Quantidade:" textFill="WHITE">
-               <font>
-                  <Font name="Leelawadee UI Bold" size="24.0" />
-               </font>
-            </Label>
-            <TextField fx:id="validadeTextField" layoutX="212.0" layoutY="420.0" prefHeight="34.0" prefWidth="165.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
-               <font>
-                  <Font name="Leelawadee UI Bold" size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="quantidadeTextField" layoutX="214.0" layoutY="493.0" prefHeight="34.0" prefWidth="165.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
-               <font>
-                  <Font name="Leelawadee UI Bold" size="14.0" />
-               </font>
-            </TextField>
-            <Button fx:id="voltarButton1" layoutY="47.0" mnemonicParsing="false" onAction="#VoltarMenu" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
+            <Button fx:id="voltarButton13" layoutY="49.0" mnemonicParsing="false" onAction="#VoltarMenu" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -89,9 +29,8 @@
                   </ImageView>
                </graphic>
             </Button>
-         </children>
-      </Pane>
-      <Pane fx:id="FuncionarioPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #479F6C;" visible="false">
+         </children></Pane>
+      <Pane fx:id="FuncionarioPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #479F6C;">
          <children>
             <Button fx:id="voltarButton11" layoutY="48.0" mnemonicParsing="false" onAction="#VoltarMenu" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
                <cursor>
@@ -160,7 +99,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="ClientePane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #479F6C;" visible="false">
+      <Pane fx:id="ClientePane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #479F6C;">
          <children>
             <Label layoutX="130.0" layoutY="161.0" text="Nome:" textFill="WHITE">
                <font>
@@ -206,6 +145,81 @@
                </cursor>
             </Button>
             <Button fx:id="voltarButton12" layoutY="49.0" mnemonicParsing="false" onAction="#VoltarMenu" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="47.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <image>
+                        <Image url="@../../../Imagens/seta_branca-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="ProdutoPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #479F6C;">
+         <children>
+            <Label layoutX="271.0" layoutY="32.0" text="Cadastro de Produto">
+               <font>
+                  <Font name="Leelawadee UI Bold" size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="24.0" layoutY="159.0" text="Nome:" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="536.0" layoutY="118.0" text="Preço:" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="56.0" layoutY="249.0" text="Alcoólico:" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="58.0" layoutY="325.0" text="Não-Alcoólico:" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI Bold" size="24.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="alcoolicoCheckBox" layoutX="266.0" layoutY="252.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="15.0" selected="true" stylesheets="@style.css" />
+            <TextField fx:id="nomeProdutoTextField" layoutX="108.0" layoutY="160.0" prefHeight="34.0" prefWidth="416.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
+               <font>
+                  <Font name="Leelawadee UI Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="precoTextField" layoutX="610.0" layoutY="160.0" prefHeight="34.0" prefWidth="135.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
+               <font>
+                  <Font name="Leelawadee UI Bold" size="14.0" />
+               </font>
+            </TextField>
+            <ChoiceBox fx:id="nalcoolicoChoiceBox" layoutX="371.0" layoutY="329.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 3px; -fx-border-radius: 30px;" />
+            <ChoiceBox fx:id="alcoolicoChoiceBox" layoutX="366.0" layoutY="249.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 3px; -fx-border-radius: 30px;" />
+            <CheckBox fx:id="NAlcoolicoCkeckBox" layoutX="265.0" layoutY="332.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="15.0" selected="true" stylesheets="@style.css" />
+            <Label layoutX="66.0" layoutY="419.0" text="Validade:" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="66.0" layoutY="492.0" text="Quantidade:" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI Bold" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="validadeTextField" layoutX="212.0" layoutY="420.0" prefHeight="34.0" prefWidth="165.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
+               <font>
+                  <Font name="Leelawadee UI Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="quantidadeTextField" layoutX="214.0" layoutY="493.0" prefHeight="34.0" prefWidth="165.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
+               <font>
+                  <Font name="Leelawadee UI Bold" size="14.0" />
+               </font>
+            </TextField>
+            <Button fx:id="voltarButton1" layoutY="47.0" mnemonicParsing="false" onAction="#VoltarMenu" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
