@@ -1,6 +1,6 @@
 package com.gragas.gragas;
 
-import com.gragas.gragas.metodos.Formatacao;
+import com.gragas.gragas.metodos.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,10 +13,61 @@ import java.util.ResourceBundle;
 public class CadastroController implements Initializable {
 
     @FXML
+    private Pane FuncionarioPane;
+
+    @FXML
+    private Button voltarButton11;
+
+    @FXML
+    private Button CadProdutosButton1;
+
+    @FXML
+    private TextField FuncNomeTextField;
+
+    @FXML
+    private TextField CPFFuncTextField;
+
+    @FXML
+    private TextField FuncLogin;
+
+    @FXML
+    private PasswordField funcSenhaTextField;
+
+    @FXML
     private Pane FornecedorPane;
 
     @FXML
-    private Pane FuncionarioPane;
+    private Button voltarButton13;
+
+    @FXML
+    private TextField usuarioTextField;
+
+    @FXML
+    private TextField usuarioTextField1;
+
+    @FXML
+    private TextField usuarioTextField2;
+
+    @FXML
+    private TextField usuarioTextField3;
+
+    @FXML
+    private Pane ClientePane;
+
+    @FXML
+    private TextField cleinteNomeTextField;
+
+    @FXML
+    private TextField clienteCPFTextField;
+
+    @FXML
+    private TextField clienteTelefoneTextField;
+
+    @FXML
+    private Button voltarButton12;
+
+    @FXML
+    private Button cadClienteButton;
 
     @FXML
     private Pane ProdutoPane;
@@ -47,39 +98,6 @@ public class CadastroController implements Initializable {
 
     @FXML
     private Button voltarButton1;
-
-    @FXML
-    private Button voltarButton11;
-
-    @FXML
-    private Button CadProdutosButton1;
-
-    @FXML
-    private TextField FuncNomeTextField;
-
-    @FXML
-    private TextField CPFFuncTextField;
-
-    @FXML
-    private TextField FuncLogin;
-
-    @FXML
-    private PasswordField funcSenhaTextField;
-
-    @FXML
-    private Pane ClientePane;
-
-    @FXML
-    private TextField cleinteNomeTextField;
-
-    @FXML
-    private TextField clienteCPFTextField;
-
-    @FXML
-    private TextField clienteTelefoneTextField;
-
-    @FXML
-    private Button cadClienteButton;
 
     @FXML
     private Pane menuPane;
@@ -152,6 +170,10 @@ public class CadastroController implements Initializable {
         ClientePane.setVisible(false);
         FuncionarioPane.setVisible(false);
 
+    }
+    @FXML
+    void cadProduto(ActionEvent event){
+        metodosGerais.CadastrarProduto(nomeProdutoTextField,precoTextField,alcoolicoCheckBox,NAlcoolicoCkeckBox,alcoolicoChoiceBox,nalcoolicoChoiceBox,validadeTextField,quantidadeTextField);
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -1,9 +1,8 @@
 package com.gragas.gragas.metodos;
 
 import com.gragas.gragas.HelloApplication;
-import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import org.w3c.dom.Text;
 
 import java.sql.*;
 
@@ -77,5 +76,38 @@ public class metodosGerais {
         }
     }
 
+    public static void CadastrarProduto(TextField nomeTF, TextField precoTF, CheckBox alcool_Sim, CheckBox alcool_Nao, ChoiceBox dest_ou_ferm, ChoiceBox suco_ou_refri, TextField validadeTF, TextField quantidadeTF){
 
+        String nomeProd = nomeTF.getText();
+        String precoProd = nomeTF.getText();
+        boolean alcoolicoSim = alcool_Sim.isSelected();
+        boolean alcoolicoNao = alcool_Nao.isSelected();
+        String tipo_alcoolico = dest_ou_ferm.getItems().toString();
+        String tipo_nao_alcoolico = suco_ou_refri.getItems().toString();
+        String validadeProd = validadeTF.getText();
+        int validade = Integer.parseInt(validadeTF.getText());
+        int quantidade = Integer.parseInt(quantidadeTF.getText());
+
+        System.out.println(nomeProd);
+        System.out.println(precoProd);
+        System.out.println(alcoolicoSim);
+        System.out.println(alcoolicoNao);
+        System.out.println(tipo_alcoolico);
+        System.out.println(tipo_nao_alcoolico);
+        System.out.println(validadeProd);
+        System.out.println(validade);
+        System.out.println(quantidade);
+    }
+
+    public static void CadastrarCliente(){
+
+    }
+
+    public static void CadastrarFuncionario(){
+
+    }
+
+    public static void CadastrarFornecedor(){
+
+    }
 }
