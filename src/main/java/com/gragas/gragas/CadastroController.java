@@ -6,9 +6,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import org.controlsfx.control.textfield.CustomTextField;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static com.gragas.gragas.metodos.Formatacao.ApenasNumeros;
 
 public class CadastroController implements Initializable {
 
@@ -76,16 +79,17 @@ public class CadastroController implements Initializable {
     private CheckBox alcoolicoCheckBox;
 
     @FXML
-    private TextField nomeProdutoTextField;
+    private CustomTextField nomeProdutoTextField;
 
     @FXML
     private TextField precoTextField;
 
     @FXML
-    private ChoiceBox<?> nalcoolicoChoiceBox;
-
+    private ChoiceBox<String> nalcoolicoChoiceBox;
+    String[] nAlcoolicoValues = {"Suco","Refrigerante"};
     @FXML
-    private ChoiceBox<?> alcoolicoChoiceBox;
+    private ChoiceBox<String> alcoolicoChoiceBox;
+    String[] AlcoolicoValues = {"Destilado","Fermentado"};
 
     @FXML
     private CheckBox NAlcoolicoCkeckBox;
@@ -140,6 +144,8 @@ public class CadastroController implements Initializable {
         ClientePane.setVisible(false);
         FuncionarioPane.setVisible(false);
         FornecedorPane.setVisible(false);
+
+
     }
 
     @FXML
@@ -177,8 +183,14 @@ public class CadastroController implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        nalcoolicoChoiceBox.getItems().addAll(nAlcoolicoValues);
+        alcoolicoChoiceBox.getItems().addAll(AlcoolicoValues);
+
+
         //O método initialize() consegue dar Propriedades a elementos gráficos como uma formatação para um textfield
         Formatacao formatacao = new Formatacao();
+        formatacao.ApenasNumeros(nomeProdutoTextField);
 
     }
 

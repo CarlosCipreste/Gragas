@@ -3,9 +3,14 @@ package com.gragas.gragas.metodos;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
+
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyCode;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.CustomTextField;
 import org.controlsfx.control.textfield.TextFields;
 
 /* -------------------------------------- BIBLIOTECA CONTROLSFX ---------------------------------------*/
@@ -154,6 +159,20 @@ public class Formatacao {
             value = String.format("%011d", Long.valueOf(value));
         }
         return String.format("%s.%s.%s-%s", value.substring(0, 3), value.substring(3, 6), value.substring(6, 9), value.substring(9, 11));
+    }
+
+        public static void ApenasNumeros(CustomTextField textField) {
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            String newText = change.getControlNewText();
+            if (Pattern.matches("\\d*", newText)) {
+                return change;
+            }
+            return null;
+        };
+
+        TextFormatter<String> textFormatter = new TextFormatter<>(filter);
+        textField.setTextFormatter(textFormatter);
+
     }
 
 }
