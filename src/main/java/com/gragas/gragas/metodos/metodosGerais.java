@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import org.w3c.dom.Text;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class metodosGerais {
     public static Connection conexao = null;
@@ -76,25 +77,12 @@ public class metodosGerais {
         }
     }
 
-    public static void CadastrarProduto(TextField nomeTF, TextField precoTF, CheckBox alcool_Sim, CheckBox alcool_Nao, ChoiceBox dest_ou_ferm, ChoiceBox suco_ou_refri, TextField validadeTF, TextField quantidadeTF){
+    public static void CadastrarProduto(TextField nomeTF, TextField precoTF, CheckBox alcool_Sim, CheckBox alcool_Nao, ChoiceBox dest_ou_ferm, ChoiceBox suco_ou_refri, DatePicker validade, TextField quantidadeTF){
 
-        String nomeProd = nomeTF.getText();
-        String precoProd = precoTF.getText();
-        boolean alcoolicoSim = alcool_Sim.isSelected();
-        boolean alcoolicoNao = alcool_Nao.isSelected();
-        String tipo_alcoolico = dest_ou_ferm.getValue().toString();
-        String tipo_nao_alcoolico = suco_ou_refri.getValue().toString();
-        int validade = Integer.parseInt(validadeTF.getText());
-        int quantidade = Integer.parseInt(quantidadeTF.getText());
+        try{
+            
+        }catch(Exception e){e.printStackTrace();}
 
-        System.out.println(nomeProd);
-        System.out.println(precoProd);
-        System.out.println(alcoolicoSim);
-        System.out.println(alcoolicoNao);
-        System.out.println(tipo_alcoolico);
-        System.out.println(tipo_nao_alcoolico);
-        System.out.println(validade+1);
-        System.out.println(quantidade+1);
     }
 
     public static void CadastrarCliente(){

@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyCode;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
-import org.controlsfx.control.textfield.CustomTextField;
 import org.controlsfx.control.textfield.TextFields;
 
 /* -------------------------------------- BIBLIOTECA CONTROLSFX ---------------------------------------*/
@@ -75,7 +74,7 @@ public class Formatacao {
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //Formata o celular enquanto digita - TextField
-    public void formataCelularEnquantoDigita(TextField textField) {
+    public void formataCelularDinamico(TextField textField) {
 
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             String digits = newValue.replaceAll("[^0-9]", "");
@@ -100,6 +99,8 @@ public class Formatacao {
             textField.setText(formatted.toString());
         });
 
+
+
         // Adiciona um listener para escutar o evento de tecla pressionada
         textField.setOnKeyPressed(event -> {
 
@@ -112,9 +113,35 @@ public class Formatacao {
         });
     }
 
+    public void formataCNPJDinamico (TextField textField){
+
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String digits = newValue.replaceAll("[^0-9]", "");
+
+            StringBuilder formatted = new StringBuilder();
+            if (digits.length() > 0) {
+                formatted.append(digits.substring(0, Math.min(2, digits.length())));
+            }
+            if (digits.length() > 2) {
+                formatted.append(".").append(digits.substring(2, Math.min(5, digits.length())));
+            }
+            if (digits.length() > 5) {
+                formatted.append(".").append(digits.substring(5, Math.min(8, digits.length())));
+            }
+            if (digits.length() > 8) {
+                formatted.append("/").append(digits.substring(8, Math.min(12, digits.length())));
+            }
+            if (digits.length() > 12) {
+                formatted.append("-").append(digits.substring(12, Math.min(14, digits.length())));
+            }
+
+            textField.setText(formatted.toString());
+        });
+    }
+
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //Formata o RG enquanto digita - TextField
-    public void formataRGEnquantoDigita(TextField textField) {
+    public void formataRGDinamico(TextField textField) {
 
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             String digits = newValue.replaceAll("[^0-9]", "");
@@ -161,7 +188,7 @@ public class Formatacao {
         return String.format("%s.%s.%s-%s", value.substring(0, 3), value.substring(3, 6), value.substring(6, 9), value.substring(9, 11));
     }
 
-        public static void ApenasNumeros(CustomTextField textField) {
+        public static void ApenasNumeros(TextField textField) {
         UnaryOperator<TextFormatter.Change> filter = change -> {
             String newText = change.getControlNewText();
             if (Pattern.matches("\\d*", newText)) {
@@ -173,6 +200,59 @@ public class Formatacao {
         TextFormatter<String> textFormatter = new TextFormatter<>(filter);
         textField.setTextFormatter(textFormatter);
 
+    }
+
+    public static void ApenasLetras(TextField textField) {
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            String newText = change.getControlNewText();
+            if (Pattern.matches("[a-zA-Z]*", newText)) {
+                return change;
+            }
+            return null;
+        };
+
+        TextFormatter<String> textFormatter = new TextFormatter<>(filter);
+        textField.setTextFormatter(textFormatter);
+
+    }
+
+    public static void LimitadorCaracteres(TextField textField, int limite) {
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            String newText = change.getControlNewText();
+
+            if (newText.length() <= limite) {
+                return change;
+            }
+
+            return null;
+        };
+
+        TextFormatter<String> textFormatter = new TextFormatter<>(filter);
+        textField.setTextFormatter(textFormatter);
+    }
+
+    public void formataPrecoEnquantoDigita(TextField textField) {
+
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String digits = newValue.replaceAll("[^0-9]", "");
+
+            StringBuilder formatted = new StringBuilder();
+            if (digits.length() > 0) {
+                formatted.append("R$ ");
+                formatted.append(digits);
+            }
+
+            textField.setText(formatted.toString());
+            textField.setOnKeyPressed(event -> {
+
+                // Verifica se a tecla pressionada foi o BACKSPACE - Pois o cliente não consegue apagar os pontos e traços que adicionei
+                if (event.getCode() == KeyCode.BACK_SPACE) {
+                    // Limpa o conteúdo do JFXTextField
+                    textField.clear();
+                }
+
+            });
+        });
     }
 
 }
