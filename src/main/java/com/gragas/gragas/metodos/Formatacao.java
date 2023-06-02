@@ -1,16 +1,16 @@
 package com.gragas.gragas.metodos;
 
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.UnaryOperator;
-import java.util.regex.Pattern;
-
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyCode;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
 
 /* -------------------------------------- BIBLIOTECA CONTROLSFX ---------------------------------------*/
 public class Formatacao {
@@ -100,7 +100,6 @@ public class Formatacao {
         });
 
 
-
         // Adiciona um listener para escutar o evento de tecla pressionada
         textField.setOnKeyPressed(event -> {
 
@@ -113,7 +112,7 @@ public class Formatacao {
         });
     }
 
-    public void formataCNPJDinamico (TextField textField){
+    public void formataCNPJDinamico(TextField textField) {
 
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             String digits = newValue.replaceAll("[^0-9]", "");
@@ -135,11 +134,22 @@ public class Formatacao {
                 formatted.append("-").append(digits.substring(12, Math.min(14, digits.length())));
             }
 
+            // Adiciona um listener para escutar o evento de tecla pressionada
+            textField.setOnKeyPressed(event -> {
+
+                // Verifica se a tecla pressionada foi o BACKSPACE - Pois o cliente não consegue apagar os pontos e traços que adicionei
+                if (event.getCode() == KeyCode.BACK_SPACE) {
+                    // Limpa o conteúdo do JFXTextField
+                    textField.clear();
+                }
+
+            });
+
             textField.setText(formatted.toString());
         });
     }
 
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //Formata o RG enquanto digita - TextField
     public void formataRGDinamico(TextField textField) {
 
@@ -163,16 +173,7 @@ public class Formatacao {
             textField.setText(formatted.toString());
         });
 
-        // Adiciona um listener para escutar o evento de tecla pressionada
-        textField.setOnKeyPressed(event -> {
 
-            // Verifica se a tecla pressionada foi o BACKSPACE - Pois o cliente não consegue apagar os pontos e traços que adicionei
-            if (event.getCode() == KeyCode.BACK_SPACE) {
-                // Limpa o conteúdo do JFXTextField
-                textField.clear();
-            }
-
-        });
     }
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -188,7 +189,7 @@ public class Formatacao {
         return String.format("%s.%s.%s-%s", value.substring(0, 3), value.substring(3, 6), value.substring(6, 9), value.substring(9, 11));
     }
 
-        public static void ApenasNumeros(TextField textField) {
+    public static void ApenasNumeros(TextField textField) {
         UnaryOperator<TextFormatter.Change> filter = change -> {
             String newText = change.getControlNewText();
             if (Pattern.matches("\\d*", newText)) {
@@ -234,7 +235,13 @@ public class Formatacao {
     public void formataPrecoEnquantoDigita(TextField textField) {
 
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
-            String digits = newValue.replaceAll("[^0-9]", "");
+            String digits = newValue.replaceAll("[^0-9,]", "");
+
+            // Limita o número de caracteres após a vírgula para no máximo 2
+            int commaIndex = digits.indexOf(",");
+            if (commaIndex != -1 && digits.length() - commaIndex > 3) {
+                digits = digits.substring(0, commaIndex + 3);
+            }
 
             StringBuilder formatted = new StringBuilder();
             if (digits.length() > 0) {
@@ -253,6 +260,26 @@ public class Formatacao {
 
             });
         });
+    }
+
+    public static boolean isTextFieldValueValid(TextField textField) {
+        String value = textField.getText();
+
+        // Remove o prefixo "R$ " e quaisquer espaços em branco antes ou depois
+        value = value.replace("R$", "").trim();
+
+        // Verifica se o valor restante possui uma vírgula e se a parte após a vírgula está no formato correto
+        if (value.contains(",")) {
+            int commaIndex = value.indexOf(",");
+            String decimalPart = value.substring(commaIndex + 1);
+
+            // Verifica se a parte após a vírgula contém apenas dígitos e tem no máximo dois caracteres
+            if (decimalPart.matches("\\d{2}")) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

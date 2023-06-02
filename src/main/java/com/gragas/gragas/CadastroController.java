@@ -1,17 +1,15 @@
 package com.gragas.gragas;
 
-import com.gragas.gragas.metodos.*;
+import com.gragas.gragas.metodos.Formatacao;
+import com.gragas.gragas.metodos.metodosGerais;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
-import org.controlsfx.control.textfield.CustomTextField;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import static com.gragas.gragas.metodos.Formatacao.ApenasNumeros;
 
 public class CadastroController implements Initializable {
 
@@ -124,10 +122,11 @@ public class CadastroController implements Initializable {
     @FXML
     private Button CadProdutoButton;
 
-    String[] nAlcoolicoValues = {"Suco","Refrigerante"};
-    String[] AlcoolicoValues = {"Destilado","Fermentado"};
+    String[] nAlcoolicoValues = {"Suco", "Refrigerante"};
+    String[] AlcoolicoValues = {"Destilado", "Fermentado"};
+
     @FXML
-    void Voltar(ActionEvent event){
+    void Voltar(ActionEvent event) {
         HelloApplication.trocaTela("principal");
     }
 
@@ -137,17 +136,21 @@ public class CadastroController implements Initializable {
             alcoolicoChoiceBox.setVisible(true);
             NAlcoolicoCheckBox.setSelected(false);
             nalcoolicoChoiceBox.setVisible(false);
+            nalcoolicoChoiceBox.getSelectionModel().clearSelection();
         }
         if (!alcoolicoCheckBox.isSelected()) {
             alcoolicoChoiceBox.setVisible(false);
         }
     }
+
     @FXML
-    void SelectedNAlcoolicoCheckBox(ActionEvent event){
+    void SelectedNAlcoolicoCheckBox(ActionEvent event) {
         if (NAlcoolicoCheckBox.isSelected()) {
             nalcoolicoChoiceBox.setVisible(true);
             alcoolicoCheckBox.setSelected(false);
             alcoolicoChoiceBox.setVisible(false);
+            alcoolicoChoiceBox.getSelectionModel().clearSelection();
+
         }
         if (!NAlcoolicoCheckBox.isSelected()) {
             nalcoolicoChoiceBox.setVisible(false);
@@ -204,10 +207,12 @@ public class CadastroController implements Initializable {
         FuncionarioPane.setVisible(false);
 
     }
+
     @FXML
-    void cadProduto(ActionEvent event){
-        metodosGerais.CadastrarProduto(nomeProdutoTextField,precoTextField,alcoolicoCheckBox,NAlcoolicoCheckBox,alcoolicoChoiceBox,nalcoolicoChoiceBox,validadeDatePicker,quantidadeTextField);
+    void cadProduto(ActionEvent event) {
+        metodosGerais.CadastrarProduto(nomeProdutoTextField, precoTextField, alcoolicoCheckBox, NAlcoolicoCheckBox, alcoolicoChoiceBox, nalcoolicoChoiceBox, validadeDatePicker, quantidadeTextField);
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //O método initialize() consegue dar Propriedades a elementos gráficos como uma formatação para um textfield
@@ -232,21 +237,23 @@ public class CadastroController implements Initializable {
         formatacao.formataPrecoEnquantoDigita(precoTextField);
 
         //Limitando a quantidade caracteres dos TextFields que nao recebem os Formatadores anteriores
-        formatacao.LimitadorCaracteres(FuncNomeTextField, 70);
-        formatacao.LimitadorCaracteres(FuncLogin,16);
-        formatacao.LimitadorCaracteres(funcSenhaTextField,16);
+        formatacao.LimitadorCaracteres(FuncNomeTextField, 60);
+        formatacao.LimitadorCaracteres(FuncLogin, 16);
+        formatacao.LimitadorCaracteres(funcSenhaTextField, 16);
 
-        formatacao.LimitadorCaracteres(fornecedorNomeTextField,60);
-        formatacao.LimitadorCaracteres(fornecedorEnderecoTextField,60);
+        formatacao.LimitadorCaracteres(fornecedorNomeTextField, 60);
+        formatacao.LimitadorCaracteres(fornecedorEnderecoTextField, 60);
 
-        formatacao.LimitadorCaracteres(nomeProdutoTextField,60);
-        formatacao.LimitadorCaracteres(quantidadeTextField,3);
-        formatacao.LimitadorCaracteres(clienteNomeTextField,60);
+        formatacao.LimitadorCaracteres(nomeProdutoTextField, 60);
+        formatacao.LimitadorCaracteres(quantidadeTextField, 3);
+        formatacao.LimitadorCaracteres(clienteNomeTextField, 60);
 
         //Transformando os TextField para receberem apenas Letras
         formatacao.ApenasLetras(FuncNomeTextField);
-    }
 
+        //Formatando para Receber apenas números
+        formatacao.ApenasNumeros(quantidadeTextField);
+    }
 
 
 }

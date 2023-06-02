@@ -2,7 +2,6 @@ package com.gragas.gragas.metodos;
 
 import com.gragas.gragas.HelloApplication;
 import javafx.scene.control.*;
-import org.w3c.dom.Text;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -14,7 +13,7 @@ public class metodosGerais {
 
     public static void TentarLogin(TextField usuarioTextField, PasswordField senhaTextField) {
 
-        String url = "jdbc:mysql://localhost:3306/login";
+        String url = "jdbc:mysql://localhost:3306/distribuidora";
         String usuario = "root";
         String senha = "";
 
@@ -64,7 +63,7 @@ public class metodosGerais {
                 alert.showAndWait();
 
             }
-            //Caso contrário, aqui ficará o código que será passado pra próxima tela
+            //Caso contrário, aqui ficará o código que será passado para próxima tela
             else {
                 System.out.println("Bem-Vindo!");
                 HelloApplication.trocaTela("principal");
@@ -77,23 +76,136 @@ public class metodosGerais {
         }
     }
 
-    public static void CadastrarProduto(TextField nomeTF, TextField precoTF, CheckBox alcool_Sim, CheckBox alcool_Nao, ChoiceBox dest_ou_ferm, ChoiceBox suco_ou_refri, DatePicker validade, TextField quantidadeTF){
+    public static void CadastrarCliente() {
 
+    }
+
+    public static void CadastrarFuncionario() {
+
+    }
+
+    public static void CadastrarFornecedor() {
+
+    }
+
+    public static void CadastrarProduto(TextField nomeTF, TextField precoTF, CheckBox alcool_Sim, CheckBox alcool_Nao, ChoiceBox<String> dest_ou_ferm, ChoiceBox<String> suco_ou_refri, DatePicker validade, TextField quantidadeTF) {
+        /*Verificação de todos os Componentes do Pane de Cadastro de Produtos
+        * A verificação checa se todos os componentes estão preenchidos de acordo
+        * Com o que o banco deve receber como valores para cadastrar o Produto*/
+
+        try {
+            // Verifica se todos os TextField possuem conteúdo
+            if (nomeTF.getText().isEmpty() || precoTF.getText().isEmpty() || quantidadeTF.getText().isEmpty()) {
+                exibirAlerta(Alert.AlertType.ERROR, "Erro de Validação", "Preencha todos os campos!");
+                return;
+            }
+
+            // Verifica se um dos CheckBox está selecionado
+            if (!(alcool_Sim.isSelected() || alcool_Nao.isSelected())) {
+                exibirAlerta(Alert.AlertType.ERROR, "Erro de Validação", "Selecione uma opção para a bebida!");
+                return;
+            }
+
+            // Verifica se um valor dos dois ChoiceBox está selecionado
+            if (dest_ou_ferm.getSelectionModel().isEmpty() && suco_ou_refri.getSelectionModel().isEmpty()) {
+                exibirAlerta(Alert.AlertType.ERROR, "Erro de Validação", "Selecione uma opção para o tipo de bebida bebida");
+                return;
+            }
+            // Verifica se há uma data no DatePicker
+            if (validade.getValue() == null) {
+                exibirAlerta(Alert.AlertType.ERROR, "Erro de Validação", "Selecione uma Data de validade para o Produto");
+                return;
+            }
+            // Verifica se o valor de preço possui 2 números após a virgula
+            if (isTextFieldValueValid(precoTF)) {
+
+            } else {
+                exibirAlerta(Alert.AlertType.ERROR, "Erro de Validação", "O preço precisa ter 2 algarismo após a vírgula");
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        /*Caso nao haja nenhum erro com os componentes
+         * O sistema é liberado para fazer o cadastro*/
+
+        //Variaveis para a Query de mySQL
+        String nomeProduto = nomeTF.getText();
+        String precoProduto = precoTF.getText();
+
+        boolean Alcoolico_S_N;
+        if(alcool_Sim.isSelected()){Alcoolico_S_N = true;}
+        else{Alcoolico_S_N = false;}
+
+        String tipo;
+        if(alcool_Sim.isSelected() || dest_ou_ferm.getValue() == "Destilado"){
+            tipo = "Destilado";
+        }
+        else{
+            tipo = "Fermentado";
+        }
+
+        if(alcool_Nao.isSelected() || suco_ou_refri.getValue() == "Suco"){
+            tipo = "Suco";
+        }
+        else{
+            tipo = "Refrigerante";
+        }
+
+        LocalDate validadeProduto = validade.getValue();
+
+        int quantidadeProduto = Integer.parseInt(quantidadeTF.getText());
         try{
-            
-        }catch(Exception e){e.printStackTrace();}
+            String query = "select * from produto WHERE nome_produto = ? and preco_produto = ? and alcoolico_S_N = ? and tipo = ? and validade = ? and quantidade = ?";
 
+            PreparedStatement statement = conexao.prepareStatement(query);
+            statement.setString(1,nomeProduto);
+            statement.setString(2,precoProduto);
+            statement.setBoolean(3,Alcoolico_S_N);
+            statement.setString(4,tipo);
+            statement.setObject(5,validadeProduto);
+            statement.setInt(6,quantidadeProduto);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                exibirAlerta(Alert.AlertType.ERROR,"Erro!","Produto já existe no Banco de Dados");
+
+            } else {
+                exibirAlerta(Alert.AlertType.CONFIRMATION,"Produto Cadastrado","Produto foi Cadastrado com Sucesso!");
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
-    public static void CadastrarCliente(){
-
+    private static void exibirAlerta(Alert.AlertType tipo, String titulo, String mensagem) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
     }
 
-    public static void CadastrarFuncionario(){
+    public static boolean isTextFieldValueValid(TextField textField) {
+        String value = textField.getText();
 
-    }
+        // Remove o prefixo "R$ " e quaisquer espaços em branco antes ou depois
+        value = value.replace("R$", "").trim();
 
-    public static void CadastrarFornecedor(){
+        // Verifica se o valor restante possui uma vírgula e se a parte após a vírgula está no formato correto
+        if (value.contains(",")) {
+            int commaIndex = value.indexOf(",");
+            String decimalPart = value.substring(commaIndex + 1);
 
+            // Verifica se a parte após a vírgula contém apenas dígitos e tem no máximo dois caracteres
+            if (decimalPart.matches("\\d{2}")) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
