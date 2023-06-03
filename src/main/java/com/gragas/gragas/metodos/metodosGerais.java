@@ -1,6 +1,8 @@
 package com.gragas.gragas.metodos;
 
+import com.gragas.gragas.CadastroController;
 import com.gragas.gragas.HelloApplication;
+import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 
 import java.sql.*;
@@ -76,18 +78,29 @@ public class metodosGerais {
         }
     }
 
+
+    /*CADASTRO DE CLIENTE*/
     public static void CadastrarCliente() {
 
     }
 
+
+
+    /*CADASTRO DE FUNCIONARIO*/
     public static void CadastrarFuncionario() {
 
     }
 
+
+
+    /*CADASTRO DE FORNECEDOR*/
     public static void CadastrarFornecedor() {
 
     }
 
+
+
+    /*CADASTRO DE PRODUTO*/
     public static void CadastrarProduto(TextField nomeTF, TextField precoTF, CheckBox alcool_Sim, CheckBox alcool_Nao, ChoiceBox<String> dest_ou_ferm, ChoiceBox<String> suco_ou_refri, DatePicker validade, TextField quantidadeTF) {
         /*Verificação de todos os Componentes do Pane de Cadastro de Produtos
         * A verificação checa se todos os componentes estão preenchidos de acordo
@@ -117,7 +130,7 @@ public class metodosGerais {
                 return;
             }
             // Verifica se o valor de preço possui 2 números após a virgula
-            if (isTextFieldValueValid(precoTF)) {
+            if (isTextFieldValueValido(precoTF)) {
 
             } else {
                 exibirAlerta(Alert.AlertType.ERROR, "Erro de Validação", "O preço precisa ter 2 algarismo após a vírgula");
@@ -161,26 +174,52 @@ public class metodosGerais {
         try{
             String query = "select * from produto WHERE nome_produto = ? and preco_produto = ? and alcoolico_S_N = ? and tipo = ? and validade = ? and quantidade = ?";
 
-            PreparedStatement statement = conexao.prepareStatement(query);
-            statement.setString(1,nomeProduto);
-            statement.setString(2,precoProduto);
-            statement.setBoolean(3,Alcoolico_S_N);
-            statement.setString(4,tipo);
-            statement.setObject(5,validadeProduto);
-            statement.setInt(6,quantidadeProduto);
-            ResultSet resultSet = statement.executeQuery();
+//          Posicionando as Variáveis dentro da STRING de QUERY
+            PreparedStatement select = conexao.prepareStatement(query);
+            select.setString(1,nomeProduto);
+            select.setString(2,precoProduto);
+            select.setBoolean(3,Alcoolico_S_N);
+            select.setString(4,tipo);
+            select.setObject(5,validadeProduto);
+            select.setInt(6,quantidadeProduto);
+            ResultSet resultSetSelect = select.executeQuery();
 
-            if (resultSet.next()) {
+            if (resultSetSelect.next()) {
                 exibirAlerta(Alert.AlertType.ERROR,"Erro!","Produto já existe no Banco de Dados");
 
             } else {
-                exibirAlerta(Alert.AlertType.CONFIRMATION,"Produto Cadastrado","Produto foi Cadastrado com Sucesso!");
+                //Query para Cadastrar o Produto no sistema
+                String queryCadastro = "insert into produto(nome_produto,preco_produto,alcoolico_S_N,tipo,validade,quantidade)values (?,?,?,?,?,?)";
+
+                PreparedStatement insert = conexao.prepareStatement(queryCadastro);
+                insert.setString(1,nomeProduto);
+                insert.setString(2,precoProduto);
+                insert.setBoolean(3,Alcoolico_S_N);
+                insert.setString(4,tipo);
+                insert.setObject(5,validadeProduto);
+                insert.setInt(6,quantidadeProduto);
+
+                int rowsInserted = insert.executeUpdate();
+
+                if (rowsInserted > 0) {
+                    exibirAlerta(Alert.AlertType.INFORMATION,"Produto Cadastrado","Produto foi Cadastrado com Sucesso!");
+                    menuPane.setVisible(true);
+                    ProdutoPane.setVisible(false);
+                    FornecedorPane.setVisible(false);
+                    ClientePane.setVisible(false);
+                    FuncionarioPane.setVisible(false);
+                }
+
             }
         }catch(SQLException e){
             e.printStackTrace();
         }
     }
 
+
+
+
+    /*MÉTODO PARA SIMPLIFICAR O USO DE ALERT BOX*/
     private static void exibirAlerta(Alert.AlertType tipo, String titulo, String mensagem) {
         Alert alert = new Alert(tipo);
         alert.setTitle(titulo);
@@ -189,7 +228,11 @@ public class metodosGerais {
         alert.showAndWait();
     }
 
-    public static boolean isTextFieldValueValid(TextField textField) {
+
+
+
+    /*MÉTODO PARA VERIFICAR SE HÁ 2 NÚMERO APÓS O VIRGULA*/
+    public static boolean isTextFieldValueValido(TextField textField) {
         String value = textField.getText();
 
         // Remove o prefixo "R$ " e quaisquer espaços em branco antes ou depois

@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 public class CadastroController implements Initializable {
 
     @FXML
-    private Pane menuPane;
+    private static Pane menuPane;
 
     @FXML
     private Button voltarButton;
@@ -32,7 +32,7 @@ public class CadastroController implements Initializable {
     private Button CadProdutosButton;
 
     @FXML
-    private Pane ClientePane;
+    private static Pane ClientePane;
 
     @FXML
     private TextField clienteNomeTextField;
@@ -50,7 +50,7 @@ public class CadastroController implements Initializable {
     private Button cadClienteButton;
 
     @FXML
-    private Pane FuncionarioPane;
+    private static Pane FuncionarioPane;
 
     @FXML
     private Button voltarButton11;
@@ -71,7 +71,7 @@ public class CadastroController implements Initializable {
     private PasswordField funcSenhaTextField;
 
     @FXML
-    private Pane FornecedorPane;
+    private static Pane FornecedorPane;
 
     @FXML
     private Button voltarButton13;
@@ -89,7 +89,7 @@ public class CadastroController implements Initializable {
     private TextField FornecedorTelefoneTextField;
 
     @FXML
-    private Pane ProdutoPane;
+    private static Pane ProdutoPane;
 
     @FXML
     private CheckBox alcoolicoCheckBox;
@@ -158,7 +158,7 @@ public class CadastroController implements Initializable {
     }
 
     @FXML
-    void VoltarMenu(ActionEvent event) {
+    public static void VoltarMenu(ActionEvent event) {
         menuPane.setVisible(true);
         ProdutoPane.setVisible(false);
         FornecedorPane.setVisible(false);
