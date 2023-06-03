@@ -31,7 +31,7 @@ public class PrincipalController {
     @FXML
     void Logout(ActionEvent event) throws SQLException {
         HelloApplication.trocaTela("login");
-        metodosGerais.conexao.close();
+        LoginController.conexao.close();
         System.out.println("Conexão Fechada!");
     }
 

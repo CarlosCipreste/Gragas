@@ -4,40 +4,12 @@ package com.gragas.gragas.metodos;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyCode;
-import org.controlsfx.control.textfield.AutoCompletionBinding;
-import org.controlsfx.control.textfield.TextFields;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 
-/* -------------------------------------- BIBLIOTECA CONTROLSFX ---------------------------------------*/
 public class Formatacao {
 
-    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    //Autocomplete Nome TextField
-    public void autocompleteCliente(TextField textField) {
-
-        List<String> suggestions = Arrays.asList("Rafaela da Silva Menegardo", "Dennis Vinicius Freitas Bozzi", "Pedro Nivaldo Bozzi"); //Lista que é populada para Clientes
-
-        AutoCompletionBinding<String> autoCompletionBinding = TextFields.bindAutoCompletion(textField, suggestions); //Método da biblioteca ControlsFX
-
-        autoCompletionBinding.setMinWidth(378); //O tamanho do pane que abre para o autocomplete
-
-    }
-
-    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    //Autocomplete CPF TextField 
-    public void autocompleteCPF(TextField textField) {
-
-        List<String> suggestions = Arrays.asList("111.222.333-45", "333.222.333-45", "444.222.333-45"); //Lista que é populada para CPF
-
-        AutoCompletionBinding<String> autoCompletionBinding = TextFields.bindAutoCompletion(textField, suggestions); //Método da biblioteca ControlsFX
-
-        autoCompletionBinding.setMinWidth(141); //O tamanho do pane que abre para o autocomplete
-
-    }
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //Formata o CPF enquanto digita - TextField
@@ -71,6 +43,9 @@ public class Formatacao {
             }
         });
     }
+
+
+
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //Formata o celular enquanto digita - TextField
@@ -112,6 +87,11 @@ public class Formatacao {
         });
     }
 
+
+
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Formata o TextField de CNPJ Dinâmicamente
     public void formataCNPJDinamico(TextField textField) {
 
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -149,89 +129,11 @@ public class Formatacao {
         });
     }
 
-    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    //Formata o RG enquanto digita - TextField
-    public void formataRGDinamico(TextField textField) {
-
-        textField.textProperty().addListener((observable, oldValue, newValue) -> {
-            String digits = newValue.replaceAll("[^0-9]", "");
-
-            StringBuilder formatted = new StringBuilder();
-            if (digits.length() > 0) {
-                formatted.append(digits.substring(0, Math.min(2, digits.length()))).append(".");
-            }
-            if (digits.length() > 2) {
-                formatted.append(digits.substring(2, Math.min(5, digits.length()))).append(".");
-            }
-            if (digits.length() > 5) {
-                formatted.append(digits.substring(5, Math.min(8, digits.length()))).append("-");
-            }
-            if (digits.length() > 8) {
-                formatted.append(digits.substring(8, Math.min(9, digits.length())));
-            }
-
-            textField.setText(formatted.toString());
-        });
 
 
-    }
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    //Faz que ele apenas ative retorne uma String quando o length do texto for maior que 1
-    public String toString(String value) {
-
-        if (value == null || value.length() < 1) {
-            return "";
-        }
-        if (value.length() < 11) {
-            value = String.format("%011d", Long.valueOf(value));
-        }
-        return String.format("%s.%s.%s-%s", value.substring(0, 3), value.substring(3, 6), value.substring(6, 9), value.substring(9, 11));
-    }
-
-    public static void ApenasNumeros(TextField textField) {
-        UnaryOperator<TextFormatter.Change> filter = change -> {
-            String newText = change.getControlNewText();
-            if (Pattern.matches("\\d*", newText)) {
-                return change;
-            }
-            return null;
-        };
-
-        TextFormatter<String> textFormatter = new TextFormatter<>(filter);
-        textField.setTextFormatter(textFormatter);
-
-    }
-
-    public static void ApenasLetras(TextField textField) {
-        UnaryOperator<TextFormatter.Change> filter = change -> {
-            String newText = change.getControlNewText();
-            if (Pattern.matches("[a-zA-Z]*", newText)) {
-                return change;
-            }
-            return null;
-        };
-
-        TextFormatter<String> textFormatter = new TextFormatter<>(filter);
-        textField.setTextFormatter(textFormatter);
-
-    }
-
-    public static void LimitadorCaracteres(TextField textField, int limite) {
-        UnaryOperator<TextFormatter.Change> filter = change -> {
-            String newText = change.getControlNewText();
-
-            if (newText.length() <= limite) {
-                return change;
-            }
-
-            return null;
-        };
-
-        TextFormatter<String> textFormatter = new TextFormatter<>(filter);
-        textField.setTextFormatter(textFormatter);
-    }
-
+    //Formata o TextFIeld de preço Dinamicamente
     public void formataPrecoEnquantoDigita(TextField textField) {
 
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -262,24 +164,78 @@ public class Formatacao {
         });
     }
 
-    public static boolean isTextFieldValueValid(TextField textField) {
-        String value = textField.getText();
 
-        // Remove o prefixo "R$ " e quaisquer espaços em branco antes ou depois
-        value = value.replace("R$", "").trim();
 
-        // Verifica se o valor restante possui uma vírgula e se a parte após a vírgula está no formato correto
-        if (value.contains(",")) {
-            int commaIndex = value.indexOf(",");
-            String decimalPart = value.substring(commaIndex + 1);
 
-            // Verifica se a parte após a vírgula contém apenas dígitos e tem no máximo dois caracteres
-            if (decimalPart.matches("\\d{2}")) {
-                return true;
-            }
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Faz que ele apenas ative retorne uma String quando o length do texto for maior que 1
+    public String toString(String value) {
+
+        if (value == null || value.length() < 1) {
+            return "";
         }
+        if (value.length() < 11) {
+            value = String.format("%011d", Long.valueOf(value));
+        }
+        return String.format("%s.%s.%s-%s", value.substring(0, 3), value.substring(3, 6), value.substring(6, 9), value.substring(9, 11));
+    }
 
-        return false;
+
+
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Limita o TextField a ter apenas Números
+    public static void ApenasNumeros(TextField textField) {
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            String newText = change.getControlNewText();
+            if (Pattern.matches("\\d*", newText)) {
+                return change;
+            }
+            return null;
+        };
+
+        TextFormatter<String> textFormatter = new TextFormatter<>(filter);
+        textField.setTextFormatter(textFormatter);
+
+    }
+
+
+
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Limita o TextField a ter apenas Letras
+    public static void ApenasLetras(TextField textField) {
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            String newText = change.getControlNewText();
+            if (Pattern.matches("[a-zA-Z]*", newText)) {
+                return change;
+            }
+            return null;
+        };
+
+        TextFormatter<String> textFormatter = new TextFormatter<>(filter);
+        textField.setTextFormatter(textFormatter);
+
+    }
+
+
+
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Limita a quantidade de caracteres no TextField
+    public static void LimitadorCaracteres(TextField textField, int limite) {
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            String newText = change.getControlNewText();
+
+            if (newText.length() <= limite) {
+                return change;
+            }
+
+            return null;
+        };
+
+        TextFormatter<String> textFormatter = new TextFormatter<>(filter);
+        textField.setTextFormatter(textFormatter);
     }
 
 }
