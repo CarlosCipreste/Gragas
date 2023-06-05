@@ -4,6 +4,7 @@ import com.gragas.gragas.CadastroController;
 import com.gragas.gragas.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import org.w3c.dom.Text;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -13,10 +14,7 @@ public class metodosGerais {
     public static String valor = null;
 
 
-    public static void TentarLogin(TextField usuarioTextField, PasswordField senhaTextField) {
 
-
-    }
 
 
     /*MÉTODO PARA SIMPLIFICAR O USO DE ALERT BOX*/
@@ -48,5 +46,41 @@ public class metodosGerais {
         }
 
         return false;
+    }
+
+    //SOBRECARGA DO MÉTODO CLEAR
+    public static void clearAll(TextField nomeProd, TextField precoProd, CheckBox alcoolico, ChoiceBox dest_ou_ferm, CheckBox nalcoolico, ChoiceBox suco_ou_refri, DatePicker validade, TextField quantidadeProd){
+        //Clear para a tela de Produtos
+        nomeProd.clear();
+        precoProd.clear();
+        alcoolico.setSelected(false);
+        dest_ou_ferm.setValue(null);
+        nalcoolico.setSelected(false);
+        suco_ou_refri.setValue(false);
+        validade.setValue(null);
+        quantidadeProd.clear();
+    }
+
+    public static void clearAll(TextField nomeFunc, TextField CPFFunc, TextField login, PasswordField senha){
+        //Clear para a Tela de Funcionarios
+        nomeFunc.clear();
+        CPFFunc.clear();
+        login.clear();
+        senha.clear();
+    }
+
+    public static void clearAll(TextField nomeCliente, TextField CPFCliente, TextField telefoneCliente){
+        //Clear para a tela de Cliente
+        nomeCliente.clear();
+        CPFCliente.clear();
+        telefoneCliente.clear();
+    }
+
+    public static void clearAll(TextField nomeFornecedor, TextField enderecoFornecedor, TextField CNPJFornecedor, TextField telefoneFornecedor){
+        //Clear para a tela de Fornecedores
+        nomeFornecedor.clear();
+        enderecoFornecedor.clear();
+        CNPJFornecedor.clear();
+        telefoneFornecedor.clear();
     }
 }

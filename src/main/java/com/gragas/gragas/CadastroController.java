@@ -15,69 +15,13 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import static com.gragas.gragas.LoginController.conexao;
 import static com.gragas.gragas.metodos.metodosGerais.*;
 
 public class CadastroController implements Initializable {
 
     @FXML
-    private static Pane menuPane;
-
-    @FXML
-    private Button voltarButton;
-
-    @FXML
-    private Button CadUsuariosButton;
-
-    @FXML
-    private Button CadClientesButton;
-
-    @FXML
-    private Button CadFornecedorButton;
-
-    @FXML
-    private Button CadProdutosButton;
-
-    @FXML
-    private static Pane ClientePane;
-
-    @FXML
-    private TextField clienteNomeTextField;
-
-    @FXML
-    private TextField clienteCPFTextField;
-
-    @FXML
-    private TextField clienteTelefoneTextField;
-
-    @FXML
-    private Button voltarButton12;
-
-    @FXML
-    private Button cadClienteButton;
-
-    @FXML
-    private static Pane FuncionarioPane;
-
-    @FXML
-    private Button voltarButton11;
-
-    @FXML
-    private Button CadProdutosButton1;
-
-    @FXML
-    private TextField FuncNomeTextField;
-
-    @FXML
-    private TextField CPFFuncTextField;
-
-    @FXML
-    private TextField FuncLogin;
-
-    @FXML
-    private PasswordField funcSenhaTextField;
-
-    @FXML
-    private static Pane FornecedorPane;
+    private Pane FornecedorPane;
 
     @FXML
     private Button voltarButton13;
@@ -95,7 +39,64 @@ public class CadastroController implements Initializable {
     private TextField FornecedorTelefoneTextField;
 
     @FXML
-    private static Pane ProdutoPane;
+    private Pane ClientePane;
+
+    @FXML
+    private TextField clienteNomeTextField;
+
+    @FXML
+    private TextField clienteCPFTextField;
+
+    @FXML
+    private TextField clienteTelefoneTextField;
+
+    @FXML
+    private Button VoltarClienteButton;
+
+    @FXML
+    private Button cadClienteButton;
+
+    @FXML
+    private Pane FuncionarioPane;
+
+    @FXML
+    private Button voltarFuncionarioButton;
+
+    @FXML
+    private Button CadProdutosButton1;
+
+    @FXML
+    private TextField FuncNomeTextField;
+
+    @FXML
+    private TextField CPFFuncTextField;
+
+    @FXML
+    private TextField FuncLogin;
+
+    @FXML
+    private PasswordField funcSenhaTextField;
+
+    @FXML
+    private Pane menuPane;
+
+    @FXML
+    private Button voltarButton;
+
+    @FXML
+    private Button CadUsuariosButton;
+
+    @FXML
+    private Button CadClientesButton;
+
+    @FXML
+    private Button CadFornecedorButton;
+
+    @FXML
+    private Button CadProdutosButton;
+
+    @FXML
+    private Pane ProdutoPane;
 
     @FXML
     private CheckBox alcoolicoCheckBox;
@@ -117,17 +118,15 @@ public class CadastroController implements Initializable {
 
     @FXML
     private TextField quantidadeTextField;
-    @FXML
-    private DatePicker validadeDatePicker;
 
     @FXML
-    private TextField validadeTextField;
-    @FXML
-    private Button voltarButton1;
+    private Button voltarProdutoButton;
 
     @FXML
     private Button CadProdutoButton;
 
+    @FXML
+    private DatePicker validadeDatePicker;
     String[] nAlcoolicoValues = {"Suco", "Refrigerante"};
     String[] AlcoolicoValues = {"Destilado", "Fermentado"};
 
@@ -164,12 +163,17 @@ public class CadastroController implements Initializable {
     }
 
     @FXML
-    public static void VoltarMenu(ActionEvent event) {
+    public void VoltarMenu(ActionEvent event) {
         menuPane.setVisible(true);
         ProdutoPane.setVisible(false);
         FornecedorPane.setVisible(false);
         ClientePane.setVisible(false);
         FuncionarioPane.setVisible(false);
+
+        clearAll(nomeProdutoTextField,precoTextField,alcoolicoCheckBox,nalcoolicoChoiceBox,NAlcoolicoCheckBox,nalcoolicoChoiceBox,validadeDatePicker,quantidadeTextField);
+        clearAll(FuncNomeTextField,CPFFuncTextField,FuncLogin,funcSenhaTextField);
+        clearAll(clienteNomeTextField,clienteCPFTextField,clienteTelefoneTextField);
+        clearAll(fornecedorNomeTextField,fornecedorEnderecoTextField,fornecedorCNPJTextField,fornecedorCNPJTextField);
 
     }
 
@@ -255,7 +259,6 @@ public class CadastroController implements Initializable {
             e.printStackTrace();
         }
 
-
         /*Caso nao haja nenhum erro com os componentes
          * O sistema é liberado para fazer o cadastro*/
 
@@ -263,9 +266,14 @@ public class CadastroController implements Initializable {
         String nomeProduto = nomeProdutoTextField.getText().toLowerCase();
         String precoProduto = precoTextField.getText();
 
+        //Definindo o valor do booleano com base da escolha do ChoiceBox
         boolean Alcoolico_S_N;
-        if(alcoolicoCheckBox.isSelected()){Alcoolico_S_N = true;}
-        else{Alcoolico_S_N = false;}
+        if(alcoolicoCheckBox.isSelected()) {
+            Alcoolico_S_N = true;
+        }
+        else{
+            Alcoolico_S_N = false;
+        }
 
         String tipo;
         if(alcoolicoCheckBox.isSelected() || alcoolicoChoiceBox.getValue() == "Destilado"){
@@ -289,7 +297,7 @@ public class CadastroController implements Initializable {
             String query = "select * from produto WHERE nome_produto = ? and preco_produto = ? and alcoolico_S_N = ? and tipo = ? and validade = ? and quantidade = ?";
 
 //          Posicionando as Variáveis dentro da STRING de QUERY
-            PreparedStatement select = LoginController.conexao.prepareStatement(query);
+            PreparedStatement select = conexao.prepareStatement(query);
             select.setString(1,nomeProduto);
             select.setString(2,precoProduto);
             select.setBoolean(3,Alcoolico_S_N);
@@ -305,7 +313,7 @@ public class CadastroController implements Initializable {
                 //Query para Cadastrar o Produto no sistema
                 String queryCadastro = "insert into produto(nome_produto,preco_produto,alcoolico_S_N,tipo,validade,quantidade)values (?,?,?,?,?,?)";
 
-                PreparedStatement insert = LoginController.conexao.prepareStatement(queryCadastro);
+                PreparedStatement insert = conexao.prepareStatement(queryCadastro);
                 insert.setString(1,nomeProduto);
                 insert.setString(2,precoProduto);
                 insert.setBoolean(3,Alcoolico_S_N);
@@ -328,10 +336,113 @@ public class CadastroController implements Initializable {
         }catch(SQLException e){
             e.printStackTrace();
         }    }
-//    nomeProdutoTextField, precoTextField, alcoolicoCheckBox, NAlcoolicoCheckBox, alcoolicoChoiceBox, nalcoolicoChoiceBox, validadeDatePicker, quantidadeTextField)
+
+    @FXML
+    void cadCliente(ActionEvent event) {
+
+
+        String cliente = clienteNomeTextField.getText().toLowerCase();
+        String CPF = clienteCPFTextField.getText();
+        String telefone = clienteTelefoneTextField.getText();
+
+        try {
+            // Criação da consulta SQL
+            String querySelect = "SELECT * FROM cliente WHERE cpf_cliente = ?";
+
+            // Preparação da instrução SQL
+            PreparedStatement select = conexao.prepareStatement(querySelect);
+            select.setString(1, CPF);
+
+            // Execução da consulta
+            ResultSet resultSet1 = select.executeQuery();
+
+            // Verifica se o CPF existe no banco de dados
+            if (resultSet1.next()) {
+                exibirAlerta(Alert.AlertType.ERROR,"CPF Existente","Este CPF já está Cadastrado!");
+            } else {
+
+                String queryInsert = "insert into cliente (nome_cliente, cpf_cliente, telefone_cliente) values (?,?,?);";
+                PreparedStatement insert = conexao.prepareStatement(queryInsert);
+                insert.setString(1,cliente);
+                insert.setString(2,CPF);
+                insert.setString(3,telefone);
+
+                int linhasInseridas = insert.executeUpdate();
+
+                if(linhasInseridas > 0) {
+                    exibirAlerta(Alert.AlertType.INFORMATION, "Cliente Cadastrado", "Informações do cliente foram inseridas com sucesso!");
+                }
+                // Fechando recurso
+                insert.close();
+
+            }
+            // Fechando recursos
+
+            resultSet1.close();
+            select.close();
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+    @FXML
+    void cadFornecedor(){
+        String fornecedor = fornecedorNomeTextField.getText().toLowerCase();
+        String endereco = fornecedorEnderecoTextField.getText().toLowerCase();
+        String CNPJ = fornecedorCNPJTextField.getText();
+        String telefone = FornecedorTelefoneTextField.getText();
+
+        try {
+            // Criação da consulta SQL
+            String querySelect = "SELECT * FROM fornecedor WHERE cnpj_fornecedor = ?";
+
+            // Preparação da instrução SQL
+            PreparedStatement select = conexao.prepareStatement(querySelect);
+            select.setString(1, CNPJ);
+
+            // Execução da consulta
+            ResultSet resultSet1 = select.executeQuery();
+
+            // Verifica se o CPF existe no banco de dados
+            if (resultSet1.next()) {
+                exibirAlerta(Alert.AlertType.ERROR,"CNPJ Existente","Este CNPJ já está Cadastrado!");
+            } else {
+
+                String queryInsert = "insert into fornecedor (nome_fornecedor, endereco_fornecedor, CNPJ_fornecedor, telefone_fornecedor) values (?,?,?,?);";
+                PreparedStatement insert = conexao.prepareStatement(queryInsert);
+                insert.setString(1,fornecedor);
+                insert.setString(2,endereco);
+                insert.setString(3,CNPJ);
+                insert.setString(4,telefone);
+
+                int linhasInseridas = insert.executeUpdate();
+
+                if(linhasInseridas > 0) {
+                    exibirAlerta(Alert.AlertType.INFORMATION, "Fornecedor Cadastrado", "Informações do Fornecedor foram inseridas com sucesso!");
+                    
+                }
+                // Fechando recurso
+                insert.close();
+
+            }
+            // Fechando recursos
+
+            resultSet1.close();
+            select.close();
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //O método initialize() consegue dar Propriedades a elementos gráficos como uma formatação para um textfield
+
+        String[] nAlcoolicoValues = {"Destilado","Fermentado"};
+        String[] AlcoolicoValues = {"Suco","Refrigerante"};
 
         nalcoolicoChoiceBox.getItems().addAll(nAlcoolicoValues);
         alcoolicoChoiceBox.getItems().addAll(AlcoolicoValues);
@@ -353,22 +464,22 @@ public class CadastroController implements Initializable {
         formatacao.formataPrecoEnquantoDigita(precoTextField);
 
         //Limitando a quantidade caracteres dos TextFields que nao recebem os Formatadores anteriores
-        formatacao.LimitadorCaracteres(FuncNomeTextField, 60);
-        formatacao.LimitadorCaracteres(FuncLogin, 16);
-        formatacao.LimitadorCaracteres(funcSenhaTextField, 16);
+        Formatacao.LimitadorCaracteres(FuncNomeTextField, 60);
+        Formatacao.LimitadorCaracteres(FuncLogin, 16);
+        Formatacao.LimitadorCaracteres(funcSenhaTextField, 16);
 
-        formatacao.LimitadorCaracteres(fornecedorNomeTextField, 60);
-        formatacao.LimitadorCaracteres(fornecedorEnderecoTextField, 60);
+        Formatacao.LimitadorCaracteres(fornecedorNomeTextField, 60);
+        Formatacao.LimitadorCaracteres(fornecedorEnderecoTextField, 60);
 
-        formatacao.LimitadorCaracteres(nomeProdutoTextField, 60);
-        formatacao.LimitadorCaracteres(quantidadeTextField, 3);
-        formatacao.LimitadorCaracteres(clienteNomeTextField, 60);
+        Formatacao.LimitadorCaracteres(nomeProdutoTextField, 60);
+        Formatacao.LimitadorCaracteres(quantidadeTextField, 3);
+        Formatacao.LimitadorCaracteres(clienteNomeTextField, 60);
 
         //Transformando os TextField para receberem apenas Letras
-        formatacao.ApenasLetras(FuncNomeTextField);
+        Formatacao.ApenasLetras(FuncNomeTextField);
 
         //Formatando para Receber apenas números
-        formatacao.ApenasNumeros(quantidadeTextField);
+        Formatacao.ApenasNumeros(quantidadeTextField);
     }
 
 
