@@ -420,7 +420,7 @@ public class CadastroController implements Initializable {
 
                 if(linhasInseridas > 0) {
                     exibirAlerta(Alert.AlertType.INFORMATION, "Fornecedor Cadastrado", "Informações do Fornecedor foram inseridas com sucesso!");
-                    
+
                 }
                 // Fechando recurso
                 insert.close();
