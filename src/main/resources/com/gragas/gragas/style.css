@@ -130,11 +130,8 @@
     -fx-background-color: transparent;
 }
 
-.table-view .table-row-cell:odd {
-    -fx-background-color: transparent;
-}
 
 .table-view .table-row-cell:selected {
-    -fx-background-color: blue;
-    -fx-text-fill: white;
+    -fx-background-color: #62E197;
+    -fx-text-fill: black;
 }

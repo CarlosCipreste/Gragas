@@ -6,5 +6,7 @@ module com.gragas.gragas {
     requires org.controlsfx.controls;
 
     opens com.gragas.gragas to javafx.fxml;
+    opens com.gragas.gragas.metodos to javafx.base;
+
     exports com.gragas.gragas;
 }

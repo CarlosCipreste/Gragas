@@ -28,34 +28,16 @@ public class LoginController implements Initializable {
     @FXML
     private PasswordField senhaTextField;
 
-    public static Connection conexao = null;
-    @FXML
-    void EntrarEnter(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) {
-            String url = "jdbc:mysql://localhost:3306/distribuidora";
-            String usuario = "root";
-            String senha = "";
-
-
-            try {
-                System.out.println("Tentativa de Conexão");
-                conexao = DriverManager.getConnection(url, usuario, senha);
-                System.out.println("Conexão Com o Banco de dados bem-Sucedida");
-
-            } catch (SQLException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erro");
-                alert.setHeaderText("Ocorreu um Erro!");
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
-
-            }
+    public static Connection conexao;
 
             /*
             variáveis necessaria para a query e retorno  de resultado.
              As variávei possuem os métodos para poder retornar o valor
              colocado no componente TextField e retornar um String
             */
+    @FXML
+    void LoginEnter(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
 
             ResultSet resultSet;
             String username = usuarioTextField.getText();
@@ -97,7 +79,7 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    void Login(ActionEvent event) {
+    void connect() {
         String url = "jdbc:mysql://localhost:3306/distribuidora";
         String usuario = "root";
         String senha = "";
@@ -116,12 +98,14 @@ public class LoginController implements Initializable {
             alert.showAndWait();
 
         }
-
+    }
             /*
             variáveis necessaria para a query e retorno  de resultado.
              As variávei possuem os métodos para poder retornar o valor
              colocado no componente TextField e retornar um String
             */
+    @FXML
+    void Login(){
 
         ResultSet resultSet;
         String username = usuarioTextField.getText();
@@ -163,7 +147,7 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        connect();
         LimitadorCaracteres(usuarioTextField,16);
         LimitadorCaracteres(senhaTextField,16);
 

@@ -207,7 +207,7 @@ public class Formatacao {
     public static void ApenasLetras(TextField textField) {
         UnaryOperator<TextFormatter.Change> filter = change -> {
             String newText = change.getControlNewText();
-            if (Pattern.matches("[a-zA-Z]*", newText)) {
+            if (Pattern.matches("[a-zA-Z ]*", newText)) {
                 return change;
             }
             return null;

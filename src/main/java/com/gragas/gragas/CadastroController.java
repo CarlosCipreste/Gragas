@@ -449,7 +449,7 @@ public class CadastroController implements Initializable {
 
 @FXML
     void cadFuncionario(){
-        String funcionario = FuncNomeTextField.getText();
+        String funcionario = FuncNomeTextField.getText().toLowerCase();
         String CPF = CPFFuncTextField.getText();
         String login = FuncLogin.getText();
         String senha = funcSenhaTextField.getText();
@@ -470,7 +470,7 @@ public class CadastroController implements Initializable {
                 exibirAlerta(Alert.AlertType.ERROR,"Funcionario Existente","Este Funcionario já está Cadastrado!");
             } else {
 
-                String queryInsert = "insert into funcionario (nome_funcionario,cpf_funcionario,login_funcioanrio,senha_funcionario) values (?,?,?);";
+                String queryInsert = "insert into funcionario (nome_funcionario,cpf_funcionario,login,senha) values (?,?,?,?);";
                 PreparedStatement insert = conexao.prepareStatement(queryInsert);
                 insert.setString(1,funcionario);
                 insert.setString(2,CPF);
@@ -480,7 +480,7 @@ public class CadastroController implements Initializable {
                 int linhasInseridas = insert.executeUpdate();
 
                 if(linhasInseridas > 0) {
-                    exibirAlerta(Alert.AlertType.INFORMATION, "Cliente Cadastrado", "Informações do cliente foram inseridas com sucesso!");
+                    exibirAlerta(Alert.AlertType.INFORMATION, "Funcionário Cadastrado", "Informações do funcionário foram inseridas com sucesso!");
                 }
                 // Fechando recurso
                 insert.close();
@@ -498,12 +498,13 @@ public class CadastroController implements Initializable {
 
 
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //O método initialize() consegue dar Propriedades a elementos gráficos como uma formatação para um textfield
 
-        String[] nAlcoolicoValues = {"Destilado","Fermentado"};
-        String[] AlcoolicoValues = {"Suco","Refrigerante"};
+        String[] nAlcoolicoValues = {"Suco","Refrigerante"};
+        String[] AlcoolicoValues = {"Destilado","Fermentado"};
 
         nalcoolicoChoiceBox.getItems().addAll(nAlcoolicoValues);
         alcoolicoChoiceBox.getItems().addAll(AlcoolicoValues);
