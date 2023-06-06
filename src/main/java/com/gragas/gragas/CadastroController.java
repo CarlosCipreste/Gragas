@@ -436,6 +436,54 @@ public class CadastroController implements Initializable {
         }
 
     }
+@FXML
+    void cadFuncionario(){
+        String funcionario = FuncNomeTextField.getText();
+        String CPF = CPFFuncTextField.getText();
+        String login = FuncLogin.getText();
+        String senha = funcSenhaTextField.getText();
+
+        try {
+            // Criação da consulta SQL
+            String querySelect = "SELECT * FROM funcionario WHERE cpf_funcionario = ?";
+
+            // Preparação da instrução SQL
+            PreparedStatement select = conexao.prepareStatement(querySelect);
+            select.setString(1, CPF);
+
+            // Execução da consulta
+            ResultSet resultSet1 = select.executeQuery();
+
+            // Verifica se o CPF existe no banco de dados
+            if (resultSet1.next()) {
+                exibirAlerta(Alert.AlertType.ERROR,"Funcionario Existente","Este Funcionario já está Cadastrado!");
+            } else {
+
+                String queryInsert = "insert into funcionario (nome_funcionario,cpf_funcionario,login_funcioanrio,senha_funcionario) values (?,?,?);";
+                PreparedStatement insert = conexao.prepareStatement(queryInsert);
+                insert.setString(1,funcionario);
+                insert.setString(2,CPF);
+                insert.setString(3,login);
+                insert.setString(4,senha);
+
+                int linhasInseridas = insert.executeUpdate();
+
+                if(linhasInseridas > 0) {
+                    exibirAlerta(Alert.AlertType.INFORMATION, "Cliente Cadastrado", "Informações do cliente foram inseridas com sucesso!");
+                }
+                // Fechando recurso
+                insert.close();
+
+            }
+            // Fechando recursos
+
+            resultSet1.close();
+            select.close();
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
