@@ -113,3 +113,28 @@
 .choice-box .context-menu {
     -fx-pref-width: 150; /* Your width for the context menu background shown */
 }
+
+
+/*TABLE VIEW STYLE*/
+.table-view{
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+
+}
+
+.table-view .table-row-cell {
+    -fx-font-size: 20px;
+    -fx-background-color: transparent;
+}
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: blue;
+    -fx-text-fill: white;
+}

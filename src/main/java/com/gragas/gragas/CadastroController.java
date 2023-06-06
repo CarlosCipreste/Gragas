@@ -337,6 +337,9 @@ public class CadastroController implements Initializable {
             e.printStackTrace();
         }    }
 
+
+
+
     @FXML
     void cadCliente(ActionEvent event) {
 
@@ -386,6 +389,10 @@ public class CadastroController implements Initializable {
         }
 
     }
+
+
+
+
     @FXML
     void cadFornecedor(){
         String fornecedor = fornecedorNomeTextField.getText().toLowerCase();
@@ -436,6 +443,10 @@ public class CadastroController implements Initializable {
         }
 
     }
+
+
+
+
 @FXML
     void cadFuncionario(){
         String funcionario = FuncNomeTextField.getText();
@@ -484,6 +495,8 @@ public class CadastroController implements Initializable {
             e.printStackTrace();
         }
     }
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
