@@ -24,7 +24,6 @@
                         <Font name="Leelawadee UI Bold" size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="vendaClienteTextField" layoutX="113.0" layoutY="87.0" prefHeight="42.0" prefWidth="290.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 2px; -fx-border-radius: 4px;" />
                   <Label layoutX="13.0" layoutY="190.0" text="Produto:" textFill="WHITE">
                      <font>
                         <Font name="Leelawadee UI Bold" size="24.0" />
@@ -36,12 +35,13 @@
                      </font>
                   </Label>
                   <TextField fx:id="vendaQTDTextField" layoutX="113.0" layoutY="289.0" prefHeight="42.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 2px; -fx-border-radius: 4px;" />
-                  <Button fx:id="vendaAdicionarProdButton" layoutX="90.0" layoutY="374.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="248.0" style="-fx-background-color: white; -fx-background-radius: 25px; -fx-border-radius: 25px; -fx-border-color: black; -fx-border-width: 3px;" text="Adicionar Produto">
+                  <Button fx:id="vendaAdicionarProdButton" layoutX="90.0" layoutY="374.0" mnemonicParsing="false" onAction="#AdicionarProdutonaVenda" prefHeight="35.0" prefWidth="248.0" style="-fx-background-color: white; -fx-background-radius: 25px; -fx-border-radius: 25px; -fx-border-color: black; -fx-border-width: 3px;" text="Adicionar Produto">
                      <font>
                         <Font name="Leelawadee UI Bold" size="18.0" />
                      </font>
                   </Button>
                   <ChoiceBox fx:id="vendaProdutosChoiceBox" layoutX="117.0" layoutY="187.0" prefHeight="42.0" prefWidth="290.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 2px; -fx-border-radius: 4px;" />
+                  <TextField fx:id="vendaClienteTextField" layoutX="113.0" layoutY="87.0" prefHeight="42.0" prefWidth="290.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 2px; -fx-border-radius: 4px;" />
                </children>
             </Pane>
             <Pane layoutX="486.0" layoutY="81.0" prefHeight="585.0" prefWidth="371.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 3px; -fx-border-radius: 30px;">

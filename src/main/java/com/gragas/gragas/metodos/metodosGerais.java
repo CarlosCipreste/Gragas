@@ -83,4 +83,11 @@ public class metodosGerais {
         CNPJFornecedor.clear();
         telefoneFornecedor.clear();
     }
+
+    public static void clearAll(TextField vendaCliente, ChoiceBox<String> produtoChoiceBox, TextField quantidadeProduto, TableView vendaTableView ){
+        vendaCliente.clear();
+        produtoChoiceBox.getSelectionModel().clearSelection();
+        quantidadeProduto.clear();
+        vendaTableView.getItems().clear();
+    }
 }

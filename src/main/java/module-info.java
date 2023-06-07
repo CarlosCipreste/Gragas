@@ -5,6 +5,7 @@ module com.gragas.gragas {
     requires mysql.connector.j;
     requires org.controlsfx.controls;
 
+
     opens com.gragas.gragas to javafx.fxml;
     opens com.gragas.gragas.metodos to javafx.base;
 

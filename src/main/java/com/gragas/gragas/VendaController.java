@@ -8,17 +8,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.net.URL;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static com.gragas.gragas.LoginController.*;
+import static com.gragas.gragas.metodos.metodosGerais.clearAll;
 
 public class VendaController implements Initializable {
 
     @FXML
-    private static ChoiceBox<String> vendaProdutosChoiceBox;
+    private ChoiceBox<String> vendaProdutosChoiceBox;
 
     @FXML
     private TextField vendaClienteTextField;
@@ -46,18 +51,18 @@ public class VendaController implements Initializable {
 
     @FXML
     private Button voltarButton;
+    @FXML
+    private ObservableList<String> lista;
 
     @FXML
     void Voltar(ActionEvent event) {
         HelloApplication.trocaTela("principal");
-    }
+        clearAll(vendaClienteTextField,vendaProdutosChoiceBox,vendaQTDTextField,vendaListaTableView);    }
     @FXML
     ObservableList<ProdTable> valoresProdTable = FXCollections.observableArrayList(
-            new ProdTable("Batata",4),
-            new ProdTable("Banana",2)
     );
 
-    public void setChoiceBoxValues(ObservableList items) {
+    public void setvendaChoiceBoxValues(List<String> list) {
 
 
         // Criar a conexão com o banco de dados
@@ -73,26 +78,73 @@ public class VendaController implements Initializable {
                 // Percorrer o resultado da consulta e adicionar os valores à ObservableList existente
                 while (resultSet.next()) {
                     String nomeProduto = resultSet.getString("nome_produto");
-                    items.add(nomeProduto);
+                    list.add(nomeProduto);
                 }
-
                 // Definir a ObservableList como a fonte de itens do ChoiceBox
-                vendaProdutosChoiceBox.setItems(items);
+                vendaProdutosChoiceBox.getItems().setAll(list);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    
+    
 
 
+    private void setupClienteValues(ObservableList<String> lista, TextField textField){
+        try {
+            String sql = "SELECT nome_cliente FROM cliente";
+            try (Statement statement = conexao.createStatement()) {
+                ResultSet resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    String nomeProduto = resultSet.getString("nome_cliente");
+                    lista.add(nomeProduto);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        AutoCompletionBinding<String> autoComplete = TextFields.bindAutoCompletion(textField,lista);
+
+        autoComplete.setOnAutoCompleted((AutoCompletionBinding.AutoCompletionEvent<String> event) -> {
+            String sugestaoSelecionada = event.getCompletion();
+            System.out.println("Sugestão selecionada: " + sugestaoSelecionada);
+        });
+
+    }
+
+    @FXML
+    void AdicionarProdutonaVenda(ActionEvent event) {
+
+        String cliente = vendaClienteTextField.getText();
+        String nomeProd = vendaProdutosChoiceBox.getValue();
+        int qtdProd = Integer.parseInt(vendaQTDTextField.getText());
+
+        if(vendaListaTableView.getItems().isEmpty()) {
+            ObservableList<ProdTable> valoresProdTable = FXCollections.observableArrayList(
+                    new ProdTable(nomeProd, qtdProd)
+            );
+            vendaListaTableView.setItems(valoresProdTable);
+
+        }
+        else{
+            valoresProdTable.add(new ProdTable(nomeProd,qtdProd)
+        );
+        }
+        System.out.println("Adicionado");
+    }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        ObservableList<String> items = FXCollections.observableArrayList();
-        vendaProdutosChoiceBox.getItems().addListener();
-        setChoiceBoxValues(items);
+        List<String> list=new ArrayList<String>();
+        setvendaChoiceBoxValues(list);
+
+        lista = FXCollections.observableArrayList();
+        setupClienteValues(lista, vendaClienteTextField);
+
 
         nome.setCellValueFactory(new PropertyValueFactory<ProdTable,String>("nomeProdClass"));
         qtd.setCellValueFactory(new PropertyValueFactory<ProdTable,Integer>("qtdProdClass"));
