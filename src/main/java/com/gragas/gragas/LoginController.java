@@ -47,7 +47,7 @@ public class LoginController implements Initializable {
                 Faz uma query de sql fazendo uma comparação de String para fazer o login,
                 Caso o valor seja retornado, ele aceita o login.
             */
-            String sql = "SELECT * FROM conexao WHERE binary username = ? and senha = ?";
+            String sql = "SELECT * FROM funcionario WHERE binary login = ? and senha = ?";
 
             try {
                 PreparedStatement declaracao = conexao.prepareStatement(sql);
@@ -115,7 +115,7 @@ public class LoginController implements Initializable {
                 Faz uma query de sql fazendo uma comparação de String para fazer o login,
                 Caso o valor seja retornado, ele aceita o login.
             */
-        String sql = "SELECT * FROM conexao WHERE binary username = ? and senha = ?";
+        String sql = "SELECT * FROM funcionario WHERE binary login = ? and senha = ?";
 
         try {
             PreparedStatement declaracao = conexao.prepareStatement(sql);

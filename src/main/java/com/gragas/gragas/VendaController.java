@@ -19,11 +19,14 @@ import java.util.ResourceBundle;
 
 import static com.gragas.gragas.LoginController.*;
 import static com.gragas.gragas.metodos.metodosGerais.clearAll;
+import static com.gragas.gragas.metodos.metodosGerais.exibirAlerta;
 
 public class VendaController implements Initializable {
 
     @FXML
     private ChoiceBox<String> vendaProdutosChoiceBox;
+    @FXML
+    private ObservableList<ProdTable> valoresProdTable = FXCollections.observableArrayList();
 
     @FXML
     private TextField vendaClienteTextField;
@@ -57,10 +60,8 @@ public class VendaController implements Initializable {
     @FXML
     void Voltar(ActionEvent event) {
         HelloApplication.trocaTela("principal");
-        clearAll(vendaClienteTextField,vendaProdutosChoiceBox,vendaQTDTextField,vendaListaTableView);    }
-    @FXML
-    ObservableList<ProdTable> valoresProdTable = FXCollections.observableArrayList(
-    );
+        clearAll(vendaClienteTextField,vendaProdutosChoiceBox,vendaQTDTextField,vendaListaTableView);
+    }
 
     public void setvendaChoiceBoxValues(List<String> list) {
 
@@ -84,6 +85,7 @@ public class VendaController implements Initializable {
                 vendaProdutosChoiceBox.getItems().setAll(list);
             }
         } catch (SQLException e) {
+            exibirAlerta(Alert.AlertType.ERROR,"ERRO","ERRO");
             e.printStackTrace();
         }
     }
@@ -117,39 +119,46 @@ public class VendaController implements Initializable {
     @FXML
     void AdicionarProdutonaVenda(ActionEvent event) {
 
-        String cliente = vendaClienteTextField.getText();
         String nomeProd = vendaProdutosChoiceBox.getValue();
         int qtdProd = Integer.parseInt(vendaQTDTextField.getText());
 
-        if(vendaListaTableView.getItems().isEmpty()) {
-            ObservableList<ProdTable> valoresProdTable = FXCollections.observableArrayList(
-                    new ProdTable(nomeProd, qtdProd)
+        if(nomeProd == ){}
+
+        //Se a lista estiver vazia é criada uma nova
+        if (valoresProdTable == null) {
+            valoresProdTable = FXCollections.observableArrayList(
+                    new ProdTable(nomeProd,qtdProd)
             );
+            vendaListaTableView.setItems(valoresProdTable);
+        }
+        //Se ela existir o produto é adicionado ao table view
+        else {
+            valoresProdTable.add( new ProdTable(nomeProd, qtdProd));
             vendaListaTableView.setItems(valoresProdTable);
 
         }
-        else{
-            valoresProdTable.add(new ProdTable(nomeProd,qtdProd)
-        );
-        }
         System.out.println("Adicionado");
+    }
+
+    @FXML
+    public void FinalizarVenda(ActionEvent event){
+
     }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        List<String> list=new ArrayList<String>();
+
+        List<String> list = new ArrayList<String>();
         setvendaChoiceBoxValues(list);
 
         lista = FXCollections.observableArrayList();
         setupClienteValues(lista, vendaClienteTextField);
 
-
         nome.setCellValueFactory(new PropertyValueFactory<ProdTable,String>("nomeProdClass"));
         qtd.setCellValueFactory(new PropertyValueFactory<ProdTable,Integer>("qtdProdClass"));
 
-        vendaListaTableView.setItems(valoresProdTable);
     }
 
 

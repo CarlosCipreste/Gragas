@@ -33,8 +33,7 @@ public class HelloApplication extends Application {
         FXMLLoader cadastrofxml = new FXMLLoader(HelloApplication.class.getResource("cadastro.fxml"));
         CadastroPage = new Scene(cadastrofxml.load());
 
-        FXMLLoader vendafxml = new FXMLLoader(HelloApplication.class.getResource("venda.fxml"));
-        VendaPage = new Scene(vendafxml.load());
+
 
         stage.setTitle("Taverna do Gragas");
         stage.setResizable(false);
@@ -67,8 +66,11 @@ public class HelloApplication extends Application {
                 break;
 
             case "venda":
+                try{
+                FXMLLoader vendafxml = new FXMLLoader(HelloApplication.class.getResource("venda.fxml"));
+                VendaPage = new Scene(vendafxml.load());
                 stage.setScene(VendaPage);
-                stage.centerOnScreen();
+                stage.centerOnScreen();}catch(IOException e){e.printStackTrace();}
                 break;
         }
     }
