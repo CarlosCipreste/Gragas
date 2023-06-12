@@ -117,26 +117,43 @@ public class VendaController implements Initializable {
     }
 
     @FXML
-    void AdicionarProdutonaVenda(ActionEvent event) {
+    void ApagarProdutoSelecionado(ActionEvent event) {
+        ProdTable itemSelecionado = vendaListaTableView.getSelectionModel().getSelectedItem();
 
+        // Verifica se um item está selecionado
+        if (itemSelecionado != null) {
+            // Remove o item da lista de itens da tabela
+            valoresProdTable.remove(itemSelecionado);
+        }
+    }
+
+    @FXML
+    void AdicionarProdutonaVenda(ActionEvent event) {
         String nomeProd = vendaProdutosChoiceBox.getValue();
         int qtdProd = Integer.parseInt(vendaQTDTextField.getText());
 
-        if(nomeProd == ){}
-
-        //Se a lista estiver vazia é criada uma nova
+        // Verifica se a lista está vazia
         if (valoresProdTable == null) {
             valoresProdTable = FXCollections.observableArrayList(
-                    new ProdTable(nomeProd,qtdProd)
+                    new ProdTable(nomeProd, qtdProd)
             );
-            vendaListaTableView.setItems(valoresProdTable);
-        }
-        //Se ela existir o produto é adicionado ao table view
-        else {
-            valoresProdTable.add( new ProdTable(nomeProd, qtdProd));
-            vendaListaTableView.setItems(valoresProdTable);
+        } else {
+            // Verifica se o produto já está presente na lista
+            boolean produtoJaPresente = false;
+            for (ProdTable produto : valoresProdTable) {
+                if (produto.getNomeProdClass().equals(nomeProd)) {
+                    produtoJaPresente = true;
+                    break;
+                }
+            }
 
+            if (produtoJaPresente) {
+                exibirAlerta(Alert.AlertType.ERROR,"ERRO","O produto já está na tabela.");
+            } else {
+                valoresProdTable.add(new ProdTable(nomeProd, qtdProd));
+            }
         }
+        vendaListaTableView.setItems(valoresProdTable);
         System.out.println("Adicionado");
     }
 

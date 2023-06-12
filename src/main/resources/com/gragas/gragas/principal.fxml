@@ -38,7 +38,7 @@
                         <Font name="Leelawadee UI Bold" size="18.0" />
                     </font>
                 </Button>
-                <Button fx:id="RegistroButton" layoutX="9.0" layoutY="343.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="280.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 2px; -fx-border-radius: 5px;" styleClass="botaomenuleft" stylesheets="@style.css" text="Registros" textFill="WHITE">
+                <Button fx:id="RegistroButton" layoutX="9.0" layoutY="343.0" mnemonicParsing="false" onAction="#enterRegistro" prefHeight="45.0" prefWidth="280.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 2px; -fx-border-radius: 5px;" styleClass="botaomenuleft" stylesheets="@style.css" text="Registros" textFill="WHITE">
                     <font>
                         <Font name="Leelawadee UI Bold" size="18.0" />
                     </font>
@@ -58,7 +58,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button layoutX="390.0" layoutY="372.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="320.0" styleClass="botaomenuright" stylesheets="@style.css" text="Estoque" textFill="WHITE">
+        <Button layoutX="390.0" layoutY="372.0" mnemonicParsing="false" onAction="#EnterEstoque" prefHeight="68.0" prefWidth="320.0" styleClass="botaomenuright" stylesheets="@style.css" text="Estoque" textFill="WHITE">
             <font>
                 <Font name="Leelawadee UI Bold" size="20.0" />
             </font>

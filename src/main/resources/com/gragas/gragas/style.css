@@ -120,18 +120,23 @@
     -fx-background-color: transparent;
 }
 
-.table-view .column-header-background {
-    -fx-background-color: transparent;
+.table-view .column-header {
+    -fx-border-width:2px;
+    -fx-border-color:black;
+    -fx-background-color: #9F478C;
+    -fx-font-size: 18px;
+
 
 }
 
 .table-view .table-row-cell {
-    -fx-font-size: 20px;
-    -fx-background-color: transparent;
+    -fx-border:2px;
+    -fx-border-color:black;
 }
 
 
 .table-view .table-row-cell:selected {
+    -fx-border:3px;
     -fx-background-color: #62E197;
     -fx-text-fill: black;
 }

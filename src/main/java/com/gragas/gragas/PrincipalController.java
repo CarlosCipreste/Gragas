@@ -26,8 +26,19 @@ public class PrincipalController {
     private Button VendaButton;
 
     @FXML
+    void enterRegistro(){
+        HelloApplication.trocaTela("registro");
+        System.out.println("Troca de tela");
+    }
+
+    @FXML
     void EnterCadastrar(ActionEvent event) {
         HelloApplication.trocaTela("cadastro");
+        System.out.println("Troca de tela");
+    }
+    @FXML
+    void EnterEstoque(ActionEvent event) {
+        HelloApplication.trocaTela("estoque");
         System.out.println("Troca de tela");
     }
 

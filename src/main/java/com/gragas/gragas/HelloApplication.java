@@ -11,9 +11,10 @@ public class HelloApplication extends Application {
 
     private static Scene LoginPage;
     private static Scene PrincipalPage;
-
+    private static Scene EstoquePane;
     private static Scene VendaPage;
     private static Scene CadastroPage;
+    private static Scene RegistroPage;
 
     private static Stage stage;
 
@@ -72,6 +73,22 @@ public class HelloApplication extends Application {
                 stage.setScene(VendaPage);
                 stage.centerOnScreen();}catch(IOException e){e.printStackTrace();}
                 break;
+
+            case "registro":
+                try{
+                    FXMLLoader registrofxml = new FXMLLoader(HelloApplication.class.getResource("registro.fxml"));
+                    RegistroPage = new Scene(registrofxml.load());
+                    stage.setScene(RegistroPage);
+                    stage.centerOnScreen();}catch(IOException e){e.printStackTrace();}
+                break;
+
+            case "estoque":
+                try{
+                FXMLLoader estoquefxml = new FXMLLoader(HelloApplication.class.getResource("estoque.fxml"));
+                EstoquePane = new Scene(estoquefxml.load());
+                stage.setScene(EstoquePane);
+                stage.centerOnScreen();}catch(IOException e){e.printStackTrace();}
+            break;
         }
     }
 
