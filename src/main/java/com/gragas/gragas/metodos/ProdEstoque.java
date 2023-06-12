@@ -4,14 +4,16 @@ import java.util.Date;
 
 public class ProdEstoque {
 
+    int id;
     String nome;
     String preco;
     boolean alcoolico;
     String tipo;
-    String validade;
+    Date validade;
     int quantidade;
 
-    public ProdEstoque(String nome, String preco, boolean alcoolico, String tipo, String validade, int quantidade) {
+    public ProdEstoque(int id, String nome, String preco, boolean alcoolico, String tipo, Date validade, int quantidade) {
+        this.id = id;
         this.nome = nome;
         this.preco = preco;
         this.alcoolico = alcoolico;
@@ -36,7 +38,7 @@ public class ProdEstoque {
         return tipo;
     }
 
-    public String getValidade() {
+    public Date getValidade() {
         return validade;
     }
 

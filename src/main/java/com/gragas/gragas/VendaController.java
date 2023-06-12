@@ -141,14 +141,29 @@ public class VendaController implements Initializable {
             // Verifica se o produto já está presente na lista
             boolean produtoJaPresente = false;
             for (ProdTable produto : valoresProdTable) {
+                //Se o produto já estiver na lista uma variavel booleana é utilizada para lançar um erro
                 if (produto.getNomeProdClass().equals(nomeProd)) {
                     produtoJaPresente = true;
                     break;
                 }
             }
 
+            int qtd = Integer.parseInt(vendaQTDTextField.getText());
+
+            String querySelect = "select quantidade from produto where quantidade <= ?";
+
+            try(PreparedStatement statement = conexao.prepareStatement(querySelect)){
+                statement.setInt(1,qtd);
+                ResultSet resultSet = statement.executeQuery();
+                if(resultSet.next()){
+                    exibirAlerta(Alert.AlertType.ERROR,"Valor inválido!","Valor acima do que há no estoque");
+                }
+            }catch (SQLException e){e.printStackTrace();}
+
+            //Lançamento do erro
             if (produtoJaPresente) {
                 exibirAlerta(Alert.AlertType.ERROR,"ERRO","O produto já está na tabela.");
+                return;
             } else {
                 valoresProdTable.add(new ProdTable(nomeProd, qtdProd));
             }
