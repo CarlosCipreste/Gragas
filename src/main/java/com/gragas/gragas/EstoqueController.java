@@ -1,29 +1,39 @@
 package com.gragas.gragas;
 
 import com.gragas.gragas.metodos.ProdEstoque;
+import com.gragas.gragas.metodos.ProdTable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
 
 import static com.gragas.gragas.LoginController.conexao;
+import static com.gragas.gragas.metodos.metodosGerais.exibirAlerta;
+import static com.gragas.gragas.metodos.metodosGerais.isTextFieldValueValido;
 
 public class EstoqueController implements Initializable {
 
     @FXML
+    private Pane EstoqueViewPane;
+    @FXML
+    private Pane AtualizarPane;
+
+    @FXML
     private TableView<ProdEstoque> EstoqueTableVIew;
+
     @FXML
     private TableColumn<ProdEstoque, Integer> estoqueIDTC;
 
@@ -47,10 +57,74 @@ public class EstoqueController implements Initializable {
     private ObservableList<ProdEstoque> values = FXCollections.observableArrayList();
 
     @FXML
+    private Button EnterAtualizarButton;
+
+    @FXML
     private Button voltarButton;
 
     @FXML
-    void Voltar(ActionEvent event) {
+    private CheckBox atualizaralcoolicoCheckBox;
+
+    @FXML
+    private TextField atualizarNomeTextField;
+
+    @FXML
+    private TextField atualizarPrecoTextField;
+
+    @FXML
+    private ChoiceBox<String> atualizarNAlcoolicoChoiceBox;
+
+    @FXML
+    private ChoiceBox<String> atualizarAcoolicoChoiceBox;
+
+    @FXML
+    private CheckBox atualizarNAlcoolicoCheckBox;
+
+    @FXML
+    private TextField atualizarQuantidadeTextField;
+
+    @FXML
+    private Button voltarEstoqueButton;
+
+    @FXML
+    private Button AtualizarProdutoButton;
+
+    @FXML
+    void enterAtualizar(ActionEvent event) {
+        ProdEstoque itemSelecionado = EstoqueTableVIew.getSelectionModel().getSelectedItem();
+
+        // Verifica se um item está selecionado
+        if (itemSelecionado != null) {
+            // Entra na tela de Atualizar os produtos
+            AtualizarPane.setVisible(true);
+            EstoqueViewPane.setVisible(false);
+        }
+
+        
+    }
+    @FXML
+    void AtualizarProduto(ActionEvent event) {
+
+
+    }
+
+    @FXML
+    void SelectedAlcoolicoCheckBox(ActionEvent event) {
+
+    }
+
+    @FXML
+    void SelectedNAlcoolicoCheckBox(ActionEvent event) {
+
+    }
+    @FXML
+    void voltarEstoque(ActionEvent event) {
+        AtualizarPane.setVisible(false);
+        EstoqueViewPane.setVisible(true);
+    }
+
+    @FXML
+    void Voltar(){
         HelloApplication.trocaTela("principal");
     }
 
@@ -84,6 +158,14 @@ public class EstoqueController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        estoqueIDTC.setCellValueFactory(new PropertyValueFactory<ProdEstoque, Integer>("id"));
+        estoqueNomeTC.setCellValueFactory(new PropertyValueFactory<ProdEstoque, String>("nome"));
+        estoquePrecoTC.setCellValueFactory(new PropertyValueFactory<ProdEstoque, String>("preco"));
+        estoqueAlcoolicoTC.setCellValueFactory(new PropertyValueFactory<ProdEstoque, Boolean>("alcoolico"));
+        estoqueTipoTC.setCellValueFactory(new PropertyValueFactory<ProdEstoque, String>("tipo"));
+        estoqueValidadeTC.setCellValueFactory(new PropertyValueFactory<ProdEstoque, Date>("validade"));
+        estoqueQTDTC.setCellValueFactory(new PropertyValueFactory<ProdEstoque, Integer>("quantidade"));
 
         setupEstoqueValues();
     }

@@ -503,9 +503,6 @@ public class CadastroController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //O método initialize() consegue dar Propriedades a elementos gráficos como uma formatação para um textfield
 
-        String[] nAlcoolicoValues = {"Suco","Refrigerante"};
-        String[] AlcoolicoValues = {"Destilado","Fermentado"};
-
         nalcoolicoChoiceBox.getItems().addAll(nAlcoolicoValues);
         alcoolicoChoiceBox.getItems().addAll(AlcoolicoValues);
 

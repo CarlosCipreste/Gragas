@@ -150,13 +150,14 @@ public class VendaController implements Initializable {
 
             int qtd = Integer.parseInt(vendaQTDTextField.getText());
 
-            String querySelect = "select quantidade from produto where quantidade <= ?";
+            String querySelect = "select quantidade from produto where quantidade < ?";
 
             try(PreparedStatement statement = conexao.prepareStatement(querySelect)){
                 statement.setInt(1,qtd);
                 ResultSet resultSet = statement.executeQuery();
                 if(resultSet.next()){
                     exibirAlerta(Alert.AlertType.ERROR,"Valor inválido!","Valor acima do que há no estoque");
+                    return;
                 }
             }catch (SQLException e){e.printStackTrace();}
 
@@ -167,9 +168,10 @@ public class VendaController implements Initializable {
             } else {
                 valoresProdTable.add(new ProdTable(nomeProd, qtdProd));
             }
+            vendaListaTableView.setItems(valoresProdTable);
+            System.out.println("Adicionado");
         }
-        vendaListaTableView.setItems(valoresProdTable);
-        System.out.println("Adicionado");
+
     }
 
     @FXML

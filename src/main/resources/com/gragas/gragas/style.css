@@ -1,3 +1,6 @@
+
+
+
 .botaoEntrar{
     -fx-background-color:black;
 }
@@ -118,6 +121,15 @@
 /*TABLE VIEW STYLE*/
 .table-view{
     -fx-background-color: transparent;
+    -fx-alignment:justify;
+
+
+}
+
+.table-cell {
+    -fx-font-size: 15px; /* Define o tamanho da fonte */
+    -fx-text-fill: white; /* Define a cor da fonte */
+    -fx-padding: 5px;
 }
 
 .table-view .column-header {
@@ -126,12 +138,13 @@
     -fx-background-color: #9F478C;
     -fx-font-size: 18px;
 
-
 }
 
 .table-view .table-row-cell {
     -fx-border:2px;
     -fx-border-color:black;
+    -fx-background-color:#9544b8;
+
 }
 
 

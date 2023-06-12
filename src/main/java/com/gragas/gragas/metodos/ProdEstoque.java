@@ -22,6 +22,10 @@ public class ProdEstoque {
         this.quantidade = quantidade;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getNome() {
         return nome;
     }
