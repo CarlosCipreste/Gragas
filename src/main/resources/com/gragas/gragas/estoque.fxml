@@ -16,49 +16,6 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gragas.gragas.EstoqueController">
    <children>
-      <Pane fx:id="EstoqueViewPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #479F6C;">
-         <children>
-            <TableView fx:id="EstoqueTableVIew" layoutX="41.0" layoutY="100.0" prefHeight="463.0" prefWidth="719.0" stylesheets="@style.css">
-              <columns>
-                  <TableColumn fx:id="estoqueIDTC" editable="false" prefWidth="33.0" sortable="false" text="ID" />
-                <TableColumn fx:id="estoqueNomeTC" editable="false" prefWidth="269.0" sortable="false" text="Nome" />
-                <TableColumn fx:id="estoquePrecoTC" editable="false" minWidth="0.0" prefWidth="67.0" sortable="false" text="Preço" />
-                  <TableColumn fx:id="estoqueAlcoolicoTC" editable="false" minWidth="0.0" prefWidth="102.0" sortable="false" text="Alcoolico" />
-                  <TableColumn fx:id="estoqueTipoTC" editable="false" minWidth="0.0" prefWidth="97.0" sortable="false" text="Tipo" />
-                  <TableColumn fx:id="estoqueValidadeTC" editable="false" minWidth="0.0" prefWidth="97.0" sortable="false" text="Validade" />
-                  <TableColumn fx:id="estoqueQTDTC" editable="false" minWidth="0.0" prefWidth="53.0" sortable="false" text="QTD" />
-              </columns>
-            </TableView>
-            <Label layoutX="288.0" layoutY="28.0" stylesheets="@style.css" text="Estoque de Produtos">
-               <font>
-                  <Font name="Leelawadee UI Bold" size="23.0" />
-               </font>
-            </Label>
-            <Button fx:id="EnterAtualizarButton" layoutX="636.0" layoutY="28.0" mnemonicParsing="false" onAction="#enterAtualizar" prefHeight="52.0" prefWidth="164.0" rotate="180.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <Label rotate="180.0" text="Atualizar Produto" textFill="WHITE">
-                     <font>
-                        <Font name="Leelawadee UI" size="16.0" />
-                     </font>
-                  </Label>
-               </graphic>
-            </Button>
-            <Button fx:id="voltarButton" layoutY="18.0" mnemonicParsing="false" onAction="#Voltar" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="47.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                     <image>
-                        <Image url="@../../../Imagens/seta_branca-removebg-preview.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children></Pane>
       <Pane fx:id="AtualizarPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #9F478C;" stylesheets="@style.css">
          <children>
             <Label layoutX="103.0" layoutY="160.0" text="Nome:" textFill="WHITE">
@@ -127,5 +84,48 @@
             </Button>
          </children>
       </Pane>
+      <Pane fx:id="EstoqueViewPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #479F6C;">
+         <children>
+            <TableView fx:id="EstoqueTableVIew" layoutX="41.0" layoutY="100.0" prefHeight="463.0" prefWidth="719.0" stylesheets="@style.css">
+              <columns>
+                  <TableColumn fx:id="estoqueIDTC" editable="false" prefWidth="33.0" sortable="false" text="ID" />
+                <TableColumn fx:id="estoqueNomeTC" editable="false" prefWidth="269.0" sortable="false" text="Nome" />
+                <TableColumn fx:id="estoquePrecoTC" editable="false" minWidth="0.0" prefWidth="67.0" sortable="false" text="Preço" />
+                  <TableColumn fx:id="estoqueAlcoolicoTC" editable="false" minWidth="0.0" prefWidth="102.0" sortable="false" text="Alcoolico" />
+                  <TableColumn fx:id="estoqueTipoTC" editable="false" minWidth="0.0" prefWidth="97.0" sortable="false" text="Tipo" />
+                  <TableColumn fx:id="estoqueValidadeTC" editable="false" minWidth="0.0" prefWidth="97.0" sortable="false" text="Validade" />
+                  <TableColumn fx:id="estoqueQTDTC" editable="false" minWidth="0.0" prefWidth="53.0" sortable="false" text="QTD" />
+              </columns>
+            </TableView>
+            <Label layoutX="288.0" layoutY="28.0" stylesheets="@style.css" text="Estoque de Produtos">
+               <font>
+                  <Font name="Leelawadee UI Bold" size="23.0" />
+               </font>
+            </Label>
+            <Button fx:id="EnterAtualizarButton" layoutX="636.0" layoutY="28.0" mnemonicParsing="false" onAction="#enterAtualizar" prefHeight="52.0" prefWidth="164.0" rotate="180.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <Label rotate="180.0" text="Atualizar Produto" textFill="WHITE">
+                     <font>
+                        <Font name="Leelawadee UI" size="16.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Button fx:id="voltarButton" layoutY="18.0" mnemonicParsing="false" onAction="#Voltar" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="47.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <image>
+                        <Image url="@../../../Imagens/seta_branca-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children></Pane>
    </children>
 </AnchorPane>
