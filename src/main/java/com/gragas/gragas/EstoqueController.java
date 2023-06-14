@@ -89,6 +89,24 @@ public class EstoqueController implements Initializable {
     @FXML
     private Button AtualizarProdutoButton;
 
+    String[] nAlcoolicoValues = {"Suco", "Refrigerante"};
+    String[] AlcoolicoValues = {"Destilado", "Fermentado"};
+
+    /*@FXML
+    void SelectedAlcoolicoCheckBox(ActionEvent event) {
+        if (alcoolicoCheckBox.isSelected()) {
+            alcoolicoChoiceBox.setVisible(true);
+            NAlcoolicoCheckBox.setSelected(false);
+            nalcoolicoChoiceBox.setVisible(false);
+            nalcoolicoChoiceBox.getSelectionModel().clearSelection();
+        }
+        if (!alcoolicoCheckBox.isSelected()) {
+            alcoolicoChoiceBox.setVisible(false);
+        }
+    }*/
+
+
+
     @FXML
     void enterAtualizar(ActionEvent event) {
         ProdEstoque itemSelecionado = EstoqueTableVIew.getSelectionModel().getSelectedItem();
@@ -98,6 +116,14 @@ public class EstoqueController implements Initializable {
             // Entra na tela de Atualizar os produtos
             AtualizarPane.setVisible(true);
             EstoqueViewPane.setVisible(false);
+
+
+
+            atualizarNomeTextField.setText(itemSelecionado.getNome());
+            atualizarPrecoTextField.setText(itemSelecionado.getPreco());
+            atualizarAcoolicoChoiceBox.getItems().addAll(AlcoolicoValues);
+            atualizarNAlcoolicoChoiceBox.getItems().addAll(nAlcoolicoValues);
+            atualizarQuantidadeTextField.setText(Integer.toString(itemSelecionado.getQuantidade()));
         }
 
         
@@ -105,17 +131,62 @@ public class EstoqueController implements Initializable {
     @FXML
     void AtualizarProduto(ActionEvent event) {
 
+        //Variaveis para a Query de mySQL
+        String nomeProduto = atualizarNomeTextField.getText().toLowerCase();
+        String precoProduto = atualizarPrecoTextField.getText();
+
+        //Definindo o valor do booleano com base da escolha do ChoiceBox
+        boolean Alcoolico_S_N;
+        if(atualizaralcoolicoCheckBox.isSelected()) {
+            Alcoolico_S_N = true;
+        }
+        else{
+            Alcoolico_S_N = false;
+        }
+        String tipo;
+        if(atualizaralcoolicoCheckBox.isSelected() || atualizarAcoolicoChoiceBox.getValue() == "Destilado"){
+            tipo = "destilado";
+        }
+        else{
+            tipo = "fermentado";
+        }
+
+        if(atualizarNAlcoolicoCheckBox.isSelected() || atualizarNAlcoolicoChoiceBox.getValue() == "Suco"){
+            tipo = "suco";
+        }
+        else{
+            tipo = "refrigerante";
+        }
+        int quantidadeProduto = Integer.parseInt(atualizarQuantidadeTextField.getText());
 
     }
 
     @FXML
     void SelectedAlcoolicoCheckBox(ActionEvent event) {
+        if(atualizaralcoolicoCheckBox.isSelected()) {
+            atualizarNAlcoolicoCheckBox.setSelected(false);
+            atualizarAcoolicoChoiceBox.setVisible(true);
+            atualizarNAlcoolicoChoiceBox.setVisible(false);
+            atualizarNAlcoolicoChoiceBox.getSelectionModel().clearSelection();
 
+        }
+        if (!atualizaralcoolicoCheckBox.isSelected()) {
+            atualizarAcoolicoChoiceBox.setVisible(false);
+        }
     }
 
     @FXML
     void SelectedNAlcoolicoCheckBox(ActionEvent event) {
+        if(atualizarNAlcoolicoCheckBox.isSelected()) {
+            atualizaralcoolicoCheckBox.setSelected(false);
+            atualizarAcoolicoChoiceBox.setVisible(false);
+            atualizarNAlcoolicoChoiceBox.setVisible(true);
+            atualizarAcoolicoChoiceBox.getSelectionModel().clearSelection();
 
+        }
+        if (!atualizarNAlcoolicoCheckBox.isSelected()) {
+            atualizarNAlcoolicoChoiceBox.setVisible(false);
+        }
     }
     @FXML
     void voltarEstoque(ActionEvent event) {

@@ -28,6 +28,9 @@ public class LoginController implements Initializable {
     @FXML
     private PasswordField senhaTextField;
 
+    public static String nomeUser;
+    public static int IDUser;
+
     public static Connection conexao;
 
             /*
@@ -35,48 +38,6 @@ public class LoginController implements Initializable {
              As variávei possuem os métodos para poder retornar o valor
              colocado no componente TextField e retornar um String
             */
-    @FXML
-    void LoginEnter(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) {
-
-            ResultSet resultSet;
-            String username = usuarioTextField.getText();
-            String password = senhaTextField.getText();
-
-            /*
-                Faz uma query de sql fazendo uma comparação de String para fazer o login,
-                Caso o valor seja retornado, ele aceita o login.
-            */
-            String sql = "SELECT * FROM funcionario WHERE binary login = ? and senha = ?";
-
-            try {
-                PreparedStatement declaracao = conexao.prepareStatement(sql);
-                declaracao.setString(1, username);
-                declaracao.setString(2, password);
-                resultSet = declaracao.executeQuery();
-
-                //Caso não haja Resultado é lançado um print avisando
-                if (!resultSet.next()) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Erro");
-                    alert.setHeaderText("Ocorreu um Erro!");
-                    alert.setContentText("Usuário ou senha Incorretos");
-                    alert.showAndWait();
-
-                }
-                //Caso contrário, aqui ficará o código que será passado para próxima tela
-                else {
-                    System.out.println("Bem-Vindo!");
-                    HelloApplication.trocaTela("principal");
-                    usuarioTextField.clear();
-                    senhaTextField.clear();
-                }
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-
-            }
-        }
-    }
 
     @FXML
     void connect() {
@@ -99,11 +60,53 @@ public class LoginController implements Initializable {
 
         }
     }
+
+    @FXML
+    void LoginEnter(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+
+            ResultSet resultSet;
+            String username = usuarioTextField.getText();
+            String password = senhaTextField.getText();
+
             /*
-            variáveis necessaria para a query e retorno  de resultado.
-             As variávei possuem os métodos para poder retornar o valor
-             colocado no componente TextField e retornar um String
+                Faz uma query de sql fazendo uma comparação de String para fazer o login,
+                Caso o valor seja retornado, ele aceita o login.
             */
+            String sql = "SELECT id_funcionario,nome_funcionario FROM funcionario WHERE binary login = ? and senha = ?";
+
+            try {
+                PreparedStatement declaracao = conexao.prepareStatement(sql);
+                declaracao.setString(1, username);
+                declaracao.setString(2, password);
+                resultSet = declaracao.executeQuery();
+
+                //Caso não haja Resultado é lançado um print avisando
+                if (!resultSet.next()) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Erro");
+                    alert.setHeaderText("Ocorreu um Erro!");
+                    alert.setContentText("Usuário ou senha Incorretos");
+                    alert.showAndWait();
+
+                }
+                //Caso contrário, aqui ficará o código que será passado para próxima tela
+                else {
+                    nomeUser = resultSet.getString("nome_funcionario");
+                    IDUser = resultSet.getInt("id_funcionario");
+                    System.out.println("Bem-Vindo!");
+                    HelloApplication.trocaTela("principal");
+                    usuarioTextField.clear();
+                    senhaTextField.clear();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+
+            }
+        }
+    }
+
+
     @FXML
     void Login(){
 
@@ -134,6 +137,8 @@ public class LoginController implements Initializable {
             }
             //Caso contrário, aqui ficará o código que será passado para próxima tela
             else {
+                nomeUser = resultSet.getString("nome_funcionario");
+                IDUser = resultSet.getInt("id_funcionario");
                 System.out.println("Bem-Vindo!");
                 HelloApplication.trocaTela("principal");
                 usuarioTextField.clear();

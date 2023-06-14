@@ -59,6 +59,8 @@ public class VendaController implements Initializable {
     private Button voltarButton;
     @FXML
     private ObservableList<String> lista;
+    @FXML
+    private int idcliente;
 
     @FXML
     void Voltar(ActionEvent event) {
@@ -98,11 +100,12 @@ public class VendaController implements Initializable {
 
     private void setupClienteValues(ObservableList<String> lista, TextField textField){
         try {
-            String sql = "SELECT nome_cliente FROM cliente";
+            String sql = "SELECT id_cliente,nome_cliente FROM cliente";
             try (Statement statement = conexao.createStatement()) {
                 ResultSet resultSet = statement.executeQuery(sql);
                 while (resultSet.next()) {
                     String nomeProduto = resultSet.getString("nome_cliente");
+                    idcliente= resultSet.getInt("id_cliente");
                     lista.add(nomeProduto);
                 }
             }
@@ -133,9 +136,6 @@ public class VendaController implements Initializable {
     @FXML
     void AdicionarProdutonaVenda(ActionEvent event) {
         String querySelect = "select id_produto from produto where nome_produto = ?";
-
-
-
 
         int IDProd = 0;
         String nomeProd = vendaProdutosChoiceBox.getValue();
@@ -196,28 +196,51 @@ public class VendaController implements Initializable {
     public void FinalizarVenda(ActionEvent event) {
 
         ObservableList<ProdTable> listaProdTable = vendaListaTableView.getItems();
+        int totalProdutos = listaProdTable.size();
+        int contador = 0;
 
         for (ProdTable produto : listaProdTable) {
-            Integer id = produto.getIDProdClass();
+            contador++;
+
+            Integer idProduto = produto.getIDProdClass();
             Integer qtd = produto.getQtdProdClass();
+            int idfuncionario = LoginController.IDUser;
 
             // Execute a atualização para o ID e novo nome
-            String sqlUpdate = "UPDATE produto SET quantidade = quantidade - ?  WHERE id = ?";
+            String sqlUpdate = "UPDATE produto SET quantidade = quantidade - ?  WHERE id_produto = ?";
             try (PreparedStatement statement = conexao.prepareStatement(sqlUpdate)) {
                 statement.setInt(1, qtd); // Define o novo valor do nome
-                statement.setInt(2, id); // Define o ID para a atualização
+                statement.setInt(2, idProduto); // Define o ID para a atualização
 
                 statement.executeUpdate();
 
-
                 System.out.println("Registro atualizado");
             } catch (SQLException e) {
+                e.printStackTrace();
             }
 
-            try(PreparedStatement statement = conexao.prepareStatement(sqlUpdate)){
-                
-            }catch(SQLException e){e.printStackTrace();}
+            String queryInsert = "insert into venda(id_cliente,id_produto,id_funcionario)values(?,?,?)";
+            try (PreparedStatement statement = conexao.prepareStatement(queryInsert)) {
+                statement.setInt(1, idcliente);
+                statement.setInt(2, idProduto);
+                statement.setInt(3, idfuncionario);
+                statement.executeUpdate();
 
+                int linhasAfetadas = statement.executeUpdate();
+
+                if (linhasAfetadas > 0) {
+                    System.out.println("A atualização foi bem-sucedida. Linhas afetadas: " + linhasAfetadas);
+                } else {
+                    exibirAlerta(Alert.AlertType.ERROR, "Atualização mal-sucedida", "");
+                    return;
+                }
+
+                if (contador == totalProdutos) {
+                    exibirAlerta(Alert.AlertType.INFORMATION, "Venda finalizada", "Todos os produtos foram atualizados e a venda foi registrada.");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
