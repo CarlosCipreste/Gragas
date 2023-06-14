@@ -24,6 +24,9 @@ import static com.gragas.gragas.metodos.metodosGerais.exibirAlerta;
 public class VendaController implements Initializable {
 
     @FXML
+    private TableColumn<ProdTable, String> ID;
+
+    @FXML
     private ChoiceBox<String> vendaProdutosChoiceBox;
     @FXML
     private ObservableList<ProdTable> valoresProdTable = FXCollections.observableArrayList();
@@ -129,13 +132,28 @@ public class VendaController implements Initializable {
 
     @FXML
     void AdicionarProdutonaVenda(ActionEvent event) {
+        String querySelect = "select id_produto from produto where nome_produto = ?";
+
+
+
+
+        int IDProd = 0;
         String nomeProd = vendaProdutosChoiceBox.getValue();
         int qtdProd = Integer.parseInt(vendaQTDTextField.getText());
+
+        try(PreparedStatement statement = conexao.prepareStatement(querySelect)){
+            statement.setString(1,nomeProd);
+            ResultSet resultSet = statement.executeQuery();
+
+            if(resultSet.next()){
+                IDProd = resultSet.getInt("id_produto");
+            }
+        }catch(SQLException e){e.printStackTrace();}
 
         // Verifica se a lista está vazia
         if (valoresProdTable == null) {
             valoresProdTable = FXCollections.observableArrayList(
-                    new ProdTable(nomeProd, qtdProd)
+                    new ProdTable(IDProd,nomeProd, qtdProd)
             );
         } else {
             // Verifica se o produto já está presente na lista
@@ -150,7 +168,7 @@ public class VendaController implements Initializable {
 
             int qtd = Integer.parseInt(vendaQTDTextField.getText());
 
-            String querySelect = "select quantidade from produto where quantidade < ?";
+            querySelect = "select quantidade from produto where quantidade < ?";
 
             try(PreparedStatement statement = conexao.prepareStatement(querySelect)){
                 statement.setInt(1,qtd);
@@ -166,7 +184,7 @@ public class VendaController implements Initializable {
                 exibirAlerta(Alert.AlertType.ERROR,"ERRO","O produto já está na tabela.");
                 return;
             } else {
-                valoresProdTable.add(new ProdTable(nomeProd, qtdProd));
+                valoresProdTable.add(new ProdTable(IDProd,nomeProd, qtdProd));
             }
             vendaListaTableView.setItems(valoresProdTable);
             System.out.println("Adicionado");
@@ -175,25 +193,50 @@ public class VendaController implements Initializable {
     }
 
     @FXML
-    public void FinalizarVenda(ActionEvent event){
+    public void FinalizarVenda(ActionEvent event) {
 
+        ObservableList<ProdTable> listaProdTable = vendaListaTableView.getItems();
+
+        for (ProdTable produto : listaProdTable) {
+            Integer id = produto.getIDProdClass();
+            Integer qtd = produto.getQtdProdClass();
+
+            // Execute a atualização para o ID e novo nome
+            String sqlUpdate = "UPDATE produto SET quantidade = quantidade - ?  WHERE id = ?";
+            try (PreparedStatement statement = conexao.prepareStatement(sqlUpdate)) {
+                statement.setInt(1, qtd); // Define o novo valor do nome
+                statement.setInt(2, id); // Define o ID para a atualização
+
+                statement.executeUpdate();
+
+
+                System.out.println("Registro atualizado");
+            } catch (SQLException e) {
+            }
+
+            try(PreparedStatement statement = conexao.prepareStatement(sqlUpdate)){
+                
+            }catch(SQLException e){e.printStackTrace();}
+
+        }
     }
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+        @Override
+        public void initialize (URL location, ResourceBundle resources){
 
 
-        List<String> list = new ArrayList<String>();
-        setvendaChoiceBoxValues(list);
+            List<String> list = new ArrayList<String>();
+            setvendaChoiceBoxValues(list);
 
-        lista = FXCollections.observableArrayList();
-        setupClienteValues(lista, vendaClienteTextField);
+            lista = FXCollections.observableArrayList();
+            setupClienteValues(lista, vendaClienteTextField);
 
-        nome.setCellValueFactory(new PropertyValueFactory<ProdTable,String>("nomeProdClass"));
-        qtd.setCellValueFactory(new PropertyValueFactory<ProdTable,Integer>("qtdProdClass"));
+            ID.setCellValueFactory(new PropertyValueFactory<ProdTable, String>("IDProdClass"));
+            nome.setCellValueFactory(new PropertyValueFactory<ProdTable, String>("nomeProdClass"));
+            qtd.setCellValueFactory(new PropertyValueFactory<ProdTable, Integer>("qtdProdClass"));
+
+        }
+
 
     }
-
-
-}
