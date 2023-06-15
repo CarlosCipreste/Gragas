@@ -1,4 +1,4 @@
-package com.gragas.gragas.metodos;
+package com.gragas.gragas.classes;
 
 import java.util.Date;
 

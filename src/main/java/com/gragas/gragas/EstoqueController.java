@@ -1,7 +1,6 @@
 package com.gragas.gragas;
 
-import com.gragas.gragas.metodos.ProdEstoque;
-import com.gragas.gragas.metodos.ProdTable;
+import com.gragas.gragas.classes.ProdEstoque;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,8 +14,6 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -229,14 +226,16 @@ public class EstoqueController implements Initializable {
         if (itemSelecionado != null) {
             exibirAlerta(Alert.AlertType.CONFIRMATION,"Tem Certeza?","Tem Certeza que quer APAGAR um Produto?");
 
-            String queryDelete = "delete from produto where id_produto = ?";
+            String queryDelete = "UPDATE produto\n" +
+                    "SET ativo = FALSE\n" +
+                    "WHERE id_produto = ?;";
 
             try(PreparedStatement statement = conexao.prepareStatement(queryDelete)){
                 statement.setInt(1,itemSelecionado.getId());
                 int linhasAfetadas = statement.executeUpdate();
 
                 if(linhasAfetadas > 0){
-                    exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Produto APAGADO com Sucesso!");
+                    exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Produto Apagado com Sucesso!");
                 }
             }catch(SQLException e){
                 e.printStackTrace();}
@@ -287,7 +286,7 @@ public class EstoqueController implements Initializable {
     }
 
     void setupEstoqueValues() {
-        String querySelect = "select * from produto;";
+        String querySelect = "select * from produto where ativo = true;";
         System.out.println("Tentativa de estoque");
 
         try (PreparedStatement statement = conexao.prepareStatement(querySelect)) {

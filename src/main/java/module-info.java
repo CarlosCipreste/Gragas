@@ -10,4 +10,5 @@ module com.gragas.gragas {
     opens com.gragas.gragas.metodos to javafx.base;
 
     exports com.gragas.gragas;
+    opens com.gragas.gragas.classes to javafx.base;
 }

@@ -1,6 +1,6 @@
 package com.gragas.gragas;
 
-import com.gragas.gragas.metodos.ProdTable;
+import com.gragas.gragas.classes.ProdVenda;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
@@ -24,12 +25,12 @@ import static com.gragas.gragas.metodos.metodosGerais.exibirAlerta;
 public class VendaController implements Initializable {
 
     @FXML
-    private TableColumn<ProdTable, String> ID;
+    private TableColumn<ProdVenda, String> ID;
 
     @FXML
     private ChoiceBox<String> vendaProdutosChoiceBox;
     @FXML
-    private ObservableList<ProdTable> valoresProdTable = FXCollections.observableArrayList();
+    private ObservableList<ProdVenda> valoresProdVenda = FXCollections.observableArrayList();
 
     @FXML
     private TextField vendaClienteTextField;
@@ -44,13 +45,16 @@ public class VendaController implements Initializable {
     private Button vendaAdicionarProdButton;
 
     @FXML
-    private TableView<ProdTable> vendaListaTableView;
+    private TableView<ProdVenda> vendaListaTableView;
 
     @FXML
-    private TableColumn<ProdTable, String> nome;
+    private TableColumn<ProdVenda, String> nome;
 
     @FXML
-    private TableColumn<ProdTable, Integer> qtd;
+    private TableColumn<ProdVenda, Integer> qtd;
+    @FXML
+    private TableColumn<ProdVenda, Double> preco;
+
 
     @FXML
     private Button vendaFinalizarVendaButton;
@@ -124,22 +128,24 @@ public class VendaController implements Initializable {
 
     @FXML
     void ApagarProdutoSelecionado(ActionEvent event) {
-        ProdTable itemSelecionado = vendaListaTableView.getSelectionModel().getSelectedItem();
+        ProdVenda itemSelecionado = vendaListaTableView.getSelectionModel().getSelectedItem();
 
         // Verifica se um item está selecionado
         if (itemSelecionado != null) {
             // Remove o item da lista de itens da tabela
-            valoresProdTable.remove(itemSelecionado);
+            valoresProdVenda.remove(itemSelecionado);
         }
     }
 
     @FXML
     void AdicionarProdutonaVenda(ActionEvent event) {
-        String querySelect = "select id_produto from produto where nome_produto = ?";
+        String querySelect = "select id_produto,preco_produto from produto where nome_produto = ?";
 
         int IDProd = 0;
         String nomeProd = vendaProdutosChoiceBox.getValue();
         int qtdProd = Integer.parseInt(vendaQTDTextField.getText());
+        String precoString = "";
+        Double precoProd = 0.0;
 
         try(PreparedStatement statement = conexao.prepareStatement(querySelect)){
             statement.setString(1,nomeProd);
@@ -147,18 +153,23 @@ public class VendaController implements Initializable {
 
             if(resultSet.next()){
                 IDProd = resultSet.getInt("id_produto");
+                precoString = resultSet.getString("preco_produto");
+                precoString = precoString.replace("R$"," ").trim();
+                precoString = precoString.replace(",", ".");
+                precoProd = Double.parseDouble(precoString);
+
             }
         }catch(SQLException e){e.printStackTrace();}
 
         // Verifica se a lista está vazia
-        if (valoresProdTable == null) {
-            valoresProdTable = FXCollections.observableArrayList(
-                    new ProdTable(IDProd,nomeProd, qtdProd)
+        if (valoresProdVenda == null) {
+            valoresProdVenda = FXCollections.observableArrayList(
+                    new ProdVenda(IDProd,nomeProd, qtdProd,precoProd)
             );
         } else {
             // Verifica se o produto já está presente na lista
             boolean produtoJaPresente = false;
-            for (ProdTable produto : valoresProdTable) {
+            for (ProdVenda produto : valoresProdVenda) {
                 //Se o produto já estiver na lista uma variavel booleana é utilizada para lançar um erro
                 if (produto.getNomeProdClass().equals(nomeProd)) {
                     produtoJaPresente = true;
@@ -184,9 +195,9 @@ public class VendaController implements Initializable {
                 exibirAlerta(Alert.AlertType.ERROR,"ERRO","O produto já está na tabela.");
                 return;
             } else {
-                valoresProdTable.add(new ProdTable(IDProd,nomeProd, qtdProd));
+                valoresProdVenda.add(new ProdVenda(IDProd,nomeProd, qtdProd,precoProd));
             }
-            vendaListaTableView.setItems(valoresProdTable);
+            vendaListaTableView.setItems(valoresProdVenda);
             System.out.println("Adicionado");
         }
 
@@ -195,18 +206,21 @@ public class VendaController implements Initializable {
     @FXML
     public void FinalizarVenda(ActionEvent event) {
 
-        ObservableList<ProdTable> listaProdTable = vendaListaTableView.getItems();
-        int totalProdutos = listaProdTable.size();
+        ObservableList<ProdVenda> listaProdVenda = vendaListaTableView.getItems();
+        int totalProdutos = listaProdVenda.size();
         int contador = 0;
 
-        for (ProdTable produto : listaProdTable) {
+        for (ProdVenda produto : listaProdVenda) {
             contador++;
 
             Integer idProduto = produto.getIDProdClass();
             Integer qtd = produto.getQtdProdClass();
+            Double preco = produto.getPrecoProdClass();
             int idfuncionario = LoginController.IDUser;
+            Double precoTotal = qtd * preco;
+            BigDecimal precoBigDecimal = new BigDecimal(precoTotal);
 
-            // Execute a atualização para o ID e novo nome
+            // Executando a atualização para a nova quantidade de produtos
             String sqlUpdate = "UPDATE produto SET quantidade = quantidade - ?  WHERE id_produto = ?";
             try (PreparedStatement statement = conexao.prepareStatement(sqlUpdate)) {
                 statement.setInt(1, qtd); // Define o novo valor do nome
@@ -219,11 +233,15 @@ public class VendaController implements Initializable {
                 e.printStackTrace();
             }
 
-            String queryInsert = "insert into venda(id_cliente,id_produto,id_funcionario)values(?,?,?)";
+            //Insert na tabela venda
+            String queryInsert = "INSERT INTO venda (id_cliente, id_funcionario, id_produto, quantidade, preco_total)\n" +
+                    "VALUES (?, ?, ?, ?, ?);";
             try (PreparedStatement statement = conexao.prepareStatement(queryInsert)) {
-                statement.setInt(1, idcliente);
-                statement.setInt(2, idProduto);
-                statement.setInt(3, idfuncionario);
+                statement.setInt(1, idcliente); // Substitui o primeiro parâmetro com o valor real do ID do cliente
+                statement.setInt(2, idfuncionario); // Substitui o segundo parâmetro com o valor real do ID do funcionário
+                statement.setInt(3, idProduto); // Substitui o terceiro parâmetro com o valor real do ID do produto
+                statement.setInt(4, qtd); // Substitui o quarto parâmetro com o valor real da quantidade
+                statement.setBigDecimal(5, precoBigDecimal); // Substitui o quinto parâmetro com o valor real do preço total
                 statement.executeUpdate();
 
                 int linhasAfetadas = statement.executeUpdate();
@@ -255,9 +273,10 @@ public class VendaController implements Initializable {
             lista = FXCollections.observableArrayList();
             setupClienteValues(lista, vendaClienteTextField);
 
-            ID.setCellValueFactory(new PropertyValueFactory<ProdTable, String>("IDProdClass"));
-            nome.setCellValueFactory(new PropertyValueFactory<ProdTable, String>("nomeProdClass"));
-            qtd.setCellValueFactory(new PropertyValueFactory<ProdTable, Integer>("qtdProdClass"));
+            ID.setCellValueFactory(new PropertyValueFactory<ProdVenda, String>("IDProdClass"));
+            nome.setCellValueFactory(new PropertyValueFactory<ProdVenda, String>("nomeProdClass"));
+            qtd.setCellValueFactory(new PropertyValueFactory<ProdVenda, Integer>("qtdProdClass"));
+            preco.setCellValueFactory(new PropertyValueFactory<ProdVenda, Double>("precoProdClass"));
 
         }
 
