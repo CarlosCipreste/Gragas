@@ -3,12 +3,15 @@ package com.gragas.gragas;
 import com.gragas.gragas.metodos.metodosGerais;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class PrincipalController {
+public class PrincipalController implements Initializable {
 
     @FXML
     private Label nomeLogon;
@@ -24,6 +27,11 @@ public class PrincipalController {
 
     @FXML
     private Button VendaButton;
+
+    @FXML
+    void setNomeLogon(){
+        nomeLogon.setText(LoginController.nomeUser);
+    }
 
     @FXML
     void enterRegistro(){
@@ -55,4 +63,10 @@ public class PrincipalController {
     }
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        setNomeLogon();
+        System.out.println(nomeLogon.toString());
+
+    }
 }

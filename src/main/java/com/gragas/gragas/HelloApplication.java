@@ -28,9 +28,6 @@ public class HelloApplication extends Application {
         FXMLLoader loginfxml = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
         LoginPage = new Scene(loginfxml.load());
 
-        FXMLLoader principalfxml = new FXMLLoader(HelloApplication.class.getResource("principal.fxml"));
-        PrincipalPage = new Scene(principalfxml.load());
-
         FXMLLoader cadastrofxml = new FXMLLoader(HelloApplication.class.getResource("cadastro.fxml"));
         CadastroPage = new Scene(cadastrofxml.load());
 
@@ -44,7 +41,7 @@ public class HelloApplication extends Application {
 
     }
 
-    public static void trocaTela(String nomeTela) {
+    public static void trocaTela(String nomeTela){
 
         switch (nomeTela) {
             case "login":
@@ -56,10 +53,13 @@ public class HelloApplication extends Application {
                 break;
 
             case "principal":
-
-                stage.setScene(PrincipalPage);
-                stage.centerOnScreen();
-                break;
+                try {
+                    FXMLLoader principalfxml = new FXMLLoader(HelloApplication.class.getResource("principal.fxml"));
+                    PrincipalPage = new Scene(principalfxml.load());
+                    stage.setScene(PrincipalPage);
+                    stage.centerOnScreen();
+                    break;
+                }catch (IOException e){e.printStackTrace();}
 
             case "cadastro":
                 stage.setScene(CadastroPage);

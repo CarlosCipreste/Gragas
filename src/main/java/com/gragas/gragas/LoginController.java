@@ -30,14 +30,11 @@ public class LoginController implements Initializable {
 
     public static String nomeUser;
     public static int IDUser;
+    public static boolean administrador;
 
     public static Connection conexao;
 
-            /*
-            variáveis necessaria para a query e retorno  de resultado.
-             As variávei possuem os métodos para poder retornar o valor
-             colocado no componente TextField e retornar um String
-            */
+
 
     @FXML
     void connect() {
@@ -73,7 +70,7 @@ public class LoginController implements Initializable {
                 Faz uma query de sql fazendo uma comparação de String para fazer o login,
                 Caso o valor seja retornado, ele aceita o login.
             */
-            String sql = "SELECT id_funcionario,nome_funcionario FROM funcionario WHERE binary login = ? and senha = ?";
+            String sql = "SELECT * FROM funcionario WHERE binary login = ? and senha = ?";
 
             try {
                 PreparedStatement declaracao = conexao.prepareStatement(sql);
@@ -93,11 +90,16 @@ public class LoginController implements Initializable {
                 //Caso contrário, aqui ficará o código que será passado para próxima tela
                 else {
                     nomeUser = resultSet.getString("nome_funcionario");
+                    String[] partes = nomeUser.split(" ", 2); // Divide a string em duas partes pelo primeiro espaço
+
+                    nomeUser = partes[0];
                     IDUser = resultSet.getInt("id_funcionario");
+                    administrador = resultSet.getBoolean("administrador");
                     System.out.println("Bem-Vindo!");
                     HelloApplication.trocaTela("principal");
                     usuarioTextField.clear();
                     senhaTextField.clear();
+
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -138,11 +140,18 @@ public class LoginController implements Initializable {
             //Caso contrário, aqui ficará o código que será passado para próxima tela
             else {
                 nomeUser = resultSet.getString("nome_funcionario");
+
+                String[] partes = nomeUser.split(" ", 2); // Divide a string em duas partes pelo primeiro espaço
+
+                nomeUser = partes[0];
                 IDUser = resultSet.getInt("id_funcionario");
+                administrador = resultSet.getBoolean("administrador");
                 System.out.println("Bem-Vindo!");
                 HelloApplication.trocaTela("principal");
                 usuarioTextField.clear();
                 senhaTextField.clear();
+
+
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

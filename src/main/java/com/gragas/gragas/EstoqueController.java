@@ -21,8 +21,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import static com.gragas.gragas.LoginController.conexao;
-import static com.gragas.gragas.metodos.metodosGerais.exibirAlerta;
-import static com.gragas.gragas.metodos.metodosGerais.isTextFieldValueValido;
+import static com.gragas.gragas.metodos.metodosGerais.*;
 
 public class EstoqueController implements Initializable {
 
@@ -89,6 +88,8 @@ public class EstoqueController implements Initializable {
     @FXML
     private Button AtualizarProdutoButton;
 
+
+
     String[] nAlcoolicoValues = {"Suco", "Refrigerante"};
     String[] AlcoolicoValues = {"Destilado", "Fermentado"};
 
@@ -109,6 +110,7 @@ public class EstoqueController implements Initializable {
 
     @FXML
     void enterAtualizar(ActionEvent event) {
+
         ProdEstoque itemSelecionado = EstoqueTableVIew.getSelectionModel().getSelectedItem();
 
         // Verifica se um item está selecionado
@@ -124,14 +126,45 @@ public class EstoqueController implements Initializable {
             atualizarAcoolicoChoiceBox.getItems().addAll(AlcoolicoValues);
             atualizarNAlcoolicoChoiceBox.getItems().addAll(nAlcoolicoValues);
             atualizarQuantidadeTextField.setText(Integer.toString(itemSelecionado.getQuantidade()));
-        }
+        }else{
+            exibirAlerta(Alert.AlertType.INFORMATION,"Informe o Produto","Primeiro você precisa selecionar um Produto");
 
-        
+        }
     }
     @FXML
     void AtualizarProduto(ActionEvent event) {
+        //INICIO DA VERIFICAÇÃO
 
-        //Variaveis para a Query de mySQL
+        // Verifica se todos os TextField possuem conteúdo
+        if (atualizarNomeTextField.getText().isEmpty() || atualizarPrecoTextField.getText().isEmpty() || atualizarQuantidadeTextField.getText().isEmpty()) {
+            exibirAlerta(Alert.AlertType.ERROR, "Erro de Validação", "Preencha todos os campos!");
+            return;
+        }
+
+        // Verifica se um dos CheckBox está selecionado
+        if (!(atualizaralcoolicoCheckBox.isSelected() || atualizarNAlcoolicoCheckBox.isSelected())) {
+            exibirAlerta(Alert.AlertType.ERROR, "Erro de Validação", "Selecione uma opção para a bebida!");
+            return;
+        }
+
+        // Verifica se um valor dos dois ChoiceBox está selecionado
+        if (atualizarAcoolicoChoiceBox.getSelectionModel().isEmpty() && atualizarNAlcoolicoChoiceBox.getSelectionModel().isEmpty()) {
+            exibirAlerta(Alert.AlertType.ERROR, "Erro de Validação", "Selecione uma opção para o tipo de bebida bebida");
+            return;
+        }
+
+
+        // Verifica se o valor de preço possui 2 números após a virgula
+        if (isTextFieldValueValido(atualizarPrecoTextField)) {
+
+        } else {
+            exibirAlerta(Alert.AlertType.ERROR, "Erro de Validação", "O preço precisa ter 2 algarismo após a vírgula");
+
+        }
+        //FIM DA VERIFICAÇÃO
+
+
+        //DEFININDO AS VARIÁVEIS
         String nomeProduto = atualizarNomeTextField.getText().toLowerCase();
         String precoProduto = atualizarPrecoTextField.getText();
 
@@ -159,7 +192,61 @@ public class EstoqueController implements Initializable {
         }
         int quantidadeProduto = Integer.parseInt(atualizarQuantidadeTextField.getText());
 
+        String queryUpdate = "update produto set nome_produto = ?,preco_produto = ?,alcoolico_S_N = ?,tipo = ?,quantidade = ? where id_produto = ?";
+        //INICIO DO UPDATE NO DB
+        try(PreparedStatement statement = conexao.prepareStatement(queryUpdate)){
+            ProdEstoque itemselecionado = EstoqueTableVIew.getSelectionModel().getSelectedItem();
+
+            statement.setString(1,nomeProduto);
+            statement.setString(2,precoProduto);
+            statement.setBoolean(3,Alcoolico_S_N);
+            statement.setString(4,tipo);
+            statement.setInt(5,quantidadeProduto);
+            statement.setInt(6,itemselecionado.getId());
+
+            int linhasAfetadas = statement.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                exibirAlerta(Alert.AlertType.INFORMATION,"Atualização Bem-Sucedida!","O produto foi atualizado no banco de dados.");
+                clearAll(atualizarNomeTextField,atualizarPrecoTextField,atualizaralcoolicoCheckBox,atualizarAcoolicoChoiceBox,atualizarNAlcoolicoCheckBox,atualizarNAlcoolicoChoiceBox,atualizarQuantidadeTextField);
+                HelloApplication.trocaTela("estoque");
+                System.out.println("A atualização foi bem-sucedida. Linhas afetadas: " + linhasAfetadas);
+            } else {
+                exibirAlerta(Alert.AlertType.ERROR, "Atualização mal-sucedida", "Não foi possivel atualiar o produto.");
+                return;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
     }
+
+    @FXML
+    void ApagarProduto(ActionEvent event) {
+        ProdEstoque itemSelecionado = EstoqueTableVIew.getSelectionModel().getSelectedItem();
+        // Verifica se um item está selecionado
+
+        if (itemSelecionado != null) {
+            exibirAlerta(Alert.AlertType.CONFIRMATION,"Tem Certeza?","Tem Certeza que quer APAGAR um Produto?");
+
+            String queryDelete = "delete from produto where id_produto = ?";
+
+            try(PreparedStatement statement = conexao.prepareStatement(queryDelete)){
+                statement.setInt(1,itemSelecionado.getId());
+                int linhasAfetadas = statement.executeUpdate();
+
+                if(linhasAfetadas > 0){
+                    exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Produto APAGADO com Sucesso!");
+                }
+            }catch(SQLException e){
+                e.printStackTrace();}
+        }else {
+            exibirAlerta(Alert.AlertType.INFORMATION,"Informe o Produto","Primeiro você precisa selecionar um Produto");
+        }
+
+
+    }
+
 
     @FXML
     void SelectedAlcoolicoCheckBox(ActionEvent event) {
@@ -237,7 +324,6 @@ public class EstoqueController implements Initializable {
         estoqueTipoTC.setCellValueFactory(new PropertyValueFactory<ProdEstoque, String>("tipo"));
         estoqueValidadeTC.setCellValueFactory(new PropertyValueFactory<ProdEstoque, Date>("validade"));
         estoqueQTDTC.setCellValueFactory(new PropertyValueFactory<ProdEstoque, Integer>("quantidade"));
-
         setupEstoqueValues();
     }
 }

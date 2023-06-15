@@ -90,4 +90,15 @@ public class metodosGerais {
         quantidadeProduto.clear();
         vendaTableView.getItems().clear();
     }
+
+    public static void clearAll(TextField nomeProd, TextField precoProd, CheckBox alcoolico, ChoiceBox dest_ou_ferm, CheckBox nalcoolico, ChoiceBox suco_ou_refri, TextField quantidadeProd){
+        //Clear para a tela de Produtos
+        nomeProd.clear();
+        precoProd.clear();
+        alcoolico.setSelected(false);
+        dest_ou_ferm.setValue(null);
+        nalcoolico.setSelected(false);
+        suco_ou_refri.setValue(null);
+        quantidadeProd.clear();
+    }
 }
