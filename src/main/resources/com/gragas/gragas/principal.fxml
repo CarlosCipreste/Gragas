@@ -46,7 +46,7 @@
                 </Button>
             </children>
         </Pane>
-        <ImageView fitHeight="177.0" fitWidth="460.0" layoutX="320.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="171.0" fitWidth="415.0" layoutX="459.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../Imagens/tavernapreto.png" />
             </image>
@@ -75,6 +75,11 @@
       <ImageView fitHeight="89.0" fitWidth="141.0" layoutX="380.0" layoutY="459.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../Imagens/icone.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="352.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Imagens/gragas.png" />
          </image>
       </ImageView>
     </children>

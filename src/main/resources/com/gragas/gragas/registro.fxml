@@ -34,7 +34,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <TableView fx:id="clienteTableView" layoutX="161.0" layoutY="157.0" prefHeight="410.0" prefWidth="605.0" stylesheets="@style.css" visible="false">
+            <TableView fx:id="clienteTableView" layoutX="144.0" layoutY="157.0" prefHeight="410.0" prefWidth="605.0" stylesheets="@style.css" visible="false">
               <columns>
                 <TableColumn fx:id="nomeClientes" editable="false" prefWidth="75.0" sortable="false" text="Nome" />
                 <TableColumn fx:id="CPFClientes" editable="false" prefWidth="75.0" sortable="false" text="CPF" />
@@ -47,7 +47,7 @@
             <TableView fx:id="fornecedorTableView" layoutX="144.0" layoutY="157.0" prefHeight="410.0" prefWidth="605.0" stylesheets="@style.css" visible="false">
               <columns>
                 <TableColumn fx:id="fornecedorNome" editable="false" prefWidth="75.0" sortable="false" text="Nome" />
-                <TableColumn fx:id="fornecedorEndereço" editable="false" prefWidth="192.0" sortable="false" text="Endereço" />
+                <TableColumn fx:id="fornecedorEndereco" editable="false" prefWidth="192.0" sortable="false" text="Endereço" />
                   <TableColumn fx:id="CNPJFornecedor" editable="false" prefWidth="110.0" sortable="false" text="CNPJ" />
                   <TableColumn fx:id="telefoneFornecedor" editable="false" prefWidth="100.0" sortable="false" text="Telefone" />
               </columns>
@@ -55,7 +55,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <TableView fx:id="vendasTableView" layoutX="144.0" layoutY="157.0" prefHeight="410.0" prefWidth="612.0" stylesheets="@style.css" visible="false">
+            <TableView fx:id="vendasTableView" layoutX="144.0" layoutY="157.0" prefHeight="410.0" prefWidth="605.0" stylesheets="@style.css" visible="false">
               <columns>
                 <TableColumn fx:id="clienteNomeVendas" editable="false" prefWidth="134.0" sortable="false" text="Cliente" />
                 <TableColumn fx:id="funcionarioNomeVendas" editable="false" prefWidth="146.0" sortable="false" text="Funcionario" />
