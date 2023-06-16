@@ -117,6 +117,13 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <graphic>
+                  <Label prefHeight="92.0" prefWidth="75.0" text="AtualizarProduto" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Leelawadee UI Bold" size="17.0" />
+                     </font>
+                  </Label>
+               </graphic>
             </Button>
             <Button fx:id="voltarButton" layoutY="28.0" mnemonicParsing="false" onAction="#Voltar" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
                <cursor>
@@ -142,11 +149,6 @@
                   </Label>
                </graphic>
             </Button>
-            <Label layoutX="622.0" layoutY="-1.0" prefHeight="92.0" prefWidth="75.0" text="AtualizarProduto" textFill="WHITE" wrapText="true">
-               <font>
-                  <Font name="Leelawadee UI Bold" size="17.0" />
-               </font>
-            </Label>
          </children></Pane>
    </children>
 </AnchorPane>

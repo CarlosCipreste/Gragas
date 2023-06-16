@@ -78,7 +78,7 @@ public class VendaController implements Initializable {
         // Criar a conexão com o banco de dados
         try {
             // Criar a consulta SQL
-            String sql = "SELECT nome_produto FROM produto";
+            String sql = "SELECT nome_produto FROM produto where ativo = true";
 
             // Criar o statement
             try (Statement statement = conexao.createStatement()) {
