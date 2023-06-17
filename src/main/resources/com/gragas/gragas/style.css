@@ -32,6 +32,11 @@
 -fx-background-radius:30px;
 }
 
+.botaomenuright:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+
+}
+
 .check-box {
     /* default properties */
     selected-box-color: transparent;
