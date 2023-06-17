@@ -166,3 +166,18 @@
 .retornarfornecedor:hover{
 -fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
 }
+
+.retornarvenda:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+}
+
+.botaoadicionar:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+}
+
+.botaofinalizar:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+}
+
+
+
