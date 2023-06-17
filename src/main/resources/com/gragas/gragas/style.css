@@ -179,5 +179,17 @@
 -fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
 }
 
+.botaousuario:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+}
+
+.botaosenha:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+}
+
+
+
+
+
 
 
