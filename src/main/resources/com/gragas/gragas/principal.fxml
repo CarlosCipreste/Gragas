@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -19,12 +20,15 @@
                         <Image url="@../../../Imagens/profileicon.png" />
                     </image>
                 </ImageView>
-                <Label layoutX="23.0" layoutY="215.0" text="Seja bem vindo," textFill="WHITE">
+                <Label layoutX="23.0" layoutY="215.0" text="Seja bem vindo, " textFill="#fcfcfc">
                     <font>
                         <Font name="Leelawadee UI" size="18.0" />
                     </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
                 </Label>
-                <Label fx:id="nomeLogon" layoutX="149.0" layoutY="215.0" prefHeight="27.0" prefWidth="126.0" text="Admin" textAlignment="CENTER" textFill="WHITE">
+                <Label fx:id="nomeLogon" layoutX="149.0" layoutY="215.0" prefHeight="27.0" prefWidth="126.0" text=" Admin" textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font name="Leelawadee UI" size="18.0" />
                     </font>
