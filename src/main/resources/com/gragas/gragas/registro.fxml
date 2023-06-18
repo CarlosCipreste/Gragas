@@ -13,6 +13,7 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gragas.gragas.RegistrosController">
    <children>
+      <Pane fx:id="AtualizarPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #9F478C;" />
       <Pane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #479F6C;">
          <children>
             <Button layoutX="197.0" layoutY="123.0" mnemonicParsing="false" onAction="#OpenFuncionarioTable" prefHeight="34.0" prefWidth="127.0" style="-fx-background-radius: 15 15 0 0;" text="Funcionarios" />
@@ -24,58 +25,79 @@
                </font>
             </Label>
             <Button layoutX="578.0" layoutY="123.0" mnemonicParsing="false" onAction="#OpenVendasTable" prefHeight="34.0" prefWidth="127.0" style="-fx-background-radius: 15 15 0 0;" text="Vendas" />
-            <TableView fx:id="funcionarioTableView" layoutX="144.0" layoutY="157.0" prefHeight="410.0" prefWidth="605.0" stylesheets="@style.css" visible="false">
+            <TableView fx:id="funcionarioTableView" layoutX="101.0" layoutY="157.0" prefHeight="540.0" prefWidth="700.0" stylesheets="@style.css" visible="false">
               <columns>
-                <TableColumn fx:id="nomeFuncionarios" editable="false" prefWidth="95.0" sortable="false" text="Nome" />
-                <TableColumn fx:id="CPFFuncionarios" editable="false" prefWidth="180.0" sortable="false" text="CPF" />
-                  <TableColumn fx:id="usuarioFuncionarios" editable="false" prefWidth="222.0" sortable="false" text="Usuario" />
+                  <TableColumn fx:id="IDFuncionarios" editable="false" prefWidth="56.66667175292969" sortable="false" text="ID" />
+                <TableColumn fx:id="nomeFuncionarios" editable="false" prefWidth="247.3333282470703" sortable="false" text="Nome" />
+                <TableColumn fx:id="CPFFuncionarios" editable="false" prefWidth="189.66668701171875" sortable="false" text="CPF" />
+                  <TableColumn fx:id="usuarioFuncionarios" editable="false" prefWidth="204.33331298828125" sortable="false" text="Usuario" />
               </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
             </TableView>
-            <TableView fx:id="clienteTableView" layoutX="144.0" layoutY="157.0" prefHeight="410.0" prefWidth="605.0" stylesheets="@style.css" visible="false">
+            <TableView fx:id="clienteTableView" layoutX="101.0" layoutY="157.0" prefHeight="450.0" prefWidth="700.0" stylesheets="@style.css" visible="false">
               <columns>
-                <TableColumn fx:id="nomeClientes" editable="false" prefWidth="75.0" sortable="false" text="Nome" />
-                <TableColumn fx:id="CPFClientes" editable="false" prefWidth="75.0" sortable="false" text="CPF" />
-                  <TableColumn fx:id="telefoneClientes" editable="false" prefWidth="75.0" sortable="false" text="Telefone" />
+                  <TableColumn fx:id="IDClientes" editable="false" prefWidth="53.333343505859375" sortable="false" text="ID" />
+                <TableColumn fx:id="nomeClientes" editable="false" prefWidth="245.33334350585938" sortable="false" text="Nome" />
+                <TableColumn fx:id="CPFClientes" editable="false" prefWidth="165.6666259765625" sortable="false" text="CPF" />
+                  <TableColumn fx:id="telefoneClientes" editable="false" prefWidth="233.0" sortable="false" text="Telefone" />
               </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
             </TableView>
-            <TableView fx:id="fornecedorTableView" layoutX="144.0" layoutY="157.0" prefHeight="410.0" prefWidth="605.0" stylesheets="@style.css" visible="false">
+            <TableView fx:id="fornecedorTableView" layoutX="101.0" layoutY="157.0" prefHeight="450.0" prefWidth="700.0" stylesheets="@style.css" visible="false">
               <columns>
-                <TableColumn fx:id="fornecedorNome" editable="false" prefWidth="75.0" sortable="false" text="Nome" />
-                <TableColumn fx:id="fornecedorEndereco" editable="false" prefWidth="192.0" sortable="false" text="Endereço" />
-                  <TableColumn fx:id="CNPJFornecedor" editable="false" prefWidth="110.0" sortable="false" text="CNPJ" />
-                  <TableColumn fx:id="telefoneFornecedor" editable="false" prefWidth="100.0" sortable="false" text="Telefone" />
+                  <TableColumn fx:id="fornecedorID" editable="false" prefWidth="44.33332824707031" sortable="false" text="ID" />
+                <TableColumn fx:id="fornecedorNome" editable="false" prefWidth="204.33331298828125" sortable="false" text="Nome" />
+                <TableColumn fx:id="fornecedorEndereco" editable="false" prefWidth="154.33331298828125" sortable="false" text="Endereço" />
+                  <TableColumn fx:id="CNPJFornecedor" editable="false" prefWidth="99.66668701171875" sortable="false" text="CNPJ" />
+                  <TableColumn fx:id="telefoneFornecedor" editable="false" prefWidth="192.33331298828125" sortable="false" text="Telefone" />
               </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
             </TableView>
-            <TableView fx:id="vendasTableView" layoutX="144.0" layoutY="157.0" prefHeight="410.0" prefWidth="605.0" stylesheets="@style.css" visible="false">
+            <TableView fx:id="vendasTableView" layoutX="101.0" layoutY="157.0" prefHeight="450.0" prefWidth="700.0" stylesheets="@style.css" visible="false">
               <columns>
-                <TableColumn fx:id="clienteNomeVendas" editable="false" prefWidth="134.0" sortable="false" text="Cliente" />
+                  <TableColumn fx:id="IDVenda" editable="false" prefWidth="39.333343505859375" sortable="false" text="ID" />
+                <TableColumn fx:id="clienteNomeVendas" editable="false" prefWidth="152.66665649414062" sortable="false" text="Cliente" />
                 <TableColumn fx:id="funcionarioNomeVendas" editable="false" prefWidth="146.0" sortable="false" text="Funcionario" />
-                  <TableColumn fx:id="produtoNomeVendas" editable="false" prefWidth="162.0" sortable="false" text="Produto" />
-                  <TableColumn fx:id="quantidadeProdutoVendas" editable="false" prefWidth="52.0" sortable="false" text="Qtd." />
-                  <TableColumn fx:id="precoVendas" editable="false" prefWidth="117.0" sortable="false" text="Preço Total" />
+                  <TableColumn fx:id="produtoNomeVendas" editable="false" prefWidth="149.66668701171875" sortable="false" text="Produto" />
+                  <TableColumn fx:id="quantidadeProdutoVendas" editable="false" prefWidth="48.6666259765625" sortable="false" text="Qtd." />
+                  <TableColumn fx:id="precoVendas" editable="false" prefWidth="109.3333740234375" sortable="false" text="Preço Total" />
+                  <TableColumn fx:id="horarioCompra" editable="false" minWidth="0.0" prefWidth="52.0" sortable="false" text="Data" />
               </columns>
             </TableView>
-         </children></Pane>
-      <Button fx:id="voltarButton" layoutY="49.0" mnemonicParsing="false" onAction="#Voltar" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <graphic>
-            <ImageView fitHeight="47.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-               <image>
-                  <Image url="@../../../Imagens/seta_branca-removebg-preview.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
+            <Button fx:id="voltarButton" layoutX="8.0" layoutY="49.0" mnemonicParsing="false" onAction="#Voltar" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="47.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <image>
+                        <Image url="@../../../Imagens/seta_branca-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="632.0" layoutY="-1.0" mnemonicParsing="false" onAction="#enterAtualizarFuncionario" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #62E197; -fx-background-radius: 0 0 30 30;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <Label prefHeight="85.0" prefWidth="101.0" text="Atualizar Funcionario" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Leelawadee UI Bold" size="17.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Button layoutX="754.0" layoutY="-3.0" mnemonicParsing="false" onAction="#ApagarFuncionario" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #b03f37; -fx-background-radius: 0 0 30 30;" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <Label prefHeight="60.0" prefWidth="103.0" text="Apagar Funcionario" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Leelawadee UI Bold" size="17.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

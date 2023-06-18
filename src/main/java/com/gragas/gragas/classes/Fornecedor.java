@@ -2,16 +2,22 @@ package com.gragas.gragas.classes;
 
 public class Fornecedor {
 
+    int IDFornecedorClass;
     String nomeFornecedorClass;
     String enderecoFornecedorClass;
     String CNPJFornecedorClass;
     String telefoneFornecedorClass;
 
-    public Fornecedor(String nomeFornecedorClass, String enderecoFornecedorClass, String CNPJFornecedorClass, String telefoneFornecedorClass) {
+    public Fornecedor(int IDFornecedorClass, String nomeFornecedorClass, String enderecoFornecedorClass, String CNPJFornecedorClass, String telefoneFornecedorClass) {
+        this.IDFornecedorClass = IDFornecedorClass;
         this.nomeFornecedorClass = nomeFornecedorClass;
         this.enderecoFornecedorClass = enderecoFornecedorClass;
         this.CNPJFornecedorClass = CNPJFornecedorClass;
         this.telefoneFornecedorClass = telefoneFornecedorClass;
+    }
+
+    public int getIDFornecedorClass() {
+        return IDFornecedorClass;
     }
 
     public String getNomeFornecedorClass() {

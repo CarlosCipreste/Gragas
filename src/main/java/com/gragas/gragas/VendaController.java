@@ -14,6 +14,7 @@ import org.controlsfx.control.textfield.TextFields;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -203,6 +204,7 @@ public class VendaController implements Initializable {
 
     }
 
+
     @FXML
     public void FinalizarVenda(ActionEvent event) {
 
@@ -219,6 +221,7 @@ public class VendaController implements Initializable {
             int idfuncionario = LoginController.IDUser;
             Double precoTotal = qtd * preco;
             BigDecimal precoBigDecimal = new BigDecimal(precoTotal);
+            Timestamp horarioCompra = Timestamp.valueOf(LocalDateTime.now());
 
             // Executando a atualização para a nova quantidade de produtos
             String sqlUpdate = "UPDATE produto SET quantidade = quantidade - ?  WHERE id_produto = ?";
@@ -234,15 +237,15 @@ public class VendaController implements Initializable {
             }
 
             //Insert na tabela venda
-            String queryInsert = "INSERT INTO venda (id_cliente, id_funcionario, id_produto, quantidade, preco_total)\n" +
-                    "VALUES (?, ?, ?, ?, ?);";
+            String queryInsert = "INSERT INTO venda (id_cliente, id_funcionario, id_produto, quantidade, preco_total,horario_compra)\n" +
+                    "VALUES (?, ?, ?, ?, ?,?);";
             try (PreparedStatement statement = conexao.prepareStatement(queryInsert)) {
                 statement.setInt(1, idcliente); // Substitui o primeiro parâmetro com o valor real do ID do cliente
                 statement.setInt(2, idfuncionario); // Substitui o segundo parâmetro com o valor real do ID do funcionário
                 statement.setInt(3, idProduto); // Substitui o terceiro parâmetro com o valor real do ID do produto
                 statement.setInt(4, qtd); // Substitui o quarto parâmetro com o valor real da quantidade
                 statement.setBigDecimal(5, precoBigDecimal); // Substitui o quinto parâmetro com o valor real do preço total
-                statement.executeUpdate();
+                statement.setTimestamp(6,horarioCompra);
 
                 int linhasAfetadas = statement.executeUpdate();
 
@@ -263,7 +266,10 @@ public class VendaController implements Initializable {
     }
 
 
-        @Override
+
+
+
+    @Override
         public void initialize (URL location, ResourceBundle resources){
 
 
