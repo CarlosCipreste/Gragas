@@ -99,9 +99,6 @@ public class VendaController implements Initializable {
             e.printStackTrace();
         }
     }
-    
-    
-
 
     private void setupClienteValues(ObservableList<String> lista, TextField textField){
         try {

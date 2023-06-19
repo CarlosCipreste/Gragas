@@ -128,6 +128,8 @@ public class EstoqueController implements Initializable {
 
         }
     }
+
+
     @FXML
     void AtualizarProduto(ActionEvent event) {
         //INICIO DA VERIFICAÇÃO
