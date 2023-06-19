@@ -21,7 +21,7 @@
 }
 
 .botaomenuleft:hover{
-    -fx-cursor:hand;
+ -fx-cursor:hand;
 }
 
 .botaomenuright{
@@ -158,3 +158,62 @@
     -fx-background-color: #62E197;
     -fx-text-fill: black;
 }
+
+.botaoretornar:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+}
+
+.retornarfornecedor:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+}
+
+.retornarvenda:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+}
+
+.botaoadicionar:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+}
+
+.botaofinalizar:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+}
+
+.botaousuario:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+}
+
+.botaosenha:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+}
+
+.retornarregistros:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+}
+
+.retornarestoque:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+}
+
+.retornarfuncionario:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+}
+
+.retornarcliente:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+}
+
+.retornarproduto:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+}
+
+.botaoapagar:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+}
+
+.botaoatualizar:hover{
+-fx-opacity: 0.7; -fx-scale-x: 1.1; -fx-scale-y: 1.1; -fx-translate-x: 5;
+}
+
+
+

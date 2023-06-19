@@ -113,7 +113,7 @@
                   <Font name="Leelawadee UI Bold" size="23.0" />
                </font>
             </Label>
-            <Button layoutX="604.0" layoutY="-11.0" mnemonicParsing="false" onAction="#enterAtualizar" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #62E197; -fx-background-radius: 0 0 30 30;">
+            <Button layoutX="604.0" layoutY="-11.0" mnemonicParsing="false" onAction="#enterAtualizar" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #62E197; -fx-background-radius: 0 0 30 30;" styleClass="botaoatualizar" stylesheets="@style.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -125,7 +125,7 @@
                   </Label>
                </graphic>
             </Button>
-            <Button fx:id="voltarButton" layoutY="28.0" mnemonicParsing="false" onAction="#Voltar" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
+            <Button fx:id="voltarButton" layoutY="28.0" mnemonicParsing="false" onAction="#Voltar" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;" styleClass="retornarestoque" stylesheets="@style.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -137,7 +137,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="744.0" layoutY="-5.0" mnemonicParsing="false" onAction="#ApagarProduto" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #b03f37; -fx-background-radius: 0 0 30 30;" wrapText="true">
+            <Button layoutX="744.0" layoutY="-5.0" mnemonicParsing="false" onAction="#ApagarProduto" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #b03f37; -fx-background-radius: 0 0 30 30;" styleClass="botaoapagar" stylesheets="@style.css" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

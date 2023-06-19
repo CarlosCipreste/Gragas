@@ -10,19 +10,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #479F6C;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gragas.gragas.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #479F6C;" styleClass="borderanimation" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gragas.gragas.LoginController">
     <children>
         <ImageView fitHeight="236.0" fitWidth="217.0" layoutX="102.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../Imagens/TavernaMenor.png" />
             </image>
         </ImageView>
-        <TextField fx:id="usuarioTextField" layoutX="102.0" layoutY="282.0" onKeyPressed="#LoginEnter" prefHeight="32.0" prefWidth="197.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
+        <TextField fx:id="usuarioTextField" layoutX="102.0" layoutY="282.0" onKeyPressed="#LoginEnter" prefHeight="32.0" prefWidth="197.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;" styleClass="botaousuario" stylesheets="@style.css">
             <font>
                 <Font name="Leelawadee UI Bold" size="14.0" />
             </font>
         </TextField>
-        <PasswordField fx:id="senhaTextField" layoutX="102.0" layoutY="354.0" onKeyPressed="#LoginEnter" prefHeight="32.0" prefWidth="197.0" style="-fx-border-color: white; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-color: transparent; -fx-text-fill: white;">
+        <PasswordField fx:id="senhaTextField" layoutX="102.0" layoutY="354.0" onKeyPressed="#LoginEnter" prefHeight="32.0" prefWidth="197.0" style="-fx-border-color: white; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-color: transparent; -fx-text-fill: white;" styleClass="botaosenha" stylesheets="@style.css">
             <font>
                 <Font name="Leelawadee UI Bold" size="14.0" />
             </font>
