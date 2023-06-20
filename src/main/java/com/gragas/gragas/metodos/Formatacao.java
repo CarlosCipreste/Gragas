@@ -49,7 +49,7 @@ public class Formatacao {
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //Formata o celular enquanto digita - TextField
-    public void formataCelularDinamico(TextField textField) {
+    public void formataTelefoneDinamico(TextField textField) {
 
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             String digits = newValue.replaceAll("[^0-9]", "");
@@ -63,6 +63,47 @@ public class Formatacao {
             }
             if (digits.length() > 2) {
                 formatted.append(digits.substring(2, Math.min(3, digits.length()))).append("-");
+            }
+            if (digits.length() > 3) {
+                formatted.append(digits.substring(3, Math.min(7, digits.length()))).append("-");
+            }
+            if (digits.length() > 7) {
+                formatted.append(digits.substring(7, Math.min(11, digits.length())));
+            }
+
+            textField.setText(formatted.toString());
+        });
+
+
+
+
+        // Adiciona um listener para escutar o evento de tecla pressionada
+        textField.setOnKeyPressed(event -> {
+
+            // Verifica se a tecla pressionada foi o BACKSPACE - Pois o cliente não consegue apagar as barras e parenteses que adicionei
+            if (event.getCode() == KeyCode.BACK_SPACE) {
+                // Limpa o conteúdo do JFXTextField
+                textField.clear();
+            }
+
+        });
+    }
+
+
+    public void formataCelularDinamico(TextField textField) {
+
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String digits = newValue.replaceAll("[^0-9]", "");
+
+            StringBuilder formatted = new StringBuilder();
+            if (digits.length() > 0) {
+                formatted.append("(").append(digits.charAt(0));
+            }
+            if (digits.length() > 1) {
+                formatted.append(digits.charAt(1)).append(") ");
+            }
+            if (digits.length() > 2) {
+                formatted.append(digits.substring(2, Math.min(3, digits.length()))).append("");
             }
             if (digits.length() > 3) {
                 formatted.append(digits.substring(3, Math.min(7, digits.length()))).append("-");

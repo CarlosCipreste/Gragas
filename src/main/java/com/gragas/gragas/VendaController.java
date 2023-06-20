@@ -176,15 +176,17 @@ public class VendaController implements Initializable {
             }
 
             int qtd = Integer.parseInt(vendaQTDTextField.getText());
-
-            querySelect = "select quantidade from produto where quantidade < ?";
+            querySelect = "select quantidade from produto where id_produto = ? and ativo = true";
 
             try(PreparedStatement statement = conexao.prepareStatement(querySelect)){
-                statement.setInt(1,qtd);
+                statement.setInt(1,IDProd);
                 ResultSet resultSet = statement.executeQuery();
-                if(resultSet.next()){
-                    exibirAlerta(Alert.AlertType.ERROR,"Valor inválido!","Valor acima do que há no estoque");
-                    return;
+
+                if( resultSet.next()){
+                    int qtdQuery = resultSet.getInt("quantidade");
+                    if(qtdQuery < qtd){
+                        exibirAlerta(Alert.AlertType.ERROR,"Erro","Quantidade inseria é maior da qu há em estoque");
+                    }
                 }
             }catch (SQLException e){e.printStackTrace();}
 

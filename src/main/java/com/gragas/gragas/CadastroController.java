@@ -51,6 +51,9 @@ public class CadastroController implements Initializable {
     private TextField clienteTelefoneTextField;
 
     @FXML
+    private TextField clienteCelularTextField;
+
+    @FXML
     private Button VoltarClienteButton;
 
     @FXML
@@ -172,7 +175,7 @@ public class CadastroController implements Initializable {
 
         clearAll(nomeProdutoTextField,precoTextField,alcoolicoCheckBox,nalcoolicoChoiceBox,NAlcoolicoCheckBox,nalcoolicoChoiceBox,validadeDatePicker,quantidadeTextField);
         clearAll(FuncNomeTextField,CPFFuncTextField,FuncLogin,funcSenhaTextField);
-        clearAll(clienteNomeTextField,clienteCPFTextField,clienteTelefoneTextField);
+        clearAll(clienteNomeTextField,clienteCPFTextField,clienteTelefoneTextField,clienteCelularTextField);
         clearAll(fornecedorNomeTextField,fornecedorEnderecoTextField,fornecedorCNPJTextField,fornecedorCNPJTextField);
 
     }
@@ -516,8 +519,9 @@ public class CadastroController implements Initializable {
         formatacao.formataCNPJDinamico(fornecedorCNPJTextField);
 
         //Formatando os TextField para Número de Celular
-        formatacao.formataCelularDinamico(FornecedorTelefoneTextField);
-        formatacao.formataCelularDinamico(clienteTelefoneTextField);
+        formatacao.formataTelefoneDinamico(FornecedorTelefoneTextField);
+        formatacao.formataTelefoneDinamico(clienteTelefoneTextField);
+        formatacao.formataCelularDinamico(clienteCelularTextField);
 
         //Formatador de Preço
         formatacao.formataPrecoEnquantoDigita(precoTextField);
@@ -539,6 +543,7 @@ public class CadastroController implements Initializable {
 
         //Formatando para Receber apenas números
         Formatacao.ApenasNumeros(quantidadeTextField);
+
     }
 
 

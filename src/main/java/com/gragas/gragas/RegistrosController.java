@@ -181,7 +181,7 @@ public class RegistrosController implements Initializable {
 
         //Setando valores para FUNCIONARIOS
 
-        String selectFuncionario = "select * from funcionario";
+        String selectFuncionario = "select * from funcionario where ativo = true";
 
         try (PreparedStatement statement = conexao.prepareStatement(selectFuncionario)) {
             ResultSet resultSet = statement.executeQuery();
@@ -203,7 +203,7 @@ public class RegistrosController implements Initializable {
             return;
         }
 
-        String selectCliente = "select * from cliente";
+        String selectCliente = "select * from cliente where ativo = true";
 
         try (PreparedStatement statement = conexao.prepareStatement(selectCliente)) {
             ResultSet resultSet = statement.executeQuery();
