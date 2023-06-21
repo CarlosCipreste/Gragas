@@ -26,40 +26,40 @@
                </font>
             </Label>
             <Button layoutX="578.0" layoutY="123.0" mnemonicParsing="false" onAction="#OpenVendasTable" prefHeight="34.0" prefWidth="127.0" style="-fx-background-radius: 15 15 0 0;" text="Vendas" />
-            <TableView fx:id="funcionarioTableView" layoutX="101.0" layoutY="157.0" prefHeight="450.0" prefWidth="700.0" stylesheets="@style.css" visible="false">
+            <TableView fx:id="funcionarioTableView" fixedCellSize="0.0" layoutX="101.0" layoutY="157.0" prefHeight="450.0" prefWidth="700.0" stylesheets="@style.css" visible="false">
               <columns>
-                  <TableColumn fx:id="IDFuncionarios" editable="false" prefWidth="56.66667175292969" sortable="false" text="ID" />
-                <TableColumn fx:id="nomeFuncionarios" editable="false" prefWidth="247.3333282470703" sortable="false" text="Nome" />
-                <TableColumn fx:id="CPFFuncionarios" editable="false" prefWidth="189.66668701171875" sortable="false" text="CPF" />
-                  <TableColumn fx:id="usuarioFuncionarios" editable="false" prefWidth="204.33331298828125" sortable="false" text="Usuario" />
+                  <TableColumn fx:id="IDFuncionarios" editable="false" prefWidth="56.66667175292969" resizable="false" sortable="false" text="ID" />
+                <TableColumn fx:id="nomeFuncionarios" editable="false" prefWidth="247.3333282470703" resizable="false" sortable="false" text="Nome" />
+                <TableColumn fx:id="CPFFuncionarios" editable="false" prefWidth="189.66668701171875" resizable="false" sortable="false" text="CPF" />
+                  <TableColumn fx:id="usuarioFuncionarios" editable="false" prefWidth="204.33331298828125" resizable="false" sortable="false" text="Usuario" />
               </columns>
             </TableView>
             <TableView fx:id="clienteTableView" layoutX="101.0" layoutY="157.0" prefHeight="450.0" prefWidth="700.0" stylesheets="@style.css" visible="false">
               <columns>
-                  <TableColumn fx:id="IDClientes" editable="false" prefWidth="53.333343505859375" sortable="false" text="ID" />
-                <TableColumn fx:id="nomeClientes" editable="false" prefWidth="245.33334350585938" sortable="false" text="Nome" />
-                <TableColumn fx:id="CPFClientes" editable="false" prefWidth="165.6666259765625" sortable="false" text="CPF" />
-                  <TableColumn fx:id="telefoneClientes" editable="false" prefWidth="233.0" sortable="false" text="Telefone" />
+                  <TableColumn fx:id="IDClientes" editable="false" prefWidth="53.333343505859375" resizable="false" sortable="false" text="ID" />
+                <TableColumn fx:id="nomeClientes" editable="false" prefWidth="389.0" resizable="false" sortable="false" text="Nome" />
+                <TableColumn fx:id="CPFClientes" editable="false" prefWidth="143.0" resizable="false" sortable="false" text="CPF" />
+                  <TableColumn fx:id="telefoneClientes" editable="false" prefWidth="113.0" resizable="false" sortable="false" text="Telefone" />
               </columns>
             </TableView>
-            <TableView fx:id="fornecedorTableView" layoutX="101.0" layoutY="157.0" prefHeight="450.0" prefWidth="700.0" stylesheets="@style.css" visible="false">
+            <TableView fx:id="fornecedorTableView" layoutX="50.0" layoutY="157.0" prefHeight="450.0" prefWidth="800.0" stylesheets="@style.css">
               <columns>
-                  <TableColumn fx:id="fornecedorID" editable="false" prefWidth="44.33332824707031" sortable="false" text="ID" />
-                <TableColumn fx:id="fornecedorNome" editable="false" prefWidth="204.33331298828125" sortable="false" text="Nome" />
-                <TableColumn fx:id="fornecedorEndereco" editable="false" prefWidth="154.33331298828125" sortable="false" text="Endereço" />
-                  <TableColumn fx:id="CNPJFornecedor" editable="false" prefWidth="99.66668701171875" sortable="false" text="CNPJ" />
-                  <TableColumn fx:id="telefoneFornecedor" editable="false" prefWidth="192.33331298828125" sortable="false" text="Telefone" />
+                  <TableColumn fx:id="fornecedorID" editable="false" prefWidth="32.0" resizable="false" sortable="false" text="ID" />
+                <TableColumn fx:id="fornecedorNome" editable="false" prefWidth="205.0" sortable="false" text="Nome" />
+                <TableColumn fx:id="fornecedorEndereco" editable="false" prefWidth="277.0" sortable="false" text="Endereço" />
+                  <TableColumn fx:id="CNPJFornecedor" editable="false" prefWidth="153.0" resizable="false" sortable="false" text="CNPJ" />
+                  <TableColumn fx:id="telefoneFornecedor" editable="false" prefWidth="132.0" resizable="false" sortable="false" text="Telefone" />
               </columns>
             </TableView>
             <TableView fx:id="vendasTableView" layoutX="50.0" layoutY="157.0" prefHeight="450.0" prefWidth="800.0" stylesheets="@style.css" visible="false">
               <columns>
-                  <TableColumn fx:id="IDVenda" editable="false" prefWidth="33.0" sortable="false" text="ID" />
+                  <TableColumn fx:id="IDVenda" editable="false" prefWidth="33.0" resizable="false" sortable="false" text="ID" />
                 <TableColumn fx:id="clienteNomeVendas" editable="false" prefWidth="160.0" sortable="false" text="Cliente" />
-                <TableColumn fx:id="funcionarioNomeVendas" editable="false" prefWidth="154.0" sortable="false" text="Funcionario" />
-                  <TableColumn fx:id="produtoNomeVendas" editable="false" prefWidth="162.0" sortable="false" text="Produto" />
-                  <TableColumn fx:id="quantidadeProdutoVendas" editable="false" prefWidth="49.0" sortable="false" text="Qtd." />
-                  <TableColumn fx:id="precoVendas" editable="false" prefWidth="59.0" sortable="false" text="Preço Total" />
-                  <TableColumn fx:id="horarioCompra" editable="false" minWidth="0.0" prefWidth="182.0" sortable="false" text="Data" />
+                <TableColumn fx:id="funcionarioNomeVendas" editable="false" prefWidth="172.0" sortable="false" text="Funcionario" />
+                  <TableColumn fx:id="produtoNomeVendas" editable="false" prefWidth="163.0" sortable="false" text="Produto" />
+                  <TableColumn fx:id="quantidadeProdutoVendas" editable="false" prefWidth="49.0" resizable="false" sortable="false" text="Qtd." />
+                  <TableColumn fx:id="precoVendas" editable="false" prefWidth="62.0" resizable="false" sortable="false" text="Preço Total" />
+                  <TableColumn fx:id="horarioCompra" editable="false" minWidth="0.0" prefWidth="160.0" resizable="false" sortable="false" text="Data" />
               </columns>
             </TableView>
             <Button fx:id="voltarButton" layoutY="49.0" mnemonicParsing="false" onAction="#Voltar" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;" styleClass="botaoretornar" stylesheets="@style.css">
@@ -74,7 +74,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="632.0" mnemonicParsing="false" onAction="#enterAtualizarFuncionario" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #62E197; -fx-background-radius: 0 0 30 30;" styleClass="botaoatualizar" stylesheets="@style.css" visible="false">
+            <Button fx:id="AtualizarFuncionarioButton" layoutX="632.0" mnemonicParsing="false" onAction="#enterAtualizarFuncionario" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #62E197; -fx-background-radius: 0 0 30 30;" styleClass="botaoatualizar" stylesheets="@style.css" visible="false">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -86,7 +86,7 @@
                   </Label>
                </graphic>
             </Button>
-            <Button layoutX="754.0" mnemonicParsing="false" onAction="#ApagarFuncionario" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #b03f37; -fx-background-radius: 0 0 30 30;" styleClass="botaoapagar" stylesheets="@style.css" visible="false" wrapText="true">
+            <Button fx:id="ApagarFuncionarioButton" layoutX="754.0" mnemonicParsing="false" onAction="#ApagarFuncionario" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #b03f37; -fx-background-radius: 0 0 30 30;" styleClass="botaoapagar" stylesheets="@style.css" visible="false" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -98,48 +98,48 @@
                   </Label>
                </graphic>
             </Button>
-            <Button layoutX="632.0" mnemonicParsing="false" onAction="#AtualizarCliente" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #62E197; -fx-background-radius: 0 0 30 30;" styleClass="botaoatualizar" stylesheets="@style.css" visible="false">
+            <Button fx:id="AtualizarClienteButton" layoutX="632.0" mnemonicParsing="false" onAction="#AtualizarCliente" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #62E197; -fx-background-radius: 0 0 30 30;" styleClass="botaoatualizar" stylesheets="@style.css" visible="false">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
-                  <Label prefHeight="85.0" prefWidth="101.0" stylesheets="@style.css" text="Atualizar Funcionario" textFill="WHITE" wrapText="true">
+                  <Label prefHeight="85.0" prefWidth="101.0" stylesheets="@style.css" text="Atualizar Cliente" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Leelawadee UI Bold" size="17.0" />
                      </font>
                   </Label>
                </graphic>
             </Button>
-            <Button layoutX="754.0" mnemonicParsing="false" onAction="#ApagarCliente" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #b03f37; -fx-background-radius: 0 0 30 30;" styleClass="botaoapagar" stylesheets="@style.css" visible="false" wrapText="true">
+            <Button fx:id="ApagarClienteButton" layoutX="754.0" mnemonicParsing="false" onAction="#ApagarCliente" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #b03f37; -fx-background-radius: 0 0 30 30;" styleClass="botaoapagar" stylesheets="@style.css" visible="false" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
-                  <Label prefHeight="60.0" prefWidth="103.0" stylesheets="@style.css" text="Apagar Funcionario" textFill="WHITE" wrapText="true">
+                  <Label prefHeight="60.0" prefWidth="103.0" stylesheets="@style.css" text="Apagar Cliente" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Leelawadee UI Bold" size="17.0" />
                      </font>
                   </Label>
                </graphic>
             </Button>
-            <Button layoutX="642.0" layoutY="10.0" mnemonicParsing="false" onAction="#AtualizarFornecedor" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #62E197; -fx-background-radius: 0 0 30 30;" styleClass="botaoatualizar" stylesheets="@style.css" visible="false">
+            <Button fx:id="AtualizarFornecedorButton" layoutX="632.0" mnemonicParsing="false" onAction="#AtualizarFornecedor" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #62E197; -fx-background-radius: 0 0 30 30;" styleClass="botaoatualizar" stylesheets="@style.css" visible="false">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
-                  <Label prefHeight="85.0" prefWidth="101.0" stylesheets="@style.css" text="Atualizar Funcionario" textFill="WHITE" wrapText="true">
+                  <Label prefHeight="85.0" prefWidth="101.0" stylesheets="@style.css" text="Atualizar Fornecedor" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Leelawadee UI Bold" size="17.0" />
                      </font>
                   </Label>
                </graphic>
             </Button>
-            <Button layoutX="764.0" layoutY="10.0" mnemonicParsing="false" onAction="#ApagarFornecedor" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #b03f37; -fx-background-radius: 0 0 30 30;" styleClass="botaoapagar" stylesheets="@style.css" visible="false" wrapText="true">
+            <Button fx:id="ApagarFornecedorButton" layoutX="754.0" mnemonicParsing="false" onAction="#ApagarFornecedor" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #b03f37; -fx-background-radius: 0 0 30 30;" styleClass="botaoapagar" stylesheets="@style.css" visible="false" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
-                  <Label prefHeight="60.0" prefWidth="103.0" stylesheets="@style.css" text="Apagar Funcionario" textFill="WHITE" wrapText="true">
+                  <Label prefHeight="60.0" prefWidth="103.0" stylesheets="@style.css" text="Apagar Fornecedor" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Leelawadee UI Bold" size="17.0" />
                      </font>
@@ -220,7 +220,7 @@
                </cursor>
             </Button>
          </children></Pane>
-      <Pane fx:id="AtualizarClientePane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #9F478C;">
+      <Pane fx:id="AtualizarClientePane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #9F478C;" visible="false">
          <children>
             <Label layoutX="350.0" layoutY="42.0" text="Atualizar Clientes">
                <font>

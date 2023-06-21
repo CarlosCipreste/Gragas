@@ -127,14 +127,13 @@
 .table-view{
     -fx-background-color: #9544b8;
     -fx-alignment:justify;
-
-
 }
 
 .table-cell {
     -fx-font-size: 15px; /* Define o tamanho da fonte */
     -fx-text-fill: white; /* Define a cor da fonte */
-    -fx-padding: 5px;
+    -fx-padding: 7px;
+
 }
 
 .table-view .column-header {
@@ -145,21 +144,20 @@
 }
 
 .table-view .label{
-    -fx-pref-height: 70px;
+    -fx-pref-height: 60px;
     -fx-wrap-text:true;
 }
 
 .table-view .table-row-cell {
-    -fx-border:2px;
+    -fx-border:1px;
     -fx-border-color:black;
     -fx-background-color:#9544b8;
 
 }
- /* Defina a altura desejada da célula aqui */
 
 
 .table-view .table-row-cell:selected {
-    -fx-border:3px;
+    -fx-border:2px;
     -fx-background-color: #62E197;
     -fx-text-fill: black;
 }

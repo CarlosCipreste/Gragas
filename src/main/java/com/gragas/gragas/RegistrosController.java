@@ -96,6 +96,24 @@ public class RegistrosController implements Initializable {
     private Button voltarButton;
 
     @FXML
+    private Button AtualizarFuncionarioButton;
+
+    @FXML
+    private Button ApagarFuncionarioButton;
+
+    @FXML
+    private Button AtualizarClienteButton;
+
+    @FXML
+    private Button ApagarClienteButton;
+
+    @FXML
+    private Button AtualizarFornecedorButton;
+
+    @FXML
+    private Button ApagarFornecedorButton;
+
+    @FXML
     private Pane AtualizarFuncionarioPane;
 
     @FXML
@@ -110,11 +128,6 @@ public class RegistrosController implements Initializable {
     @FXML
     private PasswordField funcSenhaTextField;
 
-    private ObservableList funcionarioValues = FXCollections.observableArrayList();
-    private ObservableList clienteValues = FXCollections.observableArrayList();
-    private ObservableList fornecedorValues = FXCollections.observableArrayList();
-    private ObservableList vendaValues = FXCollections.observableArrayList();
-
     @FXML
     private Pane AtualizarClientePane;
 
@@ -127,6 +140,15 @@ public class RegistrosController implements Initializable {
     @FXML
     private TextField ClienteLogin;
 
+    @FXML
+    private TextField clienteCelularTextField;
+
+
+    private ObservableList funcionarioValues = FXCollections.observableArrayList();
+    private ObservableList clienteValues = FXCollections.observableArrayList();
+    private ObservableList fornecedorValues = FXCollections.observableArrayList();
+    private ObservableList vendaValues = FXCollections.observableArrayList();
+
 
     @FXML
     void Voltar(ActionEvent event) {
@@ -136,10 +158,19 @@ public class RegistrosController implements Initializable {
 
     @FXML
     void OpenClientesTable(ActionEvent event) {
+        //Visibilidade dos botões e tabelas que vão ser vistas
         clienteTableView.setVisible(true);
-
+        AtualizarClienteButton.setVisible(true);
+        ApagarClienteButton.setVisible(true);
         clienteTableView.toFront();
 
+        //ao serem ativadas, outros botões são desativados
+        AtualizarFornecedorButton.setVisible(false);
+        ApagarFornecedorButton.setVisible(false);
+        AtualizarFuncionarioButton.setVisible(false);
+        ApagarFuncionarioButton.setVisible(false);
+
+        //Outras tabelas são desativadas
         funcionarioTableView.setVisible(false);
         fornecedorTableView.setVisible(false);
         vendasTableView.setVisible(false);
@@ -147,9 +178,17 @@ public class RegistrosController implements Initializable {
 
     @FXML
     void OpenFornecedorTable(ActionEvent event) {
+        //Visibilidade dos botões e tabelas que vão ser vistas
         fornecedorTableView.setVisible(true);
+        AtualizarFornecedorButton.setVisible(true);
+        ApagarFornecedorButton.setVisible(true);
         fornecedorTableView.toFront();
-
+        //ao serem ativadas, outros botões são desativados
+        AtualizarClienteButton.setVisible(false);
+        ApagarClienteButton.setVisible(false);
+        AtualizarFuncionarioButton.setVisible(false);
+        ApagarFuncionarioButton.setVisible(false);
+        //Outras tabelas são desativadas
         funcionarioTableView.setVisible(false);
         clienteTableView.setVisible(false);
         vendasTableView.setVisible(false);
@@ -157,9 +196,19 @@ public class RegistrosController implements Initializable {
 
     @FXML
     void OpenFuncionarioTable(ActionEvent event) {
+        //Visibilidade dos botões e tabelas que vão ser vistas
         funcionarioTableView.setVisible(true);
+        AtualizarFuncionarioButton.setVisible(true);
+        ApagarFuncionarioButton.setVisible(true);
         funcionarioTableView.toFront();
 
+        //ao serem ativadas, outros botões são desativados
+        AtualizarClienteButton.setVisible(false);
+        ApagarClienteButton.setVisible(false);
+        AtualizarFornecedorButton.setVisible(false);
+        ApagarFornecedorButton.setVisible(false);
+
+        //Outras tabelas são desativadas
         clienteTableView.setVisible(false);
         fornecedorTableView.setVisible(false);
         vendasTableView.setVisible(false);
@@ -167,9 +216,19 @@ public class RegistrosController implements Initializable {
 
     @FXML
     void OpenVendasTable(ActionEvent event) {
+
         vendasTableView.setVisible(true);
         vendasTableView.toFront();
 
+        //Todos os botões são desativados pois essa tabela não é ossivel apagar
+        AtualizarFuncionarioButton.setVisible(false);
+        ApagarFuncionarioButton.setVisible(false);
+        AtualizarClienteButton.setVisible(false);
+        ApagarClienteButton.setVisible(false);
+        AtualizarFornecedorButton.setVisible(false);
+        ApagarFornecedorButton.setVisible(false);
+
+        //Outras tabelas são desativadas
         clienteTableView.setVisible(false);
         funcionarioTableView.setVisible(false);
         fornecedorTableView.setVisible(false);

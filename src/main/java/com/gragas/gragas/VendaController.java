@@ -64,8 +64,8 @@ public class VendaController implements Initializable {
     private Button voltarButton;
     @FXML
     private ObservableList<String> lista;
-    @FXML
-    private int idcliente;
+
+    public int idcliente;
 
     @FXML
     void Voltar(ActionEvent event) {
@@ -107,7 +107,7 @@ public class VendaController implements Initializable {
                 ResultSet resultSet = statement.executeQuery(sql);
                 while (resultSet.next()) {
                     String nomeProduto = resultSet.getString("nome_cliente");
-                    idcliente= resultSet.getInt("id_cliente");
+                    int idcliente= resultSet.getInt("id_cliente");
                     lista.add(nomeProduto);
                 }
             }
@@ -235,10 +235,50 @@ public class VendaController implements Initializable {
                 e.printStackTrace();
             }
 
+
+            //Verificação se há o cliente selecionado no banco
+            String querySelect = "select id_cliente, nome_cliente from cliente where nome_cliente = ?";
+            String nomecliente = vendaClienteTextField.getText();
+            try (PreparedStatement statement = conexao.prepareStatement(querySelect)) {
+                statement.setString(1,nomecliente);
+                ResultSet resultSet = statement.executeQuery();
+
+                //Caso não haja o cliente definido é criado um cliente AVULSO no DB
+                if(!resultSet.next()){
+
+                    String queryInsert = "insert into cliente(nome_cliente)value (?)";
+                    try(PreparedStatement insert = conexao.prepareStatement(queryInsert)){
+                        insert.setString(1,nomecliente);
+                        int linhasAfetadas = insert.executeUpdate();
+                        System.out.println("Linhas Afetadas =" + linhasAfetadas);
+
+                    }catch(SQLException e){e.printStackTrace();}
+
+                    String querySelect1 = "select id_cliente from cliente where nome_cliente = ?";
+                    try(PreparedStatement insert = conexao.prepareStatement(querySelect1)){
+                        insert.setString(1,nomecliente);
+                        ResultSet resultSet1 = insert.executeQuery();
+
+                        if(resultSet1.next()){
+                            idcliente = resultSet1.getInt("id_cliente");
+                        }
+
+                    }catch(SQLException e){e.printStackTrace();}
+                }
+                //Caso haja um cliente com este nome, o ID é retornado
+                else if(resultSet.next()){
+                    idcliente = resultSet.getInt("id_cliente");
+                }
+
+            }catch(SQLException e){e.printStackTrace();}
+
+            
+            
             //Insert na tabela venda
             String queryInsert = "INSERT INTO venda (id_cliente, id_funcionario, id_produto, quantidade, preco_total,horario_compra)\n" +
                     "VALUES (?, ?, ?, ?, ?,?);";
             try (PreparedStatement statement = conexao.prepareStatement(queryInsert)) {
+
                 statement.setInt(1, idcliente); // Substitui o primeiro parâmetro com o valor real do ID do cliente
                 statement.setInt(2, idfuncionario); // Substitui o segundo parâmetro com o valor real do ID do funcionário
                 statement.setInt(3, idProduto); // Substitui o terceiro parâmetro com o valor real do ID do produto
