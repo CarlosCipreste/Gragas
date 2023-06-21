@@ -93,6 +93,7 @@ public class Formatacao {
     public void formataCelularDinamico(TextField textField) {
 
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
+
             String digits = newValue.replaceAll("[^0-9]", "");
 
             StringBuilder formatted = new StringBuilder();

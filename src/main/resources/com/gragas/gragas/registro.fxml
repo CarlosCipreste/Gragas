@@ -220,7 +220,7 @@
                </cursor>
             </Button>
          </children></Pane>
-      <Pane fx:id="AtualizarClientePane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #9F478C;" visible="false">
+      <Pane fx:id="AtualizarClientePane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #9F478C;">
          <children>
             <Label layoutX="350.0" layoutY="42.0" text="Atualizar Clientes">
                <font>
@@ -239,7 +239,7 @@
                         <Font name="Leelawadee UI Bold" size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="ClienteLogin" layoutX="221.0" layoutY="258.0" prefHeight="34.0" prefWidth="197.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
+                  <TextField fx:id="ClienteLogin" layoutX="173.0" layoutY="263.0" prefHeight="34.0" prefWidth="197.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
                      <font>
                         <Font name="Leelawadee UI Bold" size="14.0" />
                      </font>
@@ -254,7 +254,17 @@
                         <Font name="Leelawadee UI Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="113.0" layoutY="253.0" text="Telefone" textFill="WHITE">
+                  <Label layoutX="64.0" layoutY="263.0" text="Telefone" textFill="WHITE">
+                     <font>
+                        <Font name="Leelawadee UI Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="clienteCelularTextField" layoutX="492.0" layoutY="261.0" prefHeight="34.0" prefWidth="197.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
+                     <font>
+                        <Font name="Leelawadee UI Bold" size="14.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="393.0" layoutY="263.0" text="Telefone" textFill="WHITE">
                      <font>
                         <Font name="Leelawadee UI Bold" size="24.0" />
                      </font>
