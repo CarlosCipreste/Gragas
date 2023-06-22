@@ -108,7 +108,7 @@ public class RegistrosController implements Initializable {
     private Button ApagarClienteButton;
 
     @FXML
-    private Button AtualizarFornecedorButton;
+    private Pane AtualizarFornecedorButton;
 
     @FXML
     private Button ApagarFornecedorButton;
@@ -142,6 +142,15 @@ public class RegistrosController implements Initializable {
 
     @FXML
     private TextField clienteCelularTextField;
+
+    @FXML
+    private TextField fornecedorNomeTextField;
+
+    @FXML
+    private TextField fornecedorCNPJTextField;
+
+    @FXML
+    private TextField fornecedorTelefoneTextField;
 
 
     private ObservableList funcionarioValues = FXCollections.observableArrayList();
@@ -238,7 +247,7 @@ public class RegistrosController implements Initializable {
 
     void setupRegistrosValues(){
 
-        //Setando valores para FUNCIONARIOS
+        //Setando valores para a tela de Registros
 
         String selectFuncionario = "select * from funcionario where ativo = true";
 
@@ -338,6 +347,41 @@ public class RegistrosController implements Initializable {
     }
 
     @FXML
+    void AtualizarFuncionario(ActionEvent event) {
+        Funcionario itemSelecionado = funcionarioTableView.getSelectionModel().getSelectedItem();
+
+        int id = itemSelecionado.getIDFuncionarioClass();
+        String nome = FuncNomeTextField.getText();
+        String cpf = CPFFuncTextField.getText();
+        String usuario = usuarioFuncionarios.getText();
+        String senha = funcSenhaTextField.getText();
+
+        String queryUpdate = "update funcionario " +
+                "set nome_funcionario = ?, " +
+                "cpf_funcionario = ?, " +
+                "login = ?, " +
+                "senha = ? " +
+                "where id_funcionario = ?";
+
+        try(PreparedStatement statement = conexao.prepareStatement(queryUpdate)){
+            statement.setString(1,nome);
+            statement.setString(2,cpf);
+            statement.setString(3,usuario);
+            statement.setString(4,senha);
+            statement.setInt(5,id);
+
+            int linhasAfetadas = statement.executeUpdate();
+
+            if(linhasAfetadas>0){
+                exibirAlerta(Alert.AlertType.INFORMATION,"Mensagem","Funcionario Atualizado com sucesso");
+            }
+            else{
+                exibirAlerta(Alert.AlertType.ERROR,"ERRO","Atualização Mal-Sucedida");
+            }
+        }catch(SQLException e){e.printStackTrace();}
+    }
+
+    @FXML
     void ApagarFuncionario(){
         Funcionario itemSelecionado = funcionarioTableView.getSelectionModel().getSelectedItem();
         // Verifica se um item está selecionado
@@ -354,13 +398,18 @@ public class RegistrosController implements Initializable {
                 int linhasAfetadas = statement.executeUpdate();
 
                 if(linhasAfetadas > 0){
-                    exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Produto Apagado com Sucesso!");
+                    exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Funcionario Apagado com Sucesso!");
                 }
             }catch(SQLException e){
                 e.printStackTrace();}
         }else {
-            exibirAlerta(Alert.AlertType.INFORMATION,"Informe o Produto","Primeiro você precisa selecionar um Produto");
+            exibirAlerta(Alert.AlertType.INFORMATION,"Informe o Funcionario","Primeiro você precisa selecionar um Funcionario");
         }
+    }
+
+    @FXML
+    void AtualizarCliente(ActionEvent event) {
+
     }
     @FXML
     void ApagarCliente(ActionEvent event) {
@@ -368,7 +417,7 @@ public class RegistrosController implements Initializable {
         // Verifica se um item está selecionado
 
         if (itemSelecionado != null) {
-            exibirAlerta(Alert.AlertType.CONFIRMATION,"Tem Certeza?","Tem Certeza que quer APAGAR um Produto?");
+            exibirAlerta(Alert.AlertType.CONFIRMATION,"Tem Certeza?","Tem Certeza que quer APAGAR um Cliente?");
 
             String queryDelete = "UPDATE cliente\n" +
                     "SET ativo = FALSE\n" +
@@ -379,12 +428,12 @@ public class RegistrosController implements Initializable {
                 int linhasAfetadas = statement.executeUpdate();
 
                 if(linhasAfetadas > 0){
-                    exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Produto Apagado com Sucesso!");
+                    exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Cliente Apagado com Sucesso!");
                 }
             }catch(SQLException e){
                 e.printStackTrace();}
         }else {
-            exibirAlerta(Alert.AlertType.INFORMATION,"Informe o Produto","Primeiro você precisa selecionar um Produto");
+            exibirAlerta(Alert.AlertType.INFORMATION,"Informe o cliente","Primeiro você precisa selecionar um Cliente");
         }
     }
 
@@ -394,7 +443,7 @@ public class RegistrosController implements Initializable {
         // Verifica se um item está selecionado
 
         if (itemSelecionado != null) {
-            exibirAlerta(Alert.AlertType.CONFIRMATION,"Tem Certeza?","Tem Certeza que quer APAGAR um Produto?");
+            exibirAlerta(Alert.AlertType.CONFIRMATION,"Tem Certeza?","Tem Certeza que quer APAGAR um Fornecedor?");
 
             String queryDelete = "UPDATE fornecedor\n" +
                     "SET ativo = FALSE\n" +
@@ -405,13 +454,18 @@ public class RegistrosController implements Initializable {
                 int linhasAfetadas = statement.executeUpdate();
 
                 if(linhasAfetadas > 0){
-                    exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Produto Apagado com Sucesso!");
+                    exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Fornecedor Apagado com Sucesso!");
                 }
             }catch(SQLException e){
                 e.printStackTrace();}
         }else {
-            exibirAlerta(Alert.AlertType.INFORMATION,"Informe o Produto","Primeiro você precisa selecionar um Produto");
+            exibirAlerta(Alert.AlertType.INFORMATION,"Selecione o Fornecedor","Primeiro você precisa selecionar um Fornecedor");
         }
+    }
+
+    @FXML
+    void AtualizarFornecedor(ActionEvent event) {
+
     }
 
     @FXML
@@ -463,50 +517,6 @@ public class RegistrosController implements Initializable {
 
         }
     }
-    @FXML
-    void AtualizarFuncionario(ActionEvent event) {
-        Funcionario itemSelecionado = funcionarioTableView.getSelectionModel().getSelectedItem();
-
-        int id = itemSelecionado.getIDFuncionarioClass();
-        String nome = FuncNomeTextField.getText();
-        String cpf = CPFFuncTextField.getText();
-        String usuario = usuarioFuncionarios.getText();
-        String senha = funcSenhaTextField.getText();
-
-        String queryUpdate = "update funcionario " +
-                            "set nome_funcionario = ?, " +
-                            "cpf_funcionario = ?, " +
-                            "login = ?, " +
-                            "senha = ? " +
-                            "where id_funcionario = ?";
-
-        try(PreparedStatement statement = conexao.prepareStatement(queryUpdate)){
-            statement.setString(1,nome);
-            statement.setString(2,cpf);
-            statement.setString(3,usuario);
-            statement.setString(4,senha);
-            statement.setInt(5,id);
-
-            int linhasAfetadas = statement.executeUpdate();
-
-            if(linhasAfetadas>0){
-                exibirAlerta(Alert.AlertType.INFORMATION,"Mensagem","Funcionario Atualizado com sucesso");
-            }
-            else{
-                exibirAlerta(Alert.AlertType.ERROR,"ERRO","Atualização Mal-Sucedida");
-            }
-        }catch(SQLException e){e.printStackTrace();}
-    }
-    @FXML
-    void AtualizarCliente(ActionEvent event) {
-
-    }
-
-    @FXML
-    void AtualizarFornecedor(ActionEvent event) {
-
-    }
-
 
 
     @Override
