@@ -1,6 +1,7 @@
 package com.gragas.gragas;
 
 import com.gragas.gragas.classes.ProdVenda;
+import com.gragas.gragas.metodos.metodosGerais;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -207,9 +208,12 @@ public class VendaController implements Initializable {
     @FXML
     public void FinalizarVenda(ActionEvent event) {
 
-        ObservableList<ProdVenda> listaProdVenda = vendaListaTableView.getItems();
+        ObservableList<ProdVenda> listaProdVenda = FXCollections.observableArrayList(vendaListaTableView.getItems());
+
         int totalProdutos = listaProdVenda.size();
         int contador = 0;
+        int idcliente = 0; // Valor padrão para o idcliente
+
 
         for (ProdVenda produto : listaProdVenda) {
             contador++;
@@ -233,50 +237,53 @@ public class VendaController implements Initializable {
                 System.out.println("Registro atualizado");
             } catch (SQLException e) {
                 e.printStackTrace();
+                return;
             }
 
-
-            //Verificação se há o cliente selecionado no banco
-            String querySelect = "select id_cliente, nome_cliente from cliente where nome_cliente = ?";
+            // Verificação se há o cliente selecionado no banco
+            String querySelect = "SELECT id_cliente, nome_cliente FROM cliente WHERE nome_cliente = ?";
             String nomecliente = vendaClienteTextField.getText();
             try (PreparedStatement statement = conexao.prepareStatement(querySelect)) {
-                statement.setString(1,nomecliente);
+                statement.setString(1, nomecliente);
                 ResultSet resultSet = statement.executeQuery();
 
-                //Caso não haja o cliente definido é criado um cliente AVULSO no DB
-                if(!resultSet.next()){
+                // Caso não haja o cliente definido, é criado um cliente AVULSO no DB
+                if (!resultSet.next()) {
 
-                    String queryInsert = "insert into cliente(nome_cliente)value (?)";
-                    try(PreparedStatement insert = conexao.prepareStatement(queryInsert)){
-                        insert.setString(1,nomecliente);
+                    String queryInsert = "INSERT INTO cliente(nome_cliente) VALUES (?)";
+                    try (PreparedStatement insert = conexao.prepareStatement(queryInsert)) {
+                        insert.setString(1, nomecliente);
                         int linhasAfetadas = insert.executeUpdate();
-                        System.out.println("Linhas Afetadas =" + linhasAfetadas);
+                        System.out.println("Linhas Afetadas = " + linhasAfetadas);
 
-                    }catch(SQLException e){e.printStackTrace();}
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        return;
+                    }
 
-                    String querySelect1 = "select id_cliente from cliente where nome_cliente = ?";
-                    try(PreparedStatement insert = conexao.prepareStatement(querySelect1)){
-                        insert.setString(1,nomecliente);
+                    String querySelect1 = "SELECT id_cliente FROM cliente WHERE nome_cliente = ?";
+                    try (PreparedStatement insert = conexao.prepareStatement(querySelect1)) {
+                        insert.setString(1, nomecliente);
                         ResultSet resultSet1 = insert.executeQuery();
 
-                        if(resultSet1.next()){
+                        if (resultSet1.next()) {
                             idcliente = resultSet1.getInt("id_cliente");
                         }
-
-                    }catch(SQLException e){e.printStackTrace();}
-                }
-                //Caso haja um cliente com este nome, o ID é retornado
-                else if(resultSet.next()){
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    // Caso haja um cliente com este nome, o ID é retornado
                     idcliente = resultSet.getInt("id_cliente");
                 }
 
-            }catch(SQLException e){e.printStackTrace();}
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
-            
-            
-            //Insert na tabela venda
-            String queryInsert = "INSERT INTO venda (id_cliente, id_funcionario, id_produto, quantidade, preco_total,horario_compra)\n" +
-                    "VALUES (?, ?, ?, ?, ?,?);";
+            // Insert na tabela venda
+            String queryInsert = "INSERT INTO venda (id_cliente, id_funcionario, id_produto, quantidade, preco_total, horario_compra)\n" +
+                    "VALUES (?, ?, ?, ?, ?, ?);";
             try (PreparedStatement statement = conexao.prepareStatement(queryInsert)) {
 
                 statement.setInt(1, idcliente); // Substitui o primeiro parâmetro com o valor real do ID do cliente
@@ -284,7 +291,7 @@ public class VendaController implements Initializable {
                 statement.setInt(3, idProduto); // Substitui o terceiro parâmetro com o valor real do ID do produto
                 statement.setInt(4, qtd); // Substitui o quarto parâmetro com o valor real da quantidade
                 statement.setBigDecimal(5, precoBigDecimal); // Substitui o quinto parâmetro com o valor real do preço total
-                statement.setTimestamp(6,horarioCompra);
+                statement.setTimestamp(6, horarioCompra);
 
                 int linhasAfetadas = statement.executeUpdate();
 
@@ -298,11 +305,14 @@ public class VendaController implements Initializable {
                 if (contador == totalProdutos) {
                     exibirAlerta(Alert.AlertType.INFORMATION, "Venda finalizada", "Todos os produtos foram atualizados e a venda foi registrada.");
                 }
+                metodosGerais.clearAll(vendaClienteTextField,vendaProdutosChoiceBox,vendaQTDTextField,vendaListaTableView);
+                HelloApplication.trocaTela("principal");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
+
 
 
 

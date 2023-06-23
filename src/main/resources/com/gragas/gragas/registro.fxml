@@ -98,7 +98,7 @@
                   </Label>
                </graphic>
             </Button>
-            <Button fx:id="AtualizarClienteButton" layoutX="632.0" mnemonicParsing="false" onAction="#AtualizarCliente" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #62E197; -fx-background-radius: 0 0 30 30;" styleClass="botaoatualizar" stylesheets="@style.css" visible="false">
+            <Button fx:id="AtualizarClienteButton" layoutX="632.0" mnemonicParsing="false" onAction="#enterAtualizarCliente" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #62E197; -fx-background-radius: 0 0 30 30;" styleClass="botaoatualizar" stylesheets="@style.css" visible="false">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -122,7 +122,7 @@
                   </Label>
                </graphic>
             </Button>
-            <Button fx:id="AtualizarFornecedorButton" layoutX="632.0" mnemonicParsing="false" onAction="#AtualizarFornecedor" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #62E197; -fx-background-radius: 0 0 30 30;" styleClass="botaoatualizar" stylesheets="@style.css" visible="false">
+            <Button fx:id="AtualizarFornecedorButton" layoutX="632.0" mnemonicParsing="false" onAction="#enterAtualizarFornecedor" prefHeight="100.0" prefWidth="111.0" style="-fx-background-color: #62E197; -fx-background-radius: 0 0 30 30;" styleClass="botaoatualizar" stylesheets="@style.css" visible="false">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -239,7 +239,7 @@
                         <Font name="Leelawadee UI Bold" size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="ClienteLogin" layoutX="173.0" layoutY="263.0" prefHeight="34.0" prefWidth="197.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
+                  <TextField fx:id="clienteTelefoneTextField" layoutX="221.0" layoutY="264.0" prefHeight="34.0" prefWidth="197.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
                      <font>
                         <Font name="Leelawadee UI Bold" size="14.0" />
                      </font>
@@ -254,24 +254,14 @@
                         <Font name="Leelawadee UI Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="64.0" layoutY="263.0" text="Telefone" textFill="WHITE">
-                     <font>
-                        <Font name="Leelawadee UI Bold" size="24.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="clienteCelularTextField" layoutX="492.0" layoutY="261.0" prefHeight="34.0" prefWidth="197.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
-                     <font>
-                        <Font name="Leelawadee UI Bold" size="14.0" />
-                     </font>
-                  </TextField>
-                  <Label layoutX="393.0" layoutY="263.0" text="Telefone" textFill="WHITE">
+                  <Label layoutX="85.0" layoutY="264.0" text="Telefone:" textFill="WHITE">
                      <font>
                         <Font name="Leelawadee UI Bold" size="24.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <Button layoutY="48.0" mnemonicParsing="false" onAction="#VoltarFuncionario" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;" styleClass="botaoretornar" stylesheets="@style.css">
+            <Button layoutY="48.0" mnemonicParsing="false" onAction="#VoltarCliente" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;" styleClass="botaoretornar" stylesheets="@style.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -293,7 +283,7 @@
             </Button>
          </children>
       </Pane>
-      <Pane fx:id="AtualizarFornecedorButton" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #9F478C;" visible="false">
+      <Pane fx:id="AtualizarFornecedorPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #9F478C;">
          <children>
             <Label layoutX="350.0" layoutY="42.0" text="Atualizar Fornecedor">
                <font>
@@ -332,7 +322,7 @@
                         <Font name="Leelawadee UI Bold" size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="fornecedorNomeTextField" layoutX="221.0" layoutY="156.0" prefHeight="34.0" prefWidth="416.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
+                  <TextField fx:id="fornecedorEnderecoTextField" layoutX="221.0" layoutY="156.0" prefHeight="34.0" prefWidth="416.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
                      <font>
                         <Font name="Leelawadee UI Bold" size="14.0" />
                      </font>
@@ -344,7 +334,7 @@
                   </Label>
                </children>
             </Pane>
-            <Button layoutY="48.0" mnemonicParsing="false" onAction="#VoltarFuncionario" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;" styleClass="botaoretornar" stylesheets="@style.css">
+            <Button layoutY="48.0" mnemonicParsing="false" onAction="#VoltarFornecedor" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;" styleClass="botaoretornar" stylesheets="@style.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -356,7 +346,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="358.0" layoutY="596.0" mnemonicParsing="false" onAction="#AtualizarFuncionario" prefHeight="68.0" prefWidth="205.0" style="-fx-background-color: #4B6EAF;" styleClass="botaomenuright" stylesheets="@style.css" text="Finalizar" textFill="WHITE">
+            <Button layoutX="358.0" layoutY="596.0" mnemonicParsing="false" onAction="#AtualizarFornecedor" prefHeight="68.0" prefWidth="205.0" style="-fx-background-color: #4B6EAF;" styleClass="botaomenuright" stylesheets="@style.css" text="Finalizar" textFill="WHITE">
                <font>
                   <Font name="Leelawadee UI Bold" size="20.0" />
                </font>

@@ -14,9 +14,6 @@ public class metodosGerais {
     public static String valor = null;
 
 
-
-
-
     /*MÉTODO PARA SIMPLIFICAR O USO DE ALERT BOX*/
     public static void exibirAlerta(Alert.AlertType tipo, String titulo, String mensagem) {
         Alert alert = new Alert(tipo);
@@ -49,7 +46,7 @@ public class metodosGerais {
     }
 
     //SOBRECARGA DO MÉTODO CLEAR
-    public static void clearAll(TextField nomeProd, TextField precoProd, CheckBox alcoolico, ChoiceBox dest_ou_ferm, CheckBox nalcoolico, ChoiceBox suco_ou_refri, DatePicker validade, TextField quantidadeProd){
+    public static void clearAll(TextField nomeProd, TextField precoProd, CheckBox alcoolico, ChoiceBox dest_ou_ferm, CheckBox nalcoolico, ChoiceBox suco_ou_refri, DatePicker validade, TextField quantidadeProd) {
         //Clear para a tela de Produtos
         nomeProd.clear();
         precoProd.clear();
@@ -61,7 +58,7 @@ public class metodosGerais {
         quantidadeProd.clear();
     }
 
-    public static void clearAll(TextField nomeFunc, TextField CPFFunc, TextField login, PasswordField senha){
+    public static void clearAll(TextField nomeFunc, TextField CPFFunc, TextField login, PasswordField senha) {
         //Clear para a Tela de Funcionarios
         nomeFunc.clear();
         CPFFunc.clear();
@@ -69,14 +66,14 @@ public class metodosGerais {
         senha.clear();
     }
 
-    public static void clearAll(TextField nomeCliente, TextField CPFCliente, TextField telefoneCliente){
+    public static void clearAll(TextField nomeCliente, TextField CPFCliente, TextField telefoneCliente) {
         //Clear para a tela de Cliente
         nomeCliente.clear();
         CPFCliente.clear();
         telefoneCliente.clear();
     }
 
-    public static void clearAll(TextField nomeFornecedor, TextField enderecoFornecedor, TextField CNPJFornecedor, TextField telefoneFornecedor){
+    public static void clearAll(TextField nomeFornecedor, TextField enderecoFornecedor, TextField CNPJFornecedor, TextField telefoneFornecedor) {
         //Clear para a tela de Fornecedores
         nomeFornecedor.clear();
         enderecoFornecedor.clear();
@@ -84,14 +81,14 @@ public class metodosGerais {
         telefoneFornecedor.clear();
     }
 
-    public static void clearAll(TextField vendaCliente, ChoiceBox<String> produtoChoiceBox, TextField quantidadeProduto, TableView vendaTableView ){
+    public static void clearAll(TextField vendaCliente, ChoiceBox<String> produtoChoiceBox, TextField quantidadeProduto, TableView vendaTableView) {
         vendaCliente.clear();
         produtoChoiceBox.getSelectionModel().clearSelection();
         quantidadeProduto.clear();
         vendaTableView.getItems().clear();
     }
 
-    public static void clearAll(TextField nomeProd, TextField precoProd, CheckBox alcoolico, ChoiceBox dest_ou_ferm, CheckBox nalcoolico, ChoiceBox suco_ou_refri, TextField quantidadeProd){
+    public static void clearAll(TextField nomeProd, TextField precoProd, CheckBox alcoolico, ChoiceBox dest_ou_ferm, CheckBox nalcoolico, ChoiceBox suco_ou_refri, TextField quantidadeProd) {
         //Clear para a tela de Produtos
         nomeProd.clear();
         precoProd.clear();

@@ -108,7 +108,7 @@ public class RegistrosController implements Initializable {
     private Button ApagarClienteButton;
 
     @FXML
-    private Pane AtualizarFornecedorButton;
+    private Button AtualizarFornecedorButton;
 
     @FXML
     private Button ApagarFornecedorButton;
@@ -138,16 +138,19 @@ public class RegistrosController implements Initializable {
     private TextField CPFClienteTextField;
 
     @FXML
-    private TextField ClienteLogin;
+    private TextField clienteTelefoneTextField;
 
     @FXML
-    private TextField clienteCelularTextField;
+    private Pane AtualizarFornecedorPane;
 
     @FXML
     private TextField fornecedorNomeTextField;
 
     @FXML
     private TextField fornecedorCNPJTextField;
+
+    @FXML
+    private TextField fornecedorEnderecoTextField;
 
     @FXML
     private TextField fornecedorTelefoneTextField;
@@ -292,7 +295,7 @@ public class RegistrosController implements Initializable {
             e.printStackTrace();
         }
 
-        String selectFornecedor = "select * from fornecedor";
+        String selectFornecedor = "select * from fornecedor where ativo = true";
 
         try (PreparedStatement statement = conexao.prepareStatement(selectFornecedor)) {
             ResultSet resultSet = statement.executeQuery();
@@ -346,6 +349,10 @@ public class RegistrosController implements Initializable {
         }
     }
 
+
+
+
+
     @FXML
     void AtualizarFuncionario(ActionEvent event) {
         Funcionario itemSelecionado = funcionarioTableView.getSelectionModel().getSelectedItem();
@@ -382,7 +389,7 @@ public class RegistrosController implements Initializable {
     }
 
     @FXML
-    void ApagarFuncionario(){
+    void ApagarFuncionario(ActionEvent event) {
         Funcionario itemSelecionado = funcionarioTableView.getSelectionModel().getSelectedItem();
         // Verifica se um item está selecionado
 
@@ -398,19 +405,97 @@ public class RegistrosController implements Initializable {
                 int linhasAfetadas = statement.executeUpdate();
 
                 if(linhasAfetadas > 0){
-                    exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Funcionario Apagado com Sucesso!");
+                    exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Produto Apagado com Sucesso!");
                 }
             }catch(SQLException e){
                 e.printStackTrace();}
         }else {
-            exibirAlerta(Alert.AlertType.INFORMATION,"Informe o Funcionario","Primeiro você precisa selecionar um Funcionario");
+            exibirAlerta(Alert.AlertType.INFORMATION,"Informe o Produto","Primeiro você precisa selecionar um Produto");
+        }
+    }
+
+    @FXML
+    void enterAtualizarFuncionario(ActionEvent event) {
+        Funcionario itemSelecionado = funcionarioTableView.getSelectionModel().getSelectedItem();
+
+        if (itemSelecionado != null) {
+            // Entra na tela de Atualizar os produtos
+            AtualizarFuncionarioPane.setVisible(true);
+            //Adiciona os valores existentes para serem atualizados
+            FuncNomeTextField.setText(itemSelecionado.getNomeFuncionarioClass());
+            CPFFuncTextField.setText(itemSelecionado.getCPFFuncionarioClass());
+            FuncLogin.setText(itemSelecionado.getUsuarioFuncionarioClass());
+        } else {
+            exibirAlerta(Alert.AlertType.INFORMATION, "Informe o Produto", "Primeiro você precisa selecionar um Produto");
+
+        }
+    }
+
+    @FXML
+    void VoltarFuncionario(ActionEvent event){
+        AtualizarFuncionarioPane.setVisible(false);
+        metodosGerais.clearAll(FuncNomeTextField,CPFFuncTextField,FuncLogin,funcSenhaTextField);
+    }
+
+
+
+
+    @FXML
+    void enterAtualizarCliente(ActionEvent event){
+        Cliente itemSelecionado = clienteTableView.getSelectionModel().getSelectedItem();
+
+        if (itemSelecionado != null) {
+            // Entra na tela de Atualizar os produtos
+            AtualizarClientePane.setVisible(true);
+            //Adiciona os valores existentes para serem atualizados
+            clienteNomeTextFIeld.setText(itemSelecionado.getNomeClienteClass());
+            CPFClienteTextField.setText(itemSelecionado.getCPFClienteClass());
+            clienteTelefoneTextField.setText(itemSelecionado.getTelefoneClienteClass());
+
+        } else {
+            exibirAlerta(Alert.AlertType.INFORMATION, "Informe o Produto", "Primeiro você precisa selecionar um Produto");
+
         }
     }
 
     @FXML
     void AtualizarCliente(ActionEvent event) {
+        Cliente itemSelecionado = clienteTableView.getSelectionModel().getSelectedItem();
 
+        int id = itemSelecionado.getIDClienteClass();
+        String nome = clienteNomeTextFIeld.getText();
+        String cpf = CPFFuncTextField.getText();
+        String telefone = clienteTelefoneTextField.getText();
+
+        String queryUpdate;
+        if (clienteNomeTextFIeld != null) {
+            queryUpdate = "update cliente " +
+                    "set nome_cliente = ?, " +
+                    "cpf_cliente = ?, " +
+                    "telefone_cliente = ?, " +
+                    "where id_cliente = ?";
+
+            try (PreparedStatement statement = conexao.prepareStatement(queryUpdate)) {
+                statement.setString(1, nome);
+                statement.setString(2, cpf);
+                statement.setString(3, telefone);
+                statement.setInt(4,id);
+
+
+                int linhasAfetadas = statement.executeUpdate();
+
+                if (linhasAfetadas > 0) {
+                    exibirAlerta(Alert.AlertType.INFORMATION, "Mensagem", "Cliente Atualizado com sucesso");
+                } else {
+                    exibirAlerta(Alert.AlertType.ERROR, "ERRO", "Atualização Mal-Sucedida");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
+
+
     @FXML
     void ApagarCliente(ActionEvent event) {
         Cliente itemSelecionado = clienteTableView.getSelectionModel().getSelectedItem();
@@ -420,8 +505,8 @@ public class RegistrosController implements Initializable {
             exibirAlerta(Alert.AlertType.CONFIRMATION,"Tem Certeza?","Tem Certeza que quer APAGAR um Cliente?");
 
             String queryDelete = "UPDATE cliente\n" +
-                    "SET ativo = FALSE\n" +
-                    "WHERE id_produto = ?;";
+                                "SET ativo = FALSE\n" +
+                                "WHERE id_cliente = ?";
 
             try(PreparedStatement statement = conexao.prepareStatement(queryDelete)){
                 statement.setInt(1,itemSelecionado.getIDClienteClass());
@@ -438,6 +523,74 @@ public class RegistrosController implements Initializable {
     }
 
     @FXML
+    void VoltarCliente(ActionEvent event){
+        AtualizarClientePane.setVisible(false);
+        metodosGerais.clearAll(clienteNomeTextFIeld,CPFClienteTextField,clienteTelefoneTextField);
+    }
+
+
+
+    @FXML
+    void enterAtualizarFornecedor(ActionEvent event){
+        Fornecedor itemSelecionado = fornecedorTableView.getSelectionModel().getSelectedItem();
+
+        if (itemSelecionado != null) {
+            // Entra na tela de Atualizar os produtos
+            AtualizarFornecedorPane.setVisible(true);
+            //Adiciona os valores existentes para serem atualizados
+            fornecedorNomeTextField.setText(itemSelecionado.getNomeFornecedorClass());
+            fornecedorEnderecoTextField.setText(itemSelecionado.getEnderecoFornecedorClass());
+            fornecedorCNPJTextField.setText(itemSelecionado.getCNPJFornecedorClass());
+            fornecedorTelefoneTextField.setText(itemSelecionado.getTelefoneFornecedorClass());
+
+        } else {
+            exibirAlerta(Alert.AlertType.INFORMATION, "Informe o Produto", "Primeiro você precisa selecionar um Produto");
+
+        }
+    }
+
+    @FXML
+    void AtualizarFornecedor(ActionEvent event) {
+        Fornecedor itemSelecionado = fornecedorTableView.getSelectionModel().getSelectedItem();
+
+        int id = itemSelecionado.getIDFornecedorClass();
+        String nome = fornecedorNomeTextField.getText();
+        String endereco = fornecedorEndereco.getText();
+        String cnpj = fornecedorCNPJTextField.getText();
+        String telefone = fornecedorTelefoneTextField.getText();
+
+        String queryUpdate;
+        if (clienteNomeTextFIeld != null) {
+            queryUpdate = "update fornecedor " +
+                        "set nome_fornecedor = ?, " +
+                        "endereco_fornecedor = ?, " +
+                        "CNPJ_fornecedor = ?," +
+                        "telefone_fornecedor = ?, " +
+                        "where id_fornecedor = ?";
+
+            try (PreparedStatement statement = conexao.prepareStatement(queryUpdate)) {
+                statement.setString(1, nome);
+                statement.setString(2, endereco);
+                statement.setString(3, cnpj);
+                statement.setString(4, telefone);
+                statement.setInt(5,id);
+
+
+                int linhasAfetadas = statement.executeUpdate();
+
+                if (linhasAfetadas > 0) {
+                    exibirAlerta(Alert.AlertType.INFORMATION, "Mensagem", "Cliente Atualizado com sucesso");
+                } else {
+                    exibirAlerta(Alert.AlertType.ERROR, "ERRO", "Atualização Mal-Sucedida");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    @FXML
     void ApagarFornecedor(ActionEvent event) {
         Fornecedor itemSelecionado = fornecedorTableView.getSelectionModel().getSelectedItem();
         // Verifica se um item está selecionado
@@ -447,7 +600,7 @@ public class RegistrosController implements Initializable {
 
             String queryDelete = "UPDATE fornecedor\n" +
                     "SET ativo = FALSE\n" +
-                    "WHERE id_produto = ?;";
+                    "WHERE id_fornecedor = ?;";
 
             try(PreparedStatement statement = conexao.prepareStatement(queryDelete)){
                 statement.setInt(1,itemSelecionado.getIDFornecedorClass());
@@ -457,66 +610,22 @@ public class RegistrosController implements Initializable {
                     exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Fornecedor Apagado com Sucesso!");
                 }
             }catch(SQLException e){
-                e.printStackTrace();}
+                e.printStackTrace();
+            }
         }else {
             exibirAlerta(Alert.AlertType.INFORMATION,"Selecione o Fornecedor","Primeiro você precisa selecionar um Fornecedor");
         }
     }
 
     @FXML
-    void AtualizarFornecedor(ActionEvent event) {
-
+    void VoltarFornecedor(ActionEvent event){
+        AtualizarFornecedorPane.setVisible(false);
+        metodosGerais.clearAll(fornecedorNomeTextField,fornecedorCNPJTextField,fornecedorEnderecoTextField,fornecedorTelefoneTextField);
     }
 
-    @FXML
-    void ApagarFuncionario(ActionEvent event) {
-        Fornecedor itemSelecionado = fornecedorTableView.getSelectionModel().getSelectedItem();
-        // Verifica se um item está selecionado
 
-        if (itemSelecionado != null) {
-            exibirAlerta(Alert.AlertType.CONFIRMATION,"Tem Certeza?","Tem Certeza que quer APAGAR um Produto?");
 
-            String queryDelete = "UPDATE funcionario\n" +
-                    "SET ativo = FALSE\n" +
-                    "WHERE id_produto = ?;";
 
-            try(PreparedStatement statement = conexao.prepareStatement(queryDelete)){
-                statement.setInt(1,itemSelecionado.getIDFornecedorClass());
-                int linhasAfetadas = statement.executeUpdate();
-
-                if(linhasAfetadas > 0){
-                    exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Produto Apagado com Sucesso!");
-                }
-            }catch(SQLException e){
-                e.printStackTrace();}
-        }else {
-            exibirAlerta(Alert.AlertType.INFORMATION,"Informe o Produto","Primeiro você precisa selecionar um Produto");
-        }
-    }
-
-    @FXML
-    void VoltarFuncionario(ActionEvent event){
-        AtualizarFuncionarioPane.setVisible(false);
-        metodosGerais.clearAll(FuncNomeTextField,CPFFuncTextField,FuncLogin,funcSenhaTextField);
-    }
-
-    @FXML
-    void enterAtualizarFuncionario(ActionEvent event) {
-        AtualizarFuncionarioPane.setVisible(true);
-        Funcionario itemSelecionado = funcionarioTableView.getSelectionModel().getSelectedItem();
-
-        if (itemSelecionado != null) {
-            // Entra na tela de Atualizar os produtos
-            AtualizarFuncionarioPane.setVisible(true);
-            //Adiciona os valores existentes para serem atualizados
-            FuncNomeTextField.setText(itemSelecionado.getNomeFuncionarioClass());
-            CPFFuncTextField.setText(itemSelecionado.getCPFFuncionarioClass());
-            FuncLogin.setText(itemSelecionado.getUsuarioFuncionarioClass());
-        } else {
-            exibirAlerta(Alert.AlertType.INFORMATION, "Informe o Produto", "Primeiro você precisa selecionar um Produto");
-
-        }
-    }
 
 
     @Override
