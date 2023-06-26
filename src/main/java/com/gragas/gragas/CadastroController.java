@@ -48,6 +48,9 @@ public class CadastroController implements Initializable {
     private TextField clienteCPFTextField;
 
     @FXML
+    private TextField clienteEnderecoTextField;
+
+    @FXML
     private TextField clienteTelefoneTextField;
 
     @FXML
@@ -130,6 +133,10 @@ public class CadastroController implements Initializable {
 
     @FXML
     private DatePicker validadeDatePicker;
+
+    @FXML
+    private CheckBox administradorCheckBox;
+
     String[] nAlcoolicoValues = {"Suco", "Refrigerante"};
     String[] AlcoolicoValues = {"Destilado", "Fermentado"};
 
@@ -182,12 +189,16 @@ public class CadastroController implements Initializable {
 
     @FXML
     void EntrarProdutos(ActionEvent event) {
-        ProdutoPane.setVisible(true);
-        menuPane.setVisible(false);
-        ClientePane.setVisible(false);
-        FuncionarioPane.setVisible(false);
-        FornecedorPane.setVisible(false);
-
+        if(LoginController.administrador) {
+            ProdutoPane.setVisible(true);
+            menuPane.setVisible(false);
+            ClientePane.setVisible(false);
+            FuncionarioPane.setVisible(false);
+            FornecedorPane.setVisible(false);
+        }
+        else {
+            exibirAlerta(Alert.AlertType.ERROR,"Erro","Você não possui Permissão para adicionar Produtos");
+        }
 
     }
 
@@ -203,12 +214,17 @@ public class CadastroController implements Initializable {
 
     @FXML
     void EntrarFuncionario(ActionEvent event) {
-        ProdutoPane.setVisible(false);
-        menuPane.setVisible(false);
-        FuncionarioPane.setVisible(true);
-        FornecedorPane.setVisible(false);
-        ClientePane.setVisible(false);
+        if(LoginController.administrador) {
+            ProdutoPane.setVisible(false);
+            menuPane.setVisible(false);
+            FuncionarioPane.setVisible(true);
+            FornecedorPane.setVisible(false);
+            ClientePane.setVisible(false);
+        }
+        else {
+            exibirAlerta(Alert.AlertType.ERROR,"Erro","Você não possui Permissão para adicionar Funcionários");
 
+        }
     }
 
     @FXML
@@ -349,6 +365,7 @@ public class CadastroController implements Initializable {
 
         String cliente = clienteNomeTextField.getText().toLowerCase();
         String CPF = clienteCPFTextField.getText();
+        String endereco = clienteEnderecoTextField.getText();
         String telefone = clienteTelefoneTextField.getText();
 
         try {
@@ -367,11 +384,12 @@ public class CadastroController implements Initializable {
                 exibirAlerta(Alert.AlertType.ERROR,"CPF Existente","Este CPF já está Cadastrado!");
             } else {
 
-                String queryInsert = "insert into cliente (nome_cliente, cpf_cliente, telefone_cliente) values (?,?,?);";
+                String queryInsert = "insert into cliente (nome_cliente, cpf_cliente, endereco_cliente, telefone_cliente) values (?,?,?,?);";
                 PreparedStatement insert = conexao.prepareStatement(queryInsert);
                 insert.setString(1,cliente);
                 insert.setString(2,CPF);
-                insert.setString(3,telefone);
+                insert.setString(3,endereco);
+                insert.setString(4,telefone);
 
                 int linhasInseridas = insert.executeUpdate();
 
@@ -402,6 +420,7 @@ public class CadastroController implements Initializable {
         String endereco = fornecedorEnderecoTextField.getText().toLowerCase();
         String CNPJ = fornecedorCNPJTextField.getText();
         String telefone = FornecedorTelefoneTextField.getText();
+
 
         try {
             // Criação da consulta SQL
@@ -456,8 +475,9 @@ public class CadastroController implements Initializable {
         String CPF = CPFFuncTextField.getText();
         String login = FuncLogin.getText();
         String senha = funcSenhaTextField.getText();
+        boolean adm = administradorCheckBox.isSelected();
 
-        try {
+    try {
             // Criação da consulta SQL
             String querySelect = "SELECT * FROM funcionario WHERE cpf_funcionario = ?";
 
@@ -509,22 +529,21 @@ public class CadastroController implements Initializable {
         nalcoolicoChoiceBox.getItems().addAll(nAlcoolicoValues);
         alcoolicoChoiceBox.getItems().addAll(AlcoolicoValues);
 
-        Formatacao formatacao = new Formatacao();
 
         //Formatando os TextField para CPF
-        formatacao.formataCPFEnquantoDigita(CPFFuncTextField);
-        formatacao.formataCPFEnquantoDigita(clienteCPFTextField);
+        Formatacao.formataCPFEnquantoDigita(CPFFuncTextField);
+        Formatacao.formataCPFEnquantoDigita(clienteCPFTextField);
 
         //Formatando os TextField para CNPJ
-        formatacao.formataCNPJDinamico(fornecedorCNPJTextField);
+        Formatacao.formataCNPJDinamico(fornecedorCNPJTextField);
 
         //Formatando os TextField para Número de Celular
-        formatacao.formataTelefoneDinamico(FornecedorTelefoneTextField);
-        formatacao.formataTelefoneDinamico(clienteTelefoneTextField);
-        formatacao.formataCelularDinamico(clienteCelularTextField);
+        Formatacao.formataTelefoneDinamico(FornecedorTelefoneTextField);
+        Formatacao.formataTelefoneDinamico(clienteTelefoneTextField);
+        Formatacao.formataCelularDinamico(clienteCelularTextField);
 
         //Formatador de Preço
-        formatacao.formataPrecoEnquantoDigita(precoTextField);
+        Formatacao.formataPrecoEnquantoDigita(precoTextField);
 
         //Limitando a quantidade caracteres dos TextFields que nao recebem os Formatadores anteriores
         Formatacao.LimitadorCaracteres(FuncNomeTextField, 60);

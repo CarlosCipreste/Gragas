@@ -13,7 +13,7 @@ public class Formatacao {
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //Formata o CPF enquanto digita - TextField
-    public void formataCPFEnquantoDigita(TextField textField) {
+    public static void formataCPFEnquantoDigita(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             String digits = newValue.replaceAll("[^0-9]", "");
 
@@ -49,7 +49,7 @@ public class Formatacao {
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //Formata o celular enquanto digita - TextField
-    public void formataTelefoneDinamico(TextField textField) {
+    public static void formataTelefoneDinamico(TextField textField) {
 
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             String digits = newValue.replaceAll("[^0-9]", "");
@@ -90,7 +90,7 @@ public class Formatacao {
     }
 
 
-    public void formataCelularDinamico(TextField textField) {
+    public static void formataCelularDinamico(TextField textField) {
 
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
 
@@ -134,7 +134,7 @@ public class Formatacao {
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //Formata o TextField de CNPJ Dinâmicamente
-    public void formataCNPJDinamico(TextField textField) {
+    public static void formataCNPJDinamico(TextField textField) {
 
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             String digits = newValue.replaceAll("[^0-9]", "");
@@ -176,7 +176,7 @@ public class Formatacao {
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //Formata o TextFIeld de preço Dinamicamente
-    public void formataPrecoEnquantoDigita(TextField textField) {
+    public static void formataPrecoEnquantoDigita(TextField textField) {
 
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             String digits = newValue.replaceAll("[^0-9,]", "");
@@ -211,7 +211,7 @@ public class Formatacao {
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //Faz que ele apenas ative retorne uma String quando o length do texto for maior que 1
-    public String toString(String value) {
+    public static String toString(String value) {
 
         if (value == null || value.length() < 1) {
             return "";

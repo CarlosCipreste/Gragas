@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 import static com.gragas.gragas.LoginController.conexao;
+import static com.gragas.gragas.metodos.Formatacao.LimitadorCaracteres;
 import static com.gragas.gragas.metodos.metodosGerais.exibirAlerta;
 
 public class RegistrosController implements Initializable {
@@ -49,6 +50,9 @@ public class RegistrosController implements Initializable {
 
         @FXML
         private TableColumn<Cliente, String> CPFClientes;
+
+        @FXML
+        private TableColumn<Cliente, String> enderecoCliente;
 
         @FXML
         private TableColumn<Cliente, String> telefoneClientes;
@@ -117,44 +121,47 @@ public class RegistrosController implements Initializable {
     @FXML
     private Pane AtualizarFuncionarioPane;
 
-    @FXML
-    private TextField FuncNomeTextField;
+        @FXML
+        private TextField FuncNomeTextField;
 
-    @FXML
-    private TextField CPFFuncTextField;
+        @FXML
+        private TextField CPFFuncTextField;
 
-    @FXML
-    private TextField FuncLogin;
+        @FXML
+        private TextField FuncLogin;
 
-    @FXML
-    private PasswordField funcSenhaTextField;
+        @FXML
+        private PasswordField funcSenhaTextField;
 
     @FXML
     private Pane AtualizarClientePane;
 
-    @FXML
-    private TextField clienteNomeTextFIeld;
+        @FXML
+        private TextField clienteNomeTextFIeld;
 
-    @FXML
-    private TextField CPFClienteTextField;
+        @FXML
+        private TextField CPFClienteTextField;
 
-    @FXML
-    private TextField clienteTelefoneTextField;
+        @FXML
+        private TextField clienteEnderecoTextField;
+
+        @FXML
+        private TextField clienteTelefoneTextField;
 
     @FXML
     private Pane AtualizarFornecedorPane;
 
-    @FXML
-    private TextField fornecedorNomeTextField;
+        @FXML
+        private TextField fornecedorNomeTextField;
 
-    @FXML
-    private TextField fornecedorCNPJTextField;
+        @FXML
+        private TextField fornecedorCNPJTextField;
 
-    @FXML
-    private TextField fornecedorEnderecoTextField;
+        @FXML
+        private TextField fornecedorEnderecoTextField;
 
-    @FXML
-    private TextField fornecedorTelefoneTextField;
+        @FXML
+        private TextField fornecedorTelefoneTextField;
 
 
     private ObservableList funcionarioValues = FXCollections.observableArrayList();
@@ -283,10 +290,11 @@ public class RegistrosController implements Initializable {
                 int ID = resultSet.getInt("id_cliente");
                 String nome = resultSet.getString("nome_cliente");
                 String CPF = resultSet.getString("cpf_cliente");
+                String endereco = resultSet.getString("endereco_cliente");
                 String telefone = resultSet.getString("telefone_cliente");
 
                 clienteValues.add(
-                        new Cliente(ID,nome,CPF,telefone)
+                        new Cliente(ID,nome,CPF,endereco,telefone)
                 );
                 clienteTableView.setItems(clienteValues);
 
@@ -296,7 +304,7 @@ public class RegistrosController implements Initializable {
             e.printStackTrace();
         }
 
-        String selectFornecedor = "select * from fornecedor where ativo = true";
+        String selectFornecedor = "select * from fornecedor";
 
         try (PreparedStatement statement = conexao.prepareStatement(selectFornecedor)) {
             ResultSet resultSet = statement.executeQuery();
@@ -451,6 +459,7 @@ public class RegistrosController implements Initializable {
             //Adiciona os valores existentes para serem atualizados
             clienteNomeTextFIeld.setText(itemSelecionado.getNomeClienteClass());
             CPFClienteTextField.setText(itemSelecionado.getCPFClienteClass());
+            clienteEnderecoTextField.setText(itemSelecionado.getEnderecoClienteClass());
             clienteTelefoneTextField.setText(itemSelecionado.getTelefoneClienteClass());
 
         } else {
@@ -465,7 +474,8 @@ public class RegistrosController implements Initializable {
 
         int id = itemSelecionado.getIDClienteClass();
         String nome = clienteNomeTextFIeld.getText();
-        String cpf = CPFFuncTextField.getText();
+        String cpf = CPFClienteTextField.getText();
+        String endereco = clienteEnderecoTextField.getText();
         String telefone = clienteTelefoneTextField.getText();
 
         String queryUpdate;
@@ -473,14 +483,16 @@ public class RegistrosController implements Initializable {
             queryUpdate = "update cliente " +
                     "set nome_cliente = ?, " +
                     "cpf_cliente = ?, " +
-                    "telefone_cliente = ?, " +
+                    "endereco_cliente = ?," +
+                    "telefone_cliente = ? " +
                     "where id_cliente = ?";
 
             try (PreparedStatement statement = conexao.prepareStatement(queryUpdate)) {
                 statement.setString(1, nome);
                 statement.setString(2, cpf);
-                statement.setString(3, telefone);
-                statement.setInt(4,id);
+                statement.setString(3,endereco);
+                statement.setString(4, telefone);
+                statement.setInt(5,id);
 
 
                 int linhasAfetadas = statement.executeUpdate();
@@ -642,8 +654,9 @@ public class RegistrosController implements Initializable {
         IDClientes.setCellValueFactory(new PropertyValueFactory<Cliente,Integer>("IDClienteClass"));
         nomeClientes.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nomeClienteClass"));
         CPFClientes.setCellValueFactory(new PropertyValueFactory<Cliente, String>("CPFClienteClass"));
+        enderecoCliente.setCellValueFactory(new PropertyValueFactory<Cliente, String>("enderecoClienteClass"));
         telefoneClientes.setCellValueFactory(new PropertyValueFactory<Cliente, String>("telefoneClienteClass"));
-        //Table View de Clientes
+        //Table View de Fornecedor
         fornecedorID.setCellValueFactory(new PropertyValueFactory<Fornecedor, Integer>("IDFornecedorClass"));
         fornecedorNome.setCellValueFactory(new PropertyValueFactory<>("nomeFornecedorClass"));
         fornecedorEndereco.setCellValueFactory(new PropertyValueFactory<>("enderecoFornecedorClass"));
@@ -659,18 +672,25 @@ public class RegistrosController implements Initializable {
         horarioCompra.setCellValueFactory(new PropertyValueFactory<Venda, Timestamp>("horarioCompra"));
 
         //Limitando os caracteres dos textfields
-        Formatacao formatacao = new Formatacao();
 
+        //Pane de atualização de Funcionarios
+        Formatacao.ApenasLetras(FuncNomeTextField);
+        Formatacao.LimitadorCaracteres(FuncNomeTextField,60);
+        Formatacao.formataCPFEnquantoDigita(CPFFuncTextField);
+        Formatacao.LimitadorCaracteres(FuncLogin,16);
+        Formatacao.LimitadorCaracteres(funcSenhaTextField,16);
 
-        formatacao.ApenasLetras(FuncNomeTextField);
-        formatacao.ApenasNumeros(clienteNomeTextFIeld);
-        formatacao.ApenasNumeros(fornecedorNomeTextField);
+        //Pane de atualização de Clientes
+        Formatacao.ApenasLetras(clienteNomeTextFIeld);
+        Formatacao.LimitadorCaracteres(clienteNomeTextFIeld,60);
+        Formatacao.formataCPFEnquantoDigita(CPFClienteTextField);
+        Formatacao.formataTelefoneDinamico(clienteTelefoneTextField);
 
-        formatacao.formataCPFEnquantoDigita(CPFFuncTextField);
-        formatacao.formataCPFEnquantoDigita(CPFClienteTextField);
-        formatacao.formataCNPJDinamico(fornecedorCNPJTextField);
-        
-
+        //Pane de atualização de fornecedor
+        Formatacao.LimitadorCaracteres(fornecedorNomeTextField,60);
+        Formatacao.LimitadorCaracteres(fornecedorEnderecoTextField,70);
+        Formatacao.formataCNPJDinamico(fornecedorCNPJTextField);
+        Formatacao.formataTelefoneDinamico(fornecedorTelefoneTextField);
 
         setupRegistrosValues();
     }

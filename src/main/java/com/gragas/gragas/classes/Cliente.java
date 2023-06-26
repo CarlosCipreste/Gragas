@@ -5,12 +5,14 @@ public class Cliente {
     int IDClienteClass;
     String nomeClienteClass;
     String CPFClienteClass;
+    String enderecoClienteClass;
     String telefoneClienteClass;
 
-    public Cliente(int IDCLienteClass, String nomeClienteClass, String CPFClienteClass, String telefoneClienteClass) {
-        this.IDClienteClass = IDCLienteClass;
+    public Cliente(int IDClienteClass, String nomeClienteClass, String CPFClienteClass, String enderecoClienteClass, String telefoneClienteClass) {
+        this.IDClienteClass = IDClienteClass;
         this.nomeClienteClass = nomeClienteClass;
         this.CPFClienteClass = CPFClienteClass;
+        this.enderecoClienteClass = enderecoClienteClass;
         this.telefoneClienteClass = telefoneClienteClass;
     }
 
@@ -24,6 +26,10 @@ public class Cliente {
 
     public String getCPFClienteClass() {
         return CPFClienteClass;
+    }
+
+    public String getEnderecoClienteClass() {
+        return enderecoClienteClass;
     }
 
     public String getTelefoneClienteClass() {
