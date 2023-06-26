@@ -1,6 +1,7 @@
 package com.gragas.gragas;
 
 import com.gragas.gragas.classes.*;
+import com.gragas.gragas.metodos.Formatacao;
 import com.gragas.gragas.metodos.metodosGerais;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -656,6 +657,20 @@ public class RegistrosController implements Initializable {
         quantidadeProdutoVendas.setCellValueFactory(new PropertyValueFactory<Venda, Integer>("quantidade"));
         precoVendas.setCellValueFactory(new PropertyValueFactory<Venda, Double>("precoTotal"));
         horarioCompra.setCellValueFactory(new PropertyValueFactory<Venda, Timestamp>("horarioCompra"));
+
+        //Limitando os caracteres dos textfields
+        Formatacao formatacao = new Formatacao();
+
+
+        formatacao.ApenasLetras(FuncNomeTextField);
+        formatacao.ApenasNumeros(clienteNomeTextFIeld);
+        formatacao.ApenasNumeros(fornecedorNomeTextField);
+
+        formatacao.formataCPFEnquantoDigita(CPFFuncTextField);
+        formatacao.formataCPFEnquantoDigita(CPFClienteTextField);
+        formatacao.formataCNPJDinamico(fornecedorCNPJTextField);
+        
+
 
         setupRegistrosValues();
     }
