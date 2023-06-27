@@ -52,5 +52,33 @@ public class Venda {
     public Timestamp getHorarioCompra() {
         return horarioCompra;
     }
+
+    public void setIDVendas(int IDVendas) {
+        this.IDVendas = IDVendas;
+    }
+
+    public void setNomeClienteVenda(String nomeClienteVenda) {
+        this.nomeClienteVenda = nomeClienteVenda;
+    }
+
+    public void setNomeFuncionarioVenda(String nomeFuncionarioVenda) {
+        this.nomeFuncionarioVenda = nomeFuncionarioVenda;
+    }
+
+    public void setNomeProdutoVenda(String nomeProdutoVenda) {
+        this.nomeProdutoVenda = nomeProdutoVenda;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public void setPrecoTotal(BigDecimal precoTotal) {
+        this.precoTotal = precoTotal;
+    }
+
+    public void setHorarioCompra(Timestamp horarioCompra) {
+        this.horarioCompra = horarioCompra;
+    }
 }
 

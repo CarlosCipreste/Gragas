@@ -29,4 +29,20 @@ public class Funcionario {
     public String getUsuarioFuncionarioClass() {
         return usuarioFuncionarioClass;
     }
+
+    public void setIDFuncionarioClass(int IDFuncionarioClass) {
+        this.IDFuncionarioClass = IDFuncionarioClass;
+    }
+
+    public void setNomeFuncionarioClass(String nomeFuncionarioClass) {
+        this.nomeFuncionarioClass = nomeFuncionarioClass;
+    }
+
+    public void setCPFFuncionarioClass(String CPFFuncionarioClass) {
+        this.CPFFuncionarioClass = CPFFuncionarioClass;
+    }
+
+    public void setUsuarioFuncionarioClass(String usuarioFuncionarioClass) {
+        this.usuarioFuncionarioClass = usuarioFuncionarioClass;
+    }
 }

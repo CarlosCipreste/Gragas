@@ -20,6 +20,26 @@ public class Cliente {
         return IDClienteClass;
     }
 
+    public void setIDClienteClass(int IDClienteClass) {
+        this.IDClienteClass = IDClienteClass;
+    }
+
+    public void setNomeClienteClass(String nomeClienteClass) {
+        this.nomeClienteClass = nomeClienteClass;
+    }
+
+    public void setCPFClienteClass(String CPFClienteClass) {
+        this.CPFClienteClass = CPFClienteClass;
+    }
+
+    public void setEnderecoClienteClass(String enderecoClienteClass) {
+        this.enderecoClienteClass = enderecoClienteClass;
+    }
+
+    public void setTelefoneClienteClass(String telefoneClienteClass) {
+        this.telefoneClienteClass = telefoneClienteClass;
+    }
+
     public String getNomeClienteClass() {
         return nomeClienteClass;
     }

@@ -390,6 +390,20 @@ public class RegistrosController implements Initializable {
 
             if(linhasAfetadas>0){
                 exibirAlerta(Alert.AlertType.INFORMATION,"Mensagem","Funcionario Atualizado com sucesso");
+
+                // Obtém a lista de itens da tabela
+                ObservableList<Funcionario> listaFuncionarios = funcionarioTableView.getItems();
+
+                // Obtém o índice do item selecionado
+                int indiceSelecionado = listaFuncionarios.indexOf(itemSelecionado);
+
+                // Atualiza o item selecionado com os novos valores
+                itemSelecionado.setNomeFuncionarioClass(nome);
+                itemSelecionado.setCPFFuncionarioClass(cpf);
+                itemSelecionado.setUsuarioFuncionarioClass(usuario);
+
+                // Atualiza o item selecionado na lista
+                listaFuncionarios.set(indiceSelecionado, itemSelecionado);
             }
             else{
                 exibirAlerta(Alert.AlertType.ERROR,"ERRO","Atualização Mal-Sucedida");
@@ -415,6 +429,7 @@ public class RegistrosController implements Initializable {
 
                 if(linhasAfetadas > 0){
                     exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Produto Apagado com Sucesso!");
+                    funcionarioTableView.getItems().remove(itemSelecionado);
                 }
             }catch(SQLException e){
                 e.printStackTrace();}
@@ -499,6 +514,21 @@ public class RegistrosController implements Initializable {
 
                 if (linhasAfetadas > 0) {
                     exibirAlerta(Alert.AlertType.INFORMATION, "Mensagem", "Cliente Atualizado com sucesso");
+
+                    // Obtém a lista de itens da tabela
+                    ObservableList<Cliente> listaClientes = clienteTableView.getItems();
+
+                    // Obtém o índice do item selecionado
+                    int indiceSelecionado = listaClientes.indexOf(itemSelecionado);
+
+                    // Atualiza o item selecionado com os novos valores
+                    itemSelecionado.setNomeClienteClass(nome);
+                    itemSelecionado.setCPFClienteClass(cpf);
+                    itemSelecionado.setEnderecoClienteClass(endereco);
+                    itemSelecionado.setTelefoneClienteClass(telefone);
+
+                    // Atualiza o item selecionado na lista
+                    listaClientes.set(indiceSelecionado, itemSelecionado);
                 } else {
                     exibirAlerta(Alert.AlertType.ERROR, "ERRO", "Atualização Mal-Sucedida");
                 }
@@ -527,6 +557,7 @@ public class RegistrosController implements Initializable {
 
                 if(linhasAfetadas > 0){
                     exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Cliente Apagado com Sucesso!");
+                    clienteTableView.getItems().remove(itemSelecionado);
                 }
             }catch(SQLException e){
                 e.printStackTrace();}
@@ -593,6 +624,22 @@ public class RegistrosController implements Initializable {
 
                 if (linhasAfetadas > 0) {
                     exibirAlerta(Alert.AlertType.INFORMATION, "Mensagem", "Cliente Atualizado com sucesso");
+
+                    // Obtém a lista de itens da tabela
+                    ObservableList<Fornecedor> listaFornecedor = fornecedorTableView.getItems();
+
+                    // Obtém o índice do item selecionado
+                    int indiceSelecionado = listaFornecedor.indexOf(itemSelecionado);
+
+                    // Atualiza o item selecionado com os novos valores
+                    itemSelecionado.setNomeFornecedorClass(nome);
+                    itemSelecionado.setEnderecoFornecedorClass(endereco);
+                    itemSelecionado.setCNPJFornecedorClass(cnpj);
+                    itemSelecionado.setTelefoneFornecedorClass(telefone);
+
+                    // Atualiza o item selecionado na lista
+                    listaFornecedor.set(indiceSelecionado, itemSelecionado);
+
                 } else {
                     exibirAlerta(Alert.AlertType.ERROR, "ERRO", "Atualização Mal-Sucedida");
                 }
@@ -612,8 +659,8 @@ public class RegistrosController implements Initializable {
             exibirAlerta(Alert.AlertType.CONFIRMATION,"Tem Certeza?","Tem Certeza que quer APAGAR um Fornecedor?");
 
             String queryDelete = "UPDATE fornecedor\n" +
-                    "SET ativo = FALSE\n" +
-                    "WHERE id_fornecedor = ?;";
+                                "SET ativo = FALSE\n" +
+                                "WHERE id_fornecedor = ?;";
 
             try(PreparedStatement statement = conexao.prepareStatement(queryDelete)){
                 statement.setInt(1,itemSelecionado.getIDFornecedorClass());
@@ -621,6 +668,7 @@ public class RegistrosController implements Initializable {
 
                 if(linhasAfetadas > 0){
                     exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Fornecedor Apagado com Sucesso!");
+                    fornecedorTableView.getItems().remove(itemSelecionado);
                 }
             }catch(SQLException e){
                 e.printStackTrace();

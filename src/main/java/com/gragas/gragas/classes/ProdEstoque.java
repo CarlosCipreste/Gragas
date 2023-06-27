@@ -49,4 +49,32 @@ public class ProdEstoque {
     public int getQuantidade() {
         return quantidade;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setPreco(String preco) {
+        this.preco = preco;
+    }
+
+    public void setAlcoolico(boolean alcoolico) {
+        this.alcoolico = alcoolico;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setValidade(Date validade) {
+        this.validade = validade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
 }

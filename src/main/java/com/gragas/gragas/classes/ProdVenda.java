@@ -29,4 +29,20 @@ public class ProdVenda {
     public Double getPrecoProdClass() {
         return precoProdClass;
     }
+
+    public void setIDProdClass(int IDProdClass) {
+        this.IDProdClass = IDProdClass;
+    }
+
+    public void setNomeProdClass(String nomeProdClass) {
+        this.nomeProdClass = nomeProdClass;
+    }
+
+    public void setQtdProdClass(int qtdProdClass) {
+        this.qtdProdClass = qtdProdClass;
+    }
+
+    public void setPrecoProdClass(Double precoProdClass) {
+        this.precoProdClass = precoProdClass;
+    }
 }
