@@ -540,7 +540,6 @@ public class CadastroController implements Initializable {
         //Formatando os TextField para Número de Celular
         Formatacao.formataTelefoneDinamico(FornecedorTelefoneTextField);
         Formatacao.formataTelefoneDinamico(clienteTelefoneTextField);
-        Formatacao.formataCelularDinamico(clienteCelularTextField);
 
         //Formatador de Preço
         Formatacao.formataPrecoEnquantoDigita(precoTextField);
@@ -559,7 +558,6 @@ public class CadastroController implements Initializable {
 
         //Transformando os TextField para receberem apenas Letras
         Formatacao.ApenasLetras(FuncNomeTextField);
-        Formatacao.ApenasNumeros(FuncNomeTextField);
 
         //Formatando para Receber apenas números
         Formatacao.ApenasNumeros(quantidadeTextField);

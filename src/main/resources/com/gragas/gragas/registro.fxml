@@ -52,7 +52,7 @@
                   <TableColumn fx:id="telefoneFornecedor" editable="false" prefWidth="132.0" resizable="false" sortable="false" text="Telefone" />
               </columns>
             </TableView>
-            <TableView fx:id="vendasTableView" layoutX="50.0" layoutY="157.0" prefHeight="450.0" prefWidth="800.0" stylesheets="@style.css">
+            <TableView fx:id="vendasTableView" layoutX="50.0" layoutY="157.0" prefHeight="450.0" prefWidth="800.0" stylesheets="@style.css" visible="false">
               <columns>
                   <TableColumn fx:id="IDVenda" editable="false" prefWidth="33.0" resizable="false" sortable="false" text="ID" />
                 <TableColumn fx:id="clienteNomeVendas" editable="false" prefWidth="160.0" sortable="false" text="Cliente" />

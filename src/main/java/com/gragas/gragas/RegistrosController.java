@@ -366,6 +366,23 @@ public class RegistrosController implements Initializable {
     void AtualizarFuncionario(ActionEvent event) {
         Funcionario itemSelecionado = funcionarioTableView.getSelectionModel().getSelectedItem();
 
+        if(FuncNomeTextField.getText().isEmpty()){
+            exibirAlerta(Alert.AlertType.ERROR, "Preencha os campos!","Preencha os campos corretamente");
+            return;
+        }
+        if(CPFClienteTextField.getText().isEmpty()){
+            exibirAlerta(Alert.AlertType.ERROR, "Preencha os campos!","Preencha os campos corretamente");
+            return;
+        }
+        if(usuarioFuncionarios.getText().isEmpty()){
+            exibirAlerta(Alert.AlertType.ERROR, "Preencha os campos!","Preencha os campos corretamente");
+            return;
+        }
+        if(funcSenhaTextField.getText().isEmpty()){
+            exibirAlerta(Alert.AlertType.ERROR, "Preencha os campos!","Preencha os campos corretamente");
+            return;
+        }
+
         int id = itemSelecionado.getIDFuncionarioClass();
         String nome = FuncNomeTextField.getText();
         String cpf = CPFFuncTextField.getText();
@@ -478,13 +495,27 @@ public class RegistrosController implements Initializable {
             clienteTelefoneTextField.setText(itemSelecionado.getTelefoneClienteClass());
 
         } else {
-            exibirAlerta(Alert.AlertType.INFORMATION, "Informe o Produto", "Primeiro você precisa selecionar um Produto");
+            exibirAlerta(Alert.AlertType.INFORMATION, "Informe o Cliente", "Primeiro você precisa selecionar um cliente");
 
         }
     }
 
     @FXML
     void AtualizarCliente(ActionEvent event) {
+        if(clienteNomeTextFIeld.getText().isEmpty()){
+            exibirAlerta(Alert.AlertType.ERROR, "Preencha os campos!","Preencha os campos corretamente");
+            return;
+        }
+        if(CPFClienteTextField.getText().isEmpty()){
+            exibirAlerta(Alert.AlertType.ERROR, "Preencha os campos!","Preencha os campos corretamente");
+            return;
+        }
+        if(clienteEnderecoTextField.getText().isEmpty()){
+            exibirAlerta(Alert.AlertType.ERROR, "Preencha os campos!","Preencha os campos corretamente");
+            return;
+        }
+
+
         Cliente itemSelecionado = clienteTableView.getSelectionModel().getSelectedItem();
 
         int id = itemSelecionado.getIDClienteClass();
@@ -588,13 +619,31 @@ public class RegistrosController implements Initializable {
             fornecedorTelefoneTextField.setText(itemSelecionado.getTelefoneFornecedorClass());
 
         } else {
-            exibirAlerta(Alert.AlertType.INFORMATION, "Informe o Produto", "Primeiro você precisa selecionar um Produto");
+            exibirAlerta(Alert.AlertType.INFORMATION, "Informe o Fornecedor", "Primeiro você precisa selecionar um Fornecedor");
 
         }
     }
 
     @FXML
     void AtualizarFornecedor(ActionEvent event) {
+        if(fornecedorNomeTextField.getText().isEmpty()){
+            exibirAlerta(Alert.AlertType.ERROR,"Erro","Preencha os campos corretamente!");
+            return;
+        }
+
+        if(fornecedorEnderecoTextField.getText().isEmpty()){
+            exibirAlerta(Alert.AlertType.ERROR,"Erro","Preencha os campos corretamente!");
+            return;
+        }
+        if(fornecedorCNPJTextField.getText().isEmpty()){
+            exibirAlerta(Alert.AlertType.ERROR,"Erro","Preencha os campos corretamente!");
+            return;
+        }
+        if(fornecedorTelefoneTextField.getText().isEmpty()){
+            exibirAlerta(Alert.AlertType.ERROR,"Erro","Preencha os campos corretamente!");
+            return;
+        }
+
         Fornecedor itemSelecionado = fornecedorTableView.getSelectionModel().getSelectedItem();
 
         int id = itemSelecionado.getIDFornecedorClass();

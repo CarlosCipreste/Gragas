@@ -63,9 +63,11 @@ public class VendaController implements Initializable {
 
     @FXML
     private Button voltarButton;
-    @FXML
-    private ObservableList<String> lista;
 
+    @FXML
+    private Label valorTotalLabel;
+
+    private ObservableList<String> lista;
     public int idcliente;
 
     @FXML
@@ -133,6 +135,19 @@ public class VendaController implements Initializable {
         if (itemSelecionado != null) {
             // Remove o item da lista de itens da tabela
             valoresProdVenda.remove(itemSelecionado);
+
+            double totalVenda = 0.0;
+
+            for (ProdVenda produto : valoresProdVenda) {
+                double precoProduto = produto.getPrecoProdClass();
+                int quantidade = produto.getQtdProdClass();
+                totalVenda += precoProduto * quantidade;
+            }
+
+            valorTotalLabel.setText("R$ "+totalVenda);
+        }
+        else{
+            exibirAlerta(Alert.AlertType.ERROR,"Selecione um Produto!","Selecione um produto primeiro para apagar.");
         }
     }
 
@@ -199,6 +214,17 @@ public class VendaController implements Initializable {
                 valoresProdVenda.add(new ProdVenda(IDProd,nomeProd, qtdProd,precoProd));
             }
             vendaListaTableView.setItems(valoresProdVenda);
+
+            double totalVenda = 0.0;
+
+            for (ProdVenda produto : valoresProdVenda) {
+                double precoProduto = produto.getPrecoProdClass();
+                int quantidade = produto.getQtdProdClass();
+                totalVenda += precoProduto * quantidade;
+            }
+
+            valorTotalLabel.setText("R$ "+totalVenda);
+
             System.out.println("Adicionado");
         }
 
