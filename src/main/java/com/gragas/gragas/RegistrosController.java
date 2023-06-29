@@ -392,11 +392,11 @@ public class RegistrosController implements Initializable {
         String senha = funcSenhaTextField.getText();
 
         String queryUpdate = "update funcionario " +
-                "set nome_funcionario = ?, " +
-                "cpf_funcionario = ?, " +
-                "login = ?, " +
-                "senha = ? " +
-                "where id_funcionario = ?";
+                            "set nome_funcionario = ?, " +
+                            "cpf_funcionario = ?, " +
+                            "login = ?, " +
+                            "senha = ? " +
+                            "where id_funcionario = ?";
 
         try(PreparedStatement statement = conexao.prepareStatement(queryUpdate)){
             statement.setString(1,nome);

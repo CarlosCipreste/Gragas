@@ -3,6 +3,7 @@ package com.gragas.gragas;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -31,8 +32,8 @@ public class HelloApplication extends Application {
         FXMLLoader cadastrofxml = new FXMLLoader(HelloApplication.class.getResource("cadastro.fxml"));
         CadastroPage = new Scene(cadastrofxml.load());
 
-
-
+        Image icon = new Image(getClass().getResourceAsStream("/Imagens/gragas.png"));
+        stage.getIcons().add(icon);
         stage.setTitle("Taverna do Gragas");
         stage.setResizable(false);
         stage.centerOnScreen();

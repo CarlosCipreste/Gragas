@@ -327,7 +327,7 @@ public class CadastroController implements Initializable {
 
             if (resultSetSelect.next()) {
                 exibirAlerta(Alert.AlertType.ERROR,"Erro!","Produto já existe no Banco de Dados");
-
+                return;
             } else {
                 //Query para Cadastrar o Produto no sistema
                 String queryCadastro = "insert into produto(nome_produto,preco_produto,alcoolico_S_N,tipo,validade,quantidade)values (?,?,?,?,?,?)";
@@ -361,6 +361,19 @@ public class CadastroController implements Initializable {
 
     @FXML
     void cadCliente(ActionEvent event) {
+
+        if(clienteNomeTextField.getText().isEmpty()){
+           exibirAlerta(Alert.AlertType.ERROR,"Preencham os Campos","Preencha os campos corretamente");
+            return;
+        }
+        if(clienteCPFTextField.getText().isEmpty()){
+            exibirAlerta(Alert.AlertType.ERROR,"Preencham os Campos","Preencha os campos corretamente");
+            return;
+        }
+        if(clienteEnderecoTextField.getText().isEmpty()){
+            exibirAlerta(Alert.AlertType.ERROR,"Preencham os Campos","Preencha os campos corretamente");
+            return;
+        }
 
 
         String cliente = clienteNomeTextField.getText().toLowerCase();
@@ -416,6 +429,23 @@ public class CadastroController implements Initializable {
 
     @FXML
     void cadFornecedor(){
+        if(fornecedorNomeTextField.getText().isEmpty()){
+            exibirAlerta(Alert.AlertType.ERROR,"Preencham os Campos","Preencha os campos corretamente");
+            return;
+        }
+        if(fornecedorEnderecoTextField.getText().isEmpty()){
+            exibirAlerta(Alert.AlertType.ERROR,"Preencham os Campos","Preencha os campos corretamente");
+            return;
+        }
+        if(fornecedorCNPJTextField.getText().isEmpty()){
+            exibirAlerta(Alert.AlertType.ERROR,"Preencham os Campos","Preencha os campos corretamente");
+            return;
+        }
+        if(FornecedorTelefoneTextField.getText().isEmpty()){
+            exibirAlerta(Alert.AlertType.ERROR,"Preencham os Campos","Preencha os campos corretamente");
+            return;
+        }
+
         String fornecedor = fornecedorNomeTextField.getText().toLowerCase();
         String endereco = fornecedorEnderecoTextField.getText().toLowerCase();
         String CNPJ = fornecedorCNPJTextField.getText();
@@ -471,6 +501,24 @@ public class CadastroController implements Initializable {
 
 @FXML
     void cadFuncionario(){
+    if(FuncNomeTextField.getText().isEmpty()){
+        exibirAlerta(Alert.AlertType.ERROR,"Preencham os Campos","Preencha os campos corretamente");
+        return;
+    }
+    if(CPFFuncTextField.getText().isEmpty()){
+        exibirAlerta(Alert.AlertType.ERROR,"Preencham os Campos","Preencha os campos corretamente");
+        return;
+    }
+    if(FuncLogin.getText().isEmpty()){
+        exibirAlerta(Alert.AlertType.ERROR,"Preencham os Campos","Preencha os campos corretamente");
+        return;
+    }
+    if(funcSenhaTextField.getText().isEmpty()){
+        exibirAlerta(Alert.AlertType.ERROR,"Preencham os Campos","Preencha os campos corretamente");
+        return;
+    }
+
+
         String funcionario = FuncNomeTextField.getText().toLowerCase();
         String CPF = CPFFuncTextField.getText();
         String login = FuncLogin.getText();
