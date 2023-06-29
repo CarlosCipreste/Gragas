@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static com.gragas.gragas.LoginController.conexao;
@@ -226,23 +227,27 @@ public class EstoqueController implements Initializable {
         // Verifica se um item está selecionado
 
         if (itemSelecionado != null) {
-            exibirAlerta(Alert.AlertType.CONFIRMATION,"Tem Certeza?","Tem Certeza que quer APAGAR um Produto?");
+            Optional<ButtonType> resultado = exibirAlertaConfirmacao(Alert.AlertType.CONFIRMATION, "Tem Certeza?", "Tem Certeza que quer APAGAR um Cliente?");
 
-            String queryDelete = "UPDATE produto\n" +
-                    "SET ativo = FALSE\n" +
-                    "WHERE id_produto = ?;";
+            if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+                String queryDelete = "UPDATE produto\n" +
+                                    "SET ativo = FALSE\n" +
+                                    "WHERE id_produto = ?";
 
-            try(PreparedStatement statement = conexao.prepareStatement(queryDelete)){
-                statement.setInt(1,itemSelecionado.getId());
-                int linhasAfetadas = statement.executeUpdate();
+                try (PreparedStatement statement = conexao.prepareStatement(queryDelete)) {
+                    statement.setInt(1, itemSelecionado.getId());
+                    int linhasAfetadas = statement.executeUpdate();
 
-                if(linhasAfetadas > 0){
-                    exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Produto Apagado com Sucesso!");
+                    if (linhasAfetadas > 0) {
+                        exibirAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Produto Apagado com Sucesso!");
+                        EstoqueTableVIew.getItems().remove(itemSelecionado);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-            }catch(SQLException e){
-                e.printStackTrace();}
-        }else {
-            exibirAlerta(Alert.AlertType.INFORMATION,"Informe o Produto","Primeiro você precisa selecionar um Produto");
+            }
+        } else {
+            exibirAlerta(Alert.AlertType.INFORMATION, "Informe o Produto", "Primeiro você precisa selecionar um Produto");
         }
 
 

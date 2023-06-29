@@ -8,6 +8,7 @@ import org.w3c.dom.Text;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class metodosGerais {
 
@@ -22,6 +23,48 @@ public class metodosGerais {
         alert.setContentText(mensagem);
         alert.showAndWait();
     }
+
+    public static Optional<ButtonType> exibirAlertaConfirmacao(Alert.AlertType tipo, String titulo, String mensagem) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensagem);
+
+        return alerta.showAndWait();
+    }
+
+    //MÉTODO PARA SIPLIFICAR O USO DO ALERT BOX DE CONFIRMAÇÃO
+    public static int showConfirmationDialog(String title, String message) {
+        Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationDialog.setTitle(title);
+        confirmationDialog.setHeaderText(message);
+
+        // Configurando os botões do diálogo
+        ButtonType buttonTypeOK = new ButtonType("OK");
+        ButtonType buttonTypeCancel = new ButtonType("Cancelar");
+
+        confirmationDialog.getButtonTypes().setAll(buttonTypeOK, buttonTypeCancel);
+
+        // Exibindo o diálogo e aguardando a resposta
+        ButtonType result = confirmationDialog.showAndWait().orElse(buttonTypeCancel);
+
+        // Verificando qual botão foi pressionado
+        if (result == buttonTypeOK) {
+            System.out.println("Botão OK pressionado");
+            // Faça algo aqui se o botão OK for pressionado
+        } else if (result == buttonTypeCancel) {
+            System.out.println("Botão Cancelar pressionado");
+            // Faça algo aqui se o botão Cancelar for pressionado
+            // Retorna um valor específico (nesse exemplo, -1)
+            // Aqui você pode chamar um método que utiliza o valor retornado
+            int resultado = -1;
+            System.out.println("Resultado: " + resultado);
+            return resultado;
+        }
+
+        return 0;
+    }
+
 
 
     /*MÉTODO PARA VERIFICAR SE HÁ 2 NÚMERO APÓS O VIRGULA*/

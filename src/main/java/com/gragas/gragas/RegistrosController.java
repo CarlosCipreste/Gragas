@@ -17,11 +17,13 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static com.gragas.gragas.LoginController.conexao;
 import static com.gragas.gragas.metodos.Formatacao.LimitadorCaracteres;
 import static com.gragas.gragas.metodos.metodosGerais.exibirAlerta;
+import static com.gragas.gragas.metodos.metodosGerais.exibirAlertaConfirmacao;
 
 public class RegistrosController implements Initializable {
 
@@ -434,24 +436,27 @@ public class RegistrosController implements Initializable {
         // Verifica se um item está selecionado
 
         if (itemSelecionado != null) {
-            exibirAlerta(Alert.AlertType.CONFIRMATION,"Tem Certeza?","Tem Certeza que quer APAGAR um Produto?");
+            Optional<ButtonType> resultado = exibirAlertaConfirmacao(Alert.AlertType.CONFIRMATION, "Tem Certeza?", "Tem Certeza que quer APAGAR um Cliente?");
 
-            String queryDelete = "UPDATE funcionario\n" +
-                    "SET ativo = FALSE\n" +
-                    "WHERE id_produto = ?;";
+            if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+                String queryDelete = "UPDATE funcionario\n" +
+                                    "SET ativo = FALSE\n" +
+                                    "WHERE id_funcionario = ?";
 
-            try(PreparedStatement statement = conexao.prepareStatement(queryDelete)){
-                statement.setInt(1,itemSelecionado.getIDFuncionarioClass());
-                int linhasAfetadas = statement.executeUpdate();
+                try (PreparedStatement statement = conexao.prepareStatement(queryDelete)) {
+                    statement.setInt(1, itemSelecionado.getIDFuncionarioClass());
+                    int linhasAfetadas = statement.executeUpdate();
 
-                if(linhasAfetadas > 0){
-                    exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Produto Apagado com Sucesso!");
-                    funcionarioTableView.getItems().remove(itemSelecionado);
+                    if (linhasAfetadas > 0) {
+                        exibirAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Cliente Apagado com Sucesso!");
+                        funcionarioTableView.getItems().remove(itemSelecionado);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-            }catch(SQLException e){
-                e.printStackTrace();}
-        }else {
-            exibirAlerta(Alert.AlertType.INFORMATION,"Informe o Produto","Primeiro você precisa selecionar um Produto");
+            }
+        } else {
+            exibirAlerta(Alert.AlertType.INFORMATION, "Informe o Funcionário", "Primeiro você precisa selecionar um funcionário");
         }
     }
 
@@ -467,7 +472,7 @@ public class RegistrosController implements Initializable {
             CPFFuncTextField.setText(itemSelecionado.getCPFFuncionarioClass());
             FuncLogin.setText(itemSelecionado.getUsuarioFuncionarioClass());
         } else {
-            exibirAlerta(Alert.AlertType.INFORMATION, "Informe o Produto", "Primeiro você precisa selecionar um Produto");
+            exibirAlerta(Alert.AlertType.INFORMATION, "Informe o Funcionário", "Primeiro você precisa selecionar um Funcionário");
 
         }
     }
@@ -573,27 +578,30 @@ public class RegistrosController implements Initializable {
     @FXML
     void ApagarCliente(ActionEvent event) {
         Cliente itemSelecionado = clienteTableView.getSelectionModel().getSelectedItem();
+
         // Verifica se um item está selecionado
-
         if (itemSelecionado != null) {
-            exibirAlerta(Alert.AlertType.CONFIRMATION,"Tem Certeza?","Tem Certeza que quer APAGAR um Cliente?");
+            Optional<ButtonType> resultado = exibirAlertaConfirmacao(Alert.AlertType.CONFIRMATION, "Tem Certeza?", "Tem Certeza que quer APAGAR um Cliente?");
 
-            String queryDelete = "UPDATE cliente\n" +
-                                "SET ativo = FALSE\n" +
-                                "WHERE id_cliente = ?";
+            if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+                String queryDelete = "UPDATE cliente\n" +
+                        "SET ativo = FALSE\n" +
+                        "WHERE id_cliente = ?";
 
-            try(PreparedStatement statement = conexao.prepareStatement(queryDelete)){
-                statement.setInt(1,itemSelecionado.getIDClienteClass());
-                int linhasAfetadas = statement.executeUpdate();
+                try (PreparedStatement statement = conexao.prepareStatement(queryDelete)) {
+                    statement.setInt(1, itemSelecionado.getIDClienteClass());
+                    int linhasAfetadas = statement.executeUpdate();
 
-                if(linhasAfetadas > 0){
-                    exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Cliente Apagado com Sucesso!");
-                    clienteTableView.getItems().remove(itemSelecionado);
+                    if (linhasAfetadas > 0) {
+                        exibirAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Cliente Apagado com Sucesso!");
+                        clienteTableView.getItems().remove(itemSelecionado);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-            }catch(SQLException e){
-                e.printStackTrace();}
-        }else {
-            exibirAlerta(Alert.AlertType.INFORMATION,"Informe o cliente","Primeiro você precisa selecionar um Cliente");
+            }
+        } else {
+            exibirAlerta(Alert.AlertType.INFORMATION, "Informe o cliente", "Primeiro você precisa selecionar um Cliente");
         }
     }
 
@@ -705,25 +713,27 @@ public class RegistrosController implements Initializable {
         // Verifica se um item está selecionado
 
         if (itemSelecionado != null) {
-            exibirAlerta(Alert.AlertType.CONFIRMATION,"Tem Certeza?","Tem Certeza que quer APAGAR um Fornecedor?");
+            Optional<ButtonType> resultado = exibirAlertaConfirmacao(Alert.AlertType.CONFIRMATION, "Tem Certeza?", "Tem Certeza que quer APAGAR um Cliente?");
 
-            String queryDelete = "UPDATE fornecedor\n" +
-                                "SET ativo = FALSE\n" +
-                                "WHERE id_fornecedor = ?;";
+            if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+                String queryDelete = "UPDATE fornecedor\n" +
+                                    "SET ativo = FALSE\n" +
+                                    "WHERE id_fornecedor = ?";
 
-            try(PreparedStatement statement = conexao.prepareStatement(queryDelete)){
-                statement.setInt(1,itemSelecionado.getIDFornecedorClass());
-                int linhasAfetadas = statement.executeUpdate();
+                try (PreparedStatement statement = conexao.prepareStatement(queryDelete)) {
+                    statement.setInt(1, itemSelecionado.getIDFornecedorClass());
+                    int linhasAfetadas = statement.executeUpdate();
 
-                if(linhasAfetadas > 0){
-                    exibirAlerta(Alert.AlertType.INFORMATION,"Sucesso","Fornecedor Apagado com Sucesso!");
-                    fornecedorTableView.getItems().remove(itemSelecionado);
+                    if (linhasAfetadas > 0) {
+                        exibirAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Cliente Apagado com Sucesso!");
+                        fornecedorTableView.getItems().remove(itemSelecionado);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-            }catch(SQLException e){
-                e.printStackTrace();
             }
-        }else {
-            exibirAlerta(Alert.AlertType.INFORMATION,"Selecione o Fornecedor","Primeiro você precisa selecionar um Fornecedor");
+        } else {
+            exibirAlerta(Alert.AlertType.INFORMATION, "Informe o Fornecedor", "Primeiro você precisa selecionar um fornecedor");
         }
     }
 
