@@ -19,7 +19,7 @@
         <Pane fx:id="FornecedorPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #479F6C;">
             <children>
             <Pane layoutX="157.0" layoutY="137.0" prefHeight="396.0" prefWidth="587.0" style="-fx-border-radius: 15px; -fx-border-width: 3px; -fx-border-color: black;" />
-                <Button fx:id="voltarButton13" layoutY="49.0" mnemonicParsing="false" onAction="#VoltarMenu" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
+                <Button fx:id="voltarButton13" layoutY="49.0" mnemonicParsing="false" onAction="#VoltarMenuFornecedor" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -145,7 +145,7 @@
                         <Font name="Leelawadee UI Bold" size="14.0" />
                     </font>
                 </TextField>
-                <Button fx:id="voltarProdutoButton" layoutY="47.0" mnemonicParsing="false" onAction="#VoltarMenu" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
+                <Button fx:id="voltarProdutoButton" layoutY="47.0" mnemonicParsing="false" onAction="#VoltarMenuProd" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -187,7 +187,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="CadUsuariosButton" layoutX="259.0" layoutY="377.0" mnemonicParsing="false" onAction="#EntrarFuncionario" prefHeight="80.0" prefWidth="416.0" styleClass="botaomenuright" stylesheets="@style.css" text="Cadastro de Usuários" textFill="WHITE">
+                <Button fx:id="CadUsuariosButton" layoutX="259.0" layoutY="377.0" mnemonicParsing="false" onAction="#EntrarFuncionario" prefHeight="80.0" prefWidth="416.0" styleClass="botaomenuright" stylesheets="@style.css" text="Cadastro de Funcionários" textFill="WHITE">
                     <font>
                         <Font name="Leelawadee UI Bold" size="20.0" />
                     </font>
@@ -291,7 +291,7 @@
                         <Font name="Leelawadee UI Bold" size="26.0" />
                     </font>
                 </Label>
-                <Button fx:id="VoltarClienteButton" layoutY="49.0" mnemonicParsing="false" onAction="#VoltarMenu" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
+                <Button fx:id="VoltarClienteButton" layoutY="49.0" mnemonicParsing="false" onAction="#VoltarMenuCliente" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -365,7 +365,7 @@
                   </Label>
                </children>
             </Pane>
-                <Button fx:id="voltarFuncionarioButton" layoutY="48.0" mnemonicParsing="false" onAction="#VoltarMenu" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
+                <Button fx:id="voltarFuncionarioButton" layoutY="48.0" mnemonicParsing="false" onAction="#VoltarMenuFuncionario" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>

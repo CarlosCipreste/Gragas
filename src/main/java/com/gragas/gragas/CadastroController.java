@@ -173,7 +173,7 @@ public class CadastroController implements Initializable {
     }
 
     @FXML
-    public void VoltarMenu(ActionEvent event) {
+    public void VoltarMenuProd(ActionEvent event) {
         menuPane.setVisible(true);
         ProdutoPane.setVisible(false);
         FornecedorPane.setVisible(false);
@@ -181,8 +181,41 @@ public class CadastroController implements Initializable {
         FuncionarioPane.setVisible(false);
 
         clearAll(nomeProdutoTextField,precoTextField,alcoolicoCheckBox,nalcoolicoChoiceBox,NAlcoolicoCheckBox,nalcoolicoChoiceBox,validadeDatePicker,quantidadeTextField);
-        clearAll(FuncNomeTextField,CPFFuncTextField,FuncLogin,funcSenhaTextField);
+
+    }
+    @FXML
+    public void VoltarMenuCliente(ActionEvent event) {
+        menuPane.setVisible(true);
+        ProdutoPane.setVisible(false);
+        FornecedorPane.setVisible(false);
+        ClientePane.setVisible(false);
+        FuncionarioPane.setVisible(false);
+
+
         clearAll(clienteNomeTextField,clienteCPFTextField,clienteTelefoneTextField,clienteCelularTextField);
+
+    }
+
+    @FXML
+    public void VoltarMenuFuncionario(ActionEvent event) {
+        menuPane.setVisible(true);
+        ProdutoPane.setVisible(false);
+        FornecedorPane.setVisible(false);
+        ClientePane.setVisible(false);
+        FuncionarioPane.setVisible(false);
+
+        clearAll(FuncNomeTextField,CPFFuncTextField,FuncLogin,funcSenhaTextField);
+
+    }
+
+    @FXML
+    public void VoltarMenuFornecedor(ActionEvent event) {
+        menuPane.setVisible(true);
+        ProdutoPane.setVisible(false);
+        FornecedorPane.setVisible(false);
+        ClientePane.setVisible(false);
+        FuncionarioPane.setVisible(false);
+
         clearAll(fornecedorNomeTextField,fornecedorEnderecoTextField,fornecedorCNPJTextField,fornecedorCNPJTextField);
 
     }
@@ -239,10 +272,8 @@ public class CadastroController implements Initializable {
 
     @FXML
     void cadProduto(ActionEvent event) {
-        /*Verificação de todos os Componentes do Pane de Cadastro de Produtos
-         * A verificação checa se todos os componentes estão preenchidos de acordo
-         * Com o que o banco deve receber como valores para cadastrar o Produto*/
 
+        //VERIFICAÇÃO
         try {
             // Verifica se todos os TextField possuem conteúdo
             if (nomeProdutoTextField.getText().isEmpty() || precoTextField.getText().isEmpty() || quantidadeTextField.getText().isEmpty()) {
@@ -349,6 +380,8 @@ public class CadastroController implements Initializable {
                     FornecedorPane.setVisible(false);
                     ClientePane.setVisible(false);
                     FuncionarioPane.setVisible(false);
+                    clearAll(nomeProdutoTextField,precoTextField,alcoolicoCheckBox,nalcoolicoChoiceBox,NAlcoolicoCheckBox,nalcoolicoChoiceBox,validadeDatePicker,quantidadeTextField);
+
                 }
 
             }
@@ -361,7 +394,7 @@ public class CadastroController implements Initializable {
 
     @FXML
     void cadCliente(ActionEvent event) {
-
+        //VERIFICAÇÃO
         if(clienteNomeTextField.getText().isEmpty()){
            exibirAlerta(Alert.AlertType.ERROR,"Preencham os Campos","Preencha os campos corretamente");
             return;
@@ -408,6 +441,13 @@ public class CadastroController implements Initializable {
 
                 if(linhasInseridas > 0) {
                     exibirAlerta(Alert.AlertType.INFORMATION, "Cliente Cadastrado", "Informações do cliente foram inseridas com sucesso!");
+                    menuPane.setVisible(true);
+                    ProdutoPane.setVisible(false);
+                    FornecedorPane.setVisible(false);
+                    ClientePane.setVisible(false);
+                    FuncionarioPane.setVisible(false);
+                    clearAll(clienteNomeTextField,clienteCPFTextField,clienteEnderecoTextField,clienteTelefoneTextField);
+
                 }
                 // Fechando recurso
                 insert.close();
@@ -429,6 +469,7 @@ public class CadastroController implements Initializable {
 
     @FXML
     void cadFornecedor(){
+        //VERIFICAÇÂO
         if(fornecedorNomeTextField.getText().isEmpty()){
             exibirAlerta(Alert.AlertType.ERROR,"Preencham os Campos","Preencha os campos corretamente");
             return;
@@ -479,6 +520,12 @@ public class CadastroController implements Initializable {
 
                 if(linhasInseridas > 0) {
                     exibirAlerta(Alert.AlertType.INFORMATION, "Fornecedor Cadastrado", "Informações do Fornecedor foram inseridas com sucesso!");
+                    menuPane.setVisible(true);
+                    ProdutoPane.setVisible(false);
+                    FornecedorPane.setVisible(false);
+                    ClientePane.setVisible(false);
+                    FuncionarioPane.setVisible(false);
+                    clearAll(fornecedorNomeTextField,fornecedorEnderecoTextField,fornecedorCNPJTextField,fornecedorCNPJTextField);
 
                 }
                 // Fechando recurso
@@ -501,6 +548,7 @@ public class CadastroController implements Initializable {
 
 @FXML
     void cadFuncionario(){
+    //VERIFICAÇÃO
     if(FuncNomeTextField.getText().isEmpty()){
         exibirAlerta(Alert.AlertType.ERROR,"Preencham os Campos","Preencha os campos corretamente");
         return;
@@ -552,6 +600,13 @@ public class CadastroController implements Initializable {
 
                 if(linhasInseridas > 0) {
                     exibirAlerta(Alert.AlertType.INFORMATION, "Funcionário Cadastrado", "Informações do funcionário foram inseridas com sucesso!");
+                    menuPane.setVisible(true);
+                    ProdutoPane.setVisible(false);
+                    FornecedorPane.setVisible(false);
+                    ClientePane.setVisible(false);
+                    FuncionarioPane.setVisible(false);
+                    clearAll(FuncNomeTextField,CPFFuncTextField,FuncLogin,funcSenhaTextField);
+
                 }
                 // Fechando recurso
                 insert.close();

@@ -11,6 +11,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gragas.gragas.VendaController">
@@ -105,6 +106,36 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Pane fx:id="notaFiscalPane" layoutX="196.0" layoutY="28.0" prefHeight="665.0" prefWidth="505.0" style="-fx-background-color: #fcee7e;" visible="false">
+               <children>
+                  <Label layoutX="22.0" layoutY="72.0" text="Emitente: " />
+                  <Label layoutX="82.0" layoutY="72.0" text="Taverna do Gragas Distribuidora" />
+                  <Label layoutX="218.0" layoutY="17.0" text="Cupom Fiscal" />
+                  <Label layoutX="285.0" layoutY="72.0" text="CNPJ: " />
+                  <Label layoutX="323.0" layoutY="73.0" text="000000000000/00001-21" />
+                  <Label layoutX="22.0" layoutY="112.0" text="Cliente:" />
+                  <Label fx:id="nomeClienteLabel" layoutX="87.0" layoutY="112.0" text="Label" />
+                  <Label layoutX="271.0" layoutY="112.0" text="Data:" />
+                  <Label fx:id="dataCompraLabel" layoutX="310.0" layoutY="112.0" prefHeight="17.0" prefWidth="99.0" text="Label" />
+                  <ImageView fitHeight="108.0" fitWidth="464.0" layoutX="21.0" layoutY="554.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Imagens/codigo%20de%20barra.png" />
+                     </image>
+                  </ImageView>
+                  <Line endX="364.0" layoutX="122.0" layoutY="164.0" startX="-100.0" />
+                  <Line endX="364.0" layoutX="122.0" layoutY="520.0" startX="-100.0" />
+                  <TableView fx:id="notaFiscalTableView" layoutX="22.0" layoutY="166.0" prefHeight="353.0" prefWidth="464.0" style="-fx-background-color: transparent;" stylesheets="@tabelaNotaFiscal.css">
+                    <columns>
+                      <TableColumn fx:id="produtoNotaTableCell" minWidth="0.0" prefWidth="308.0" resizable="false" text="Produto" />
+                        <TableColumn fx:id="qtdNotaTableCell" minWidth="0.0" prefWidth="81.0" resizable="false" text="Quantidade" />
+                        <TableColumn fx:id="precoNotaTableCell" minWidth="0.0" prefWidth="73.0" resizable="false" text="Preço" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="360.0" layoutY="528.0" text="Valor Total:" />
+                  <Label fx:id="valorTotalNotaLabel" layoutX="427.0" layoutY="528.0" text="Label" />
+                  <Button layoutX="447.0" layoutY="21.0" mnemonicParsing="false" onAction="#sair" text="Sair" />
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>

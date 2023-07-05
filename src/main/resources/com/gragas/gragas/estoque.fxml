@@ -99,8 +99,8 @@
          <children>
             <TableView fx:id="EstoqueTableVIew" layoutX="46.0" layoutY="110.0" prefHeight="551.0" prefWidth="809.0" stylesheets="@style.css">
               <columns>
-                  <TableColumn fx:id="estoqueIDTC" editable="false" prefWidth="33.0" sortable="false" text="ID" />
-                <TableColumn fx:id="estoqueNomeTC" editable="false" prefWidth="315.0" sortable="false" text="Nome" />
+                  <TableColumn fx:id="estoqueIDTC" editable="false" prefWidth="41.0" sortable="false" text="ID" />
+                <TableColumn fx:id="estoqueNomeTC" editable="false" prefWidth="307.0" sortable="false" text="Nome" />
                 <TableColumn fx:id="estoquePrecoTC" editable="false" minWidth="0.0" prefWidth="89.0" sortable="false" text="Preço" />
                   <TableColumn fx:id="estoqueAlcoolicoTC" editable="false" minWidth="0.0" prefWidth="107.0" sortable="false" text="Alcoolico" />
                   <TableColumn fx:id="estoqueTipoTC" editable="false" minWidth="0.0" prefWidth="91.0" sortable="false" text="Tipo" />

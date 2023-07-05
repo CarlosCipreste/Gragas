@@ -9,12 +9,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +68,31 @@ public class VendaController implements Initializable {
 
     @FXML
     private Label valorTotalLabel;
+
+    @FXML
+    private Pane notaFiscalPane;
+
+    @FXML
+    private Label nomeClienteLabel;
+
+    @FXML
+    private Label dataCompraLabel;
+    @FXML
+    private TableView<ProdVenda> notaFiscalTableView;
+
+    @FXML
+    private TableColumn<ProdVenda, String> produtoNotaTableCell;
+
+    @FXML
+    private TableColumn<ProdVenda, Integer> qtdNotaTableCell;
+
+    @FXML
+    private TableColumn<ProdVenda, Double> precoNotaTableCell;
+
+    @FXML
+    private Label valorTotalNotaLabel;
+
+    private ObservableList<ProdVenda> valoresNotaFiscal = FXCollections.observableArrayList();
 
     private ObservableList<String> lista;
     public int idcliente;
@@ -226,9 +253,20 @@ public class VendaController implements Initializable {
             valorTotalLabel.setText("R$ "+totalVenda);
 
             System.out.println("Adicionado");
-        }
 
+            // Verifica se a lista está vazia
+            if (valoresNotaFiscal == null) {
+                valoresNotaFiscal = FXCollections.observableArrayList(
+                        new ProdVenda(IDProd, nomeProd, qtdProd, precoProd)
+                );
+            }else {
+                    valoresNotaFiscal.add(new ProdVenda(IDProd,nomeProd, qtdProd,precoProd));
+                }
+                notaFiscalTableView.setItems(valoresProdVenda);
+
+        }
     }
+
 
 
     @FXML
@@ -331,17 +369,40 @@ public class VendaController implements Initializable {
                 if (contador == totalProdutos) {
                     exibirAlerta(Alert.AlertType.INFORMATION, "Venda finalizada", "Todos os produtos foram atualizados e a venda foi registrada.");
                 }
-                metodosGerais.clearAll(vendaClienteTextField,vendaProdutosChoiceBox,vendaQTDTextField,vendaListaTableView);
-                HelloApplication.trocaTela("principal");
+
+
+                String nomeNota = vendaClienteTextField.getText();
+                Date data = Date.valueOf(LocalDate.now());
+                double totalVenda = 0.0;
+
+                for (ProdVenda precoNota : valoresProdVenda) {
+                    double precoProduto = precoNota.getPrecoProdClass();
+                    int quantidade = precoNota.getQtdProdClass();
+                    totalVenda += precoProduto * quantidade;
+                }
+
+                vendaListaTableView.setItems(valoresProdVenda);
+
+                nomeClienteLabel.setText(nomeNota);
+                dataCompraLabel.setText(data.toString());
+                valorTotalNotaLabel.setText("R$ "+totalVenda);
+
+                //Mostrar Nota Fiscal
+                notaFiscalPane.setVisible(true);
+
+
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
 
-
-
-
+    @FXML
+    void sair(ActionEvent event){
+        metodosGerais.clearAll(vendaClienteTextField,vendaProdutosChoiceBox,vendaQTDTextField,vendaListaTableView);
+        HelloApplication.trocaTela("principal");
+    }
 
 
     @Override
@@ -358,6 +419,10 @@ public class VendaController implements Initializable {
             nome.setCellValueFactory(new PropertyValueFactory<ProdVenda, String>("nomeProdClass"));
             qtd.setCellValueFactory(new PropertyValueFactory<ProdVenda, Integer>("qtdProdClass"));
             preco.setCellValueFactory(new PropertyValueFactory<ProdVenda, Double>("precoProdClass"));
+
+            produtoNotaTableCell.setCellValueFactory(new PropertyValueFactory<ProdVenda, String>("nomeProdClass"));
+            qtdNotaTableCell.setCellValueFactory(new PropertyValueFactory<ProdVenda, Integer>("qtdProdClass"));
+            precoNotaTableCell.setCellValueFactory(new PropertyValueFactory<ProdVenda, Double>("precoProdClass"));
 
         }
 
