@@ -91,8 +91,9 @@ public class LoginController implements Initializable {
                 else {
                     nomeUser = resultSet.getString("nome_funcionario");
                     String[] partes = nomeUser.split(" ", 2); // Divide a string em duas partes pelo primeiro espaço
-
                     nomeUser = partes[0];
+                    nomeUser = " "+partes[0].toUpperCase();
+
                     IDUser = resultSet.getInt("id_funcionario");
                     administrador = resultSet.getBoolean("administrador");
                     System.out.println("Bem-Vindo!");
@@ -139,11 +140,13 @@ public class LoginController implements Initializable {
             }
             //Caso contrário, aqui ficará o código que será passado para próxima tela
             else {
+                //pegando o nome do usuario
                 nomeUser = resultSet.getString("nome_funcionario");
-
+                nomeUser = nomeUser.substring(0, 1).toUpperCase() + nomeUser.substring(1);
                 String[] partes = nomeUser.split(" ", 2); // Divide a string em duas partes pelo primeiro espaço
+                nomeUser = " "+partes[0].toUpperCase();
 
-                nomeUser = partes[0];
+
                 IDUser = resultSet.getInt("id_funcionario");
                 administrador = resultSet.getBoolean("administrador");
                 System.out.println("Bem-Vindo!");

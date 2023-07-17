@@ -16,9 +16,9 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gragas.gragas.CadastroController">
     <children>
-        <Pane fx:id="FornecedorPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #479F6C;">
+        <Pane fx:id="FornecedorPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #006233;">
             <children>
-            <Pane layoutX="157.0" layoutY="137.0" prefHeight="396.0" prefWidth="587.0" style="-fx-border-radius: 15px; -fx-border-width: 3px; -fx-border-color: black;" />
+            <Pane layoutX="157.0" layoutY="137.0" prefHeight="396.0" prefWidth="587.0" style="-fx-border-radius: 15px; -fx-background-color: #266258; -fx-background-radius: 15px; -fx-border-width: 3px; -fx-border-color: black;" />
                 <Button fx:id="voltarButton13" layoutY="49.0" mnemonicParsing="false" onAction="#VoltarMenuFornecedor" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;">
                     <cursor>
                         <Cursor fx:constant="HAND" />
@@ -86,10 +86,10 @@
                 </Button>
             </children>
         </Pane>
-        <Pane fx:id="ProdutoPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #479F6C;">
+        <Pane fx:id="ProdutoPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #006233;">
             <children>
             <Pane layoutX="555.0" layoutY="273.0" opacity="0.09" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: black; -fx-background-radius: 30px;" />
-            <Pane layoutX="82.0" layoutY="117.0" prefHeight="424.0" prefWidth="750.0" style="-fx-border-radius: 15px; -fx-border-width: 3px; -fx-border-color: black;" />
+            <Pane layoutX="82.0" layoutY="117.0" prefHeight="424.0" prefWidth="750.0" style="-fx-border-radius: 15px; -fx-background-color: #266258; -fx-background-radius: 15px; -fx-border-width: 3px; -fx-border-color: black;" />
             <Pane layoutX="555.0" layoutY="354.0" opacity="0.09" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: black; -fx-background-radius: 30px;" />
                 <Label layoutX="274.0" layoutY="28.0" text="Cadastro de Produto">
                     <font>
@@ -168,7 +168,7 @@
                 <DatePicker fx:id="validadeDatePicker" layoutX="235.0" layoutY="460.0" prefHeight="35.0" prefWidth="174.0" showWeekNumbers="true" style="-fx-background-radius: 5px;" stylesheets="@style.css" />
             </children>
         </Pane>
-        <Pane fx:id="menuPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #9F478C;">
+        <Pane fx:id="menuPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #006233;">
             <children>
                 <Label layoutX="400.0" layoutY="57.0" text="Cadastro">
                     <font>
@@ -241,46 +241,46 @@
             </ImageView>
             </children>
         </Pane>
-        <Pane fx:id="ClientePane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #479F6C;" visible="false">
+        <Pane fx:id="ClientePane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #006233;" visible="false">
             <children>
-            <Pane layoutX="76.0" layoutY="138.0" prefHeight="424.0" prefWidth="750.0" style="-fx-border-radius: 15px; -fx-border-width: 3px; -fx-border-color: black;">
+            <Pane layoutX="76.0" layoutY="138.0" prefHeight="424.0" prefWidth="750.0" style="-fx-border-radius: 15px; -fx-background-color: #266258; -fx-background-radius: 15px; -fx-border-width: 3px; -fx-border-color: black;">
                <children>
-                      <Label layoutX="124.0" layoutY="283.0" text="Telefone:" textFill="WHITE">
+                      <Label layoutX="124.0" layoutY="335.0" text="Telefone:" textFill="WHITE">
                           <font>
                               <Font name="Leelawadee UI Bold" size="24.0" />
                           </font>
                       </Label>
-                      <TextField fx:id="clienteTelefoneTextField" layoutX="237.0" layoutY="283.0" prefHeight="34.0" prefWidth="150.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
+                      <TextField fx:id="clienteTelefoneTextField" layoutX="237.0" layoutY="335.0" prefHeight="34.0" prefWidth="150.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
                           <font>
                               <Font name="Leelawadee UI Bold" size="14.0" />
                           </font>
                       </TextField>
-                      <Label layoutX="139.0" layoutY="47.0" text="Nome:" textFill="WHITE">
+                      <Label layoutX="141.0" layoutY="65.0" text="Nome:" textFill="WHITE">
                           <font>
                               <Font name="Leelawadee UI Bold" size="24.0" />
                           </font>
                       </Label>
-                      <Label layoutX="145.0" layoutY="128.0" text="CPF:" textFill="WHITE">
+                      <Label layoutX="145.0" layoutY="157.0" text="CPF:" textFill="WHITE">
                           <font>
                               <Font name="Leelawadee UI Bold" size="24.0" />
                           </font>
                       </Label>
-                      <TextField fx:id="clienteNomeTextField" layoutX="239.0" layoutY="48.0" prefHeight="34.0" prefWidth="375.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
+                      <TextField fx:id="clienteNomeTextField" layoutX="239.0" layoutY="65.0" prefHeight="34.0" prefWidth="375.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
                           <font>
                               <Font name="Leelawadee UI Bold" size="14.0" />
                           </font>
                       </TextField>
-                      <TextField fx:id="clienteCPFTextField" layoutX="239.0" layoutY="129.0" prefHeight="34.0" prefWidth="241.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
+                      <TextField fx:id="clienteCPFTextField" layoutX="239.0" layoutY="158.0" prefHeight="34.0" prefWidth="241.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
                           <font>
                               <Font name="Leelawadee UI Bold" size="14.0" />
                           </font>
                       </TextField>
-                  <Label layoutX="124.0" layoutY="212.0" text="Endereço:" textFill="WHITE">
+                  <Label layoutX="124.0" layoutY="246.0" text="Endereço:" textFill="WHITE">
                      <font>
                         <Font name="Leelawadee UI Bold" size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="clienteEnderecoTextField" layoutX="239.0" layoutY="212.0" prefHeight="34.0" prefWidth="375.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
+                  <TextField fx:id="clienteEnderecoTextField" layoutX="239.0" layoutY="246.0" prefHeight="34.0" prefWidth="375.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
                      <font>
                         <Font name="Leelawadee UI Bold" size="14.0" />
                      </font>
@@ -313,9 +313,9 @@
                 </Button>
             </children>
         </Pane>
-        <Pane fx:id="FuncionarioPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #479F6C;" visible="false">
+        <Pane fx:id="FuncionarioPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #006233;" visible="false">
             <children>
-            <Pane layoutX="75.0" layoutY="138.0" prefHeight="424.0" prefWidth="750.0" style="-fx-border-radius: 15px; -fx-border-width: 3px; -fx-border-color: black;">
+            <Pane layoutX="75.0" layoutY="138.0" prefHeight="424.0" prefWidth="750.0" style="-fx-border-radius: 15px; -fx-background-color: #266258; -fx-background-radius: 15px; -fx-border-width: 3px; -fx-border-color: black;">
                <children>
                       <TextField fx:id="FuncNomeTextField" layoutX="221.0" layoutY="63.0" prefHeight="34.0" prefWidth="416.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
                           <font>

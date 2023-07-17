@@ -16,9 +16,9 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gragas.gragas.EstoqueController">
    <children>
-      <Pane fx:id="AtualizarPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #9F478C;" stylesheets="@style.css">
+      <Pane fx:id="AtualizarPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #704E98;" stylesheets="@style.css">
          <children>
-            <Pane layoutX="72.0" layoutY="124.0" prefHeight="442.0" prefWidth="763.0" style="-fx-border-color: black; -fx-border-width: 3px; -fx-border-radius: 15px;">
+            <Pane layoutX="72.0" layoutY="124.0" prefHeight="442.0" prefWidth="763.0" style="-fx-border-color: black; -fx-background-color: #136748; -fx-background-radius: 15px; -fx-border-width: 3px; -fx-border-radius: 15px;">
                <children>
                   <Pane layoutX="481.0" layoutY="154.0" opacity="0.18" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: black; -fx-background-radius: 30px;" />
                   <Pane layoutX="481.0" layoutY="237.0" opacity="0.18" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: black; -fx-background-radius: 30px;" />
@@ -80,7 +80,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="AtualizarProdutoButton" layoutX="348.0" layoutY="592.0" mnemonicParsing="false" onAction="#AtualizarProduto" prefHeight="68.0" prefWidth="205.0" style="-fx-background-color: #62E197;" styleClass="botaomenuright" stylesheets="@style.css" text="Atualizar Produto" textFill="WHITE">
+            <Button fx:id="AtualizarProdutoButton" layoutX="348.0" layoutY="592.0" mnemonicParsing="false" onAction="#AtualizarProduto" prefHeight="68.0" prefWidth="205.0" style="-fx-background-color: #4B5878; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-width: 3px; -fx-border-radius: 30px;" styleClass="botaoatualizar" stylesheets="@style.css" text="Atualizar Produto" textFill="WHITE">
                <font>
                   <Font name="Leelawadee UI Bold" size="20.0" />
                </font>
@@ -88,14 +88,14 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label layoutX="362.0" layoutY="49.0" text="Atualizar Produto">
+            <Label layoutX="362.0" layoutY="49.0" text="Atualizar Produto" textFill="WHITE">
                <font>
                   <Font name="Leelawadee UI Bold" size="22.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="EstoqueViewPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #479F6C;">
+      <Pane fx:id="EstoqueViewPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #136748;">
          <children>
             <TableView fx:id="EstoqueTableVIew" layoutX="46.0" layoutY="110.0" prefHeight="551.0" prefWidth="809.0" stylesheets="@style.css">
               <columns>
@@ -108,7 +108,7 @@
                   <TableColumn fx:id="estoqueQTDTC" editable="false" minWidth="0.0" prefWidth="68.0" sortable="false" text="QTD" />
               </columns>
             </TableView>
-            <Label layoutX="338.0" layoutY="39.0" stylesheets="@style.css" text="Estoque de Produtos">
+            <Label layoutX="338.0" layoutY="39.0" stylesheets="@style.css" text="Estoque de Produtos" textFill="WHITE">
                <font>
                   <Font name="Leelawadee UI Bold" size="23.0" />
                </font>

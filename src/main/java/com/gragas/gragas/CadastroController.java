@@ -192,7 +192,7 @@ public class CadastroController implements Initializable {
         FuncionarioPane.setVisible(false);
 
 
-        clearAll(clienteNomeTextField,clienteCPFTextField,clienteTelefoneTextField,clienteCelularTextField);
+        clearAll(clienteNomeTextField,clienteCPFTextField,clienteTelefoneTextField);
 
     }
 

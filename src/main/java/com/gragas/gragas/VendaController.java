@@ -16,10 +16,13 @@ import org.controlsfx.control.textfield.TextFields;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.*;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static com.gragas.gragas.LoginController.*;
@@ -180,6 +183,7 @@ public class VendaController implements Initializable {
 
     @FXML
     void AdicionarProdutonaVenda(ActionEvent event) {
+
         String querySelect = "select id_produto,preco_produto from produto where nome_produto = ?";
 
         int IDProd = 0;
@@ -228,7 +232,8 @@ public class VendaController implements Initializable {
                 if( resultSet.next()){
                     int qtdQuery = resultSet.getInt("quantidade");
                     if(qtdQuery < qtd){
-                        exibirAlerta(Alert.AlertType.ERROR,"Erro","Quantidade inseria é maior da qu há em estoque");
+                        exibirAlerta(Alert.AlertType.ERROR,"Erro","Quantidade inseria é maior da que há em estoque");
+                        return;
                     }
                 }
             }catch (SQLException e){e.printStackTrace();}
@@ -242,15 +247,24 @@ public class VendaController implements Initializable {
             }
             vendaListaTableView.setItems(valoresProdVenda);
 
+            // Definindo , como separador de decimal em Números de ponto flutuante
+            DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.getDefault());
+            symbols.setDecimalSeparator(',');
+
             double totalVenda = 0.0;
+            DecimalFormat df = new DecimalFormat("0.00");
+
 
             for (ProdVenda produto : valoresProdVenda) {
                 double precoProduto = produto.getPrecoProdClass();
                 int quantidade = produto.getQtdProdClass();
                 totalVenda += precoProduto * quantidade;
+
             }
 
-            valorTotalLabel.setText("R$ "+totalVenda);
+            // a instancia df formata o Double para 0,00
+            String precoFormatado = df.format(totalVenda);
+            valorTotalLabel.setText("R$ "+precoFormatado);
 
             System.out.println("Adicionado");
 
@@ -264,6 +278,7 @@ public class VendaController implements Initializable {
                 }
                 notaFiscalTableView.setItems(valoresProdVenda);
 
+            clearAll(vendaProdutosChoiceBox,vendaQTDTextField);
         }
     }
 

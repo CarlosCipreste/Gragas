@@ -15,12 +15,12 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gragas.gragas.RegistrosController">
    <children>
-      <Pane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #479F6C;">
+      <Pane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #006233;">
          <children>
             <Button layoutX="197.0" layoutY="123.0" mnemonicParsing="false" onAction="#OpenFuncionarioTable" prefHeight="34.0" prefWidth="127.0" style="-fx-background-radius: 15 15 0 0;" text="Funcionarios" />
             <Button layoutX="324.0" layoutY="123.0" mnemonicParsing="false" onAction="#OpenClientesTable" prefHeight="34.0" prefWidth="127.0" style="-fx-background-radius: 15 15 0 0;" text="Clientes" />
             <Button layoutX="451.0" layoutY="123.0" mnemonicParsing="false" onAction="#OpenFornecedorTable" prefHeight="34.0" prefWidth="127.0" style="-fx-background-radius: 15 15 0 0;" text="Fornecedor" />
-            <Label layoutX="398.0" layoutY="42.0" text="Registros">
+            <Label layoutX="398.0" layoutY="42.0" text="Registros" textFill="WHITE">
                <font>
                   <Font name="Leelawadee UI Bold" size="24.0" />
                </font>
@@ -149,14 +149,9 @@
             </Button>
          </children>
       </Pane>
-      <Pane fx:id="AtualizarFuncionarioPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #9F478C;" visible="false">
+      <Pane fx:id="AtualizarFuncionarioPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #704E98;" visible="false">
          <children>
-            <Label layoutX="350.0" layoutY="42.0" text="Atualizar Funcionario">
-               <font>
-                  <Font name="Leelawadee UI Bold" size="20.0" />
-               </font>
-            </Label>
-            <Pane layoutX="75.0" layoutY="138.0" prefHeight="424.0" prefWidth="750.0" style="-fx-border-radius: 15px; -fx-border-width: 3px; -fx-border-color: black;">
+            <Pane layoutX="75.0" layoutY="138.0" prefHeight="424.0" prefWidth="750.0" style="-fx-border-radius: 15px; -fx-background-radius: 15px; -fx-background-color: #136748; -fx-border-width: 3px; -fx-border-color: black;">
                <children>
                   <TextField fx:id="FuncNomeTextField" layoutX="221.0" layoutY="106.0" prefHeight="34.0" prefWidth="416.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
                      <font>
@@ -200,6 +195,11 @@
                   </Label>
                </children>
             </Pane>
+            <Label layoutX="350.0" layoutY="42.0" text="Atualizar Funcionario" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI Bold" size="20.0" />
+               </font>
+            </Label>
             <Button layoutY="48.0" mnemonicParsing="false" onAction="#VoltarFuncionario" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;" styleClass="botaoretornar" stylesheets="@style.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -221,14 +221,9 @@
                </cursor>
             </Button>
          </children></Pane>
-      <Pane fx:id="AtualizarClientePane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #9F478C;" visible="false">
+      <Pane fx:id="AtualizarClientePane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #704E98;" visible="false">
          <children>
-            <Label layoutX="350.0" layoutY="42.0" text="Atualizar Clientes">
-               <font>
-                  <Font name="Leelawadee UI Bold" size="20.0" />
-               </font>
-            </Label>
-            <Pane layoutX="75.0" layoutY="138.0" prefHeight="424.0" prefWidth="750.0" style="-fx-border-radius: 15px; -fx-border-width: 3px; -fx-border-color: black;">
+            <Pane layoutX="75.0" layoutY="138.0" prefHeight="424.0" prefWidth="750.0" style="-fx-border-radius: 15px; -fx-background-color: #136748; -fx-border-width: 3px; -fx-background-radius: 15px; -fx-border-color: black;">
                <children>
                   <TextField fx:id="clienteNomeTextFIeld" layoutX="221.0" layoutY="96.0" prefHeight="34.0" prefWidth="416.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
                      <font>
@@ -272,6 +267,11 @@
                   </Label>
                </children>
             </Pane>
+            <Label layoutX="350.0" layoutY="42.0" text="Atualizar Clientes" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI Bold" size="20.0" />
+               </font>
+            </Label>
             <Button layoutY="48.0" mnemonicParsing="false" onAction="#VoltarCliente" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;" styleClass="botaoretornar" stylesheets="@style.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -294,14 +294,9 @@
             </Button>
          </children>
       </Pane>
-      <Pane fx:id="AtualizarFornecedorPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #9F478C;" visible="false">
+      <Pane fx:id="AtualizarFornecedorPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #704E98;" visible="false">
          <children>
-            <Label layoutX="350.0" layoutY="42.0" text="Atualizar Fornecedor">
-               <font>
-                  <Font name="Leelawadee UI Bold" size="20.0" />
-               </font>
-            </Label>
-            <Pane layoutX="75.0" layoutY="138.0" prefHeight="424.0" prefWidth="750.0" style="-fx-border-radius: 15px; -fx-border-width: 3px; -fx-border-color: black;">
+            <Pane layoutX="75.0" layoutY="138.0" prefHeight="424.0" prefWidth="750.0" style="-fx-border-radius: 15px; -fx-background-color: #136748; -fx-background-radius: 15px; -fx-border-width: 3px; -fx-border-color: black;">
                <children>
                   <TextField fx:id="fornecedorNomeTextField" layoutX="221.0" layoutY="80.0" prefHeight="34.0" prefWidth="416.0" style="-fx-border-radius: 5px; -fx-border-color: white; -fx-border-width: 2px; -fx-background-color: transparent; -fx-text-fill: white;">
                      <font>
@@ -345,6 +340,11 @@
                   </Label>
                </children>
             </Pane>
+            <Label layoutX="350.0" layoutY="42.0" text="Atualizar Fornecedor" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI Bold" size="20.0" />
+               </font>
+            </Label>
             <Button layoutY="48.0" mnemonicParsing="false" onAction="#VoltarFornecedor" prefHeight="52.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0 30 30 0;" styleClass="botaoretornar" stylesheets="@style.css">
                <cursor>
                   <Cursor fx:constant="HAND" />

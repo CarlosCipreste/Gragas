@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #9F478C;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gragas.gragas.PrincipalController">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #94D6AB;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gragas.gragas.PrincipalController">
     <children>
-        <Pane prefHeight="700.0" prefWidth="320.0" style="-fx-background-color: #479F6C; -fx-background-radius: 0 10 10 0;" styleClass="#9F478C">
+        <Pane prefHeight="700.0" prefWidth="320.0" style="-fx-background-color: #006233; -fx-background-radius: 0 10 10 0;" styleClass="#9F478C">
             <children>
             <Pane prefHeight="700.0" prefWidth="320.0" style="-fx-border-color: black; -fx-border-width: 3px; -fx-border-radius: 0 10 10 0;" />
                 <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="74.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">

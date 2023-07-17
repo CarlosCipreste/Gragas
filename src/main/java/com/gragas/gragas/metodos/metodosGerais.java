@@ -91,41 +91,41 @@ public class metodosGerais {
     //SOBRECARGA DO MÉTODO CLEAR
     public static void clearAll(TextField nomeProd, TextField precoProd, CheckBox alcoolico, ChoiceBox dest_ou_ferm, CheckBox nalcoolico, ChoiceBox suco_ou_refri, DatePicker validade, TextField quantidadeProd) {
         //Clear para a tela de Produtos
-        nomeProd.clear();
-        precoProd.clear();
+        nomeProd.setText("");
+        precoProd.setText("");
         alcoolico.setSelected(false);
         dest_ou_ferm.setValue(null);
         nalcoolico.setSelected(false);
         suco_ou_refri.setValue(false);
         validade.setValue(null);
-        quantidadeProd.clear();
+        quantidadeProd.setText("");
     }
 
     public static void clearAll(TextField nomeFunc, TextField CPFFunc, TextField login, PasswordField senha) {
         //Clear para a Tela de Funcionarios
-        nomeFunc.clear();
-        CPFFunc.clear();
-        login.clear();
-        senha.clear();
+        nomeFunc.setText("");
+        CPFFunc.setText("");
+        login.setText("");
+        senha.setText("");
     }
 
     public static void clearAll(TextField nomeCliente, TextField CPFCliente, TextField telefoneCliente) {
         //Clear para a tela de Cliente
-        nomeCliente.clear();
-        CPFCliente.clear();
-        telefoneCliente.clear();
+        nomeCliente.setText("");
+        CPFCliente.setText("");
+        telefoneCliente.setText("");
     }
 
     public static void clearAll(TextField nomeFornecedor, TextField enderecoFornecedor, TextField CNPJFornecedor, TextField telefoneFornecedor) {
         //Clear para a tela de Fornecedores
-        nomeFornecedor.clear();
-        enderecoFornecedor.clear();
-        CNPJFornecedor.clear();
-        telefoneFornecedor.clear();
+        nomeFornecedor.setText("");
+        enderecoFornecedor.setText("");
+        CNPJFornecedor.setText("");
+        telefoneFornecedor.setText("");
     }
 
     public static void clearAll(TextField vendaCliente, ChoiceBox<String> produtoChoiceBox, TextField quantidadeProduto, TableView vendaTableView) {
-        vendaCliente.clear();
+        vendaCliente.setText("");
         produtoChoiceBox.getSelectionModel().clearSelection();
         quantidadeProduto.clear();
         vendaTableView.getItems().clear();
@@ -140,5 +140,11 @@ public class metodosGerais {
         nalcoolico.setSelected(false);
         suco_ou_refri.setValue(null);
         quantidadeProd.clear();
+    }
+
+    public static void clearAll(ChoiceBox produtoChoiceBox, TextField QTFTextfield){
+        produtoChoiceBox.setValue(null);
+        QTFTextfield.setText("");
+
     }
 }

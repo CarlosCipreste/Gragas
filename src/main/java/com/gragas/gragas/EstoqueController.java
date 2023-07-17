@@ -91,19 +91,6 @@ public class EstoqueController implements Initializable {
     String[] nAlcoolicoValues = {"Suco", "Refrigerante"};
     String[] AlcoolicoValues = {"Destilado", "Fermentado"};
 
-    /*@FXML
-    void SelectedAlcoolicoCheckBox(ActionEvent event) {
-        if (alcoolicoCheckBox.isSelected()) {
-            alcoolicoChoiceBox.setVisible(true);
-            NAlcoolicoCheckBox.setSelected(false);
-            nalcoolicoChoiceBox.setVisible(false);
-            nalcoolicoChoiceBox.getSelectionModel().clearSelection();
-        }
-        if (!alcoolicoCheckBox.isSelected()) {
-            alcoolicoChoiceBox.setVisible(false);
-        }
-    }*/
-
 
 
     @FXML
